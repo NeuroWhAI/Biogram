@@ -1,0 +1,1580 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="소스 파일">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="헤더 파일">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="리소스 파일">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Biogram">
+      <UniqueIdentifier>{84cefabf-5dc6-4330-ad20-00c2c52468a2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Biogram\Model">
+      <UniqueIdentifier>{2cd309ef-7a8e-4dcf-ab24-aa9a50dab827}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Biogram\View">
+      <UniqueIdentifier>{ef7b9b12-c79d-4b13-aa21-606c53e419cf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Biogram\Controller">
+      <UniqueIdentifier>{341bcbe8-4918-4b94-b729-5945bb0b3fb6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Biogram\BiogramApp">
+      <UniqueIdentifier>{1fb0bf79-369f-4087-96c0-292c72ee078c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Biogram\Model\System">
+      <UniqueIdentifier>{67be59f1-48ec-407c-ba65-65cb5d138f3b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Biogram\Controller\UserInputController">
+      <UniqueIdentifier>{127e7cc8-a79a-465c-8e92-0ed050b3b711}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Biogram\Controller\UserInputController\UserInputController">
+      <UniqueIdentifier>{c3fd7826-d93a-43c8-bf73-5eec9933dca2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Biogram\Controller\UserInputController\WhatboxUserInputController">
+      <UniqueIdentifier>{c1586bdd-0990-4b2d-a478-33c94bfa61c6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Biogram\View\Graphic">
+      <UniqueIdentifier>{6cbef750-9237-42c5-83cc-08d6995a83dc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Biogram\View\Graphic\Graphic">
+      <UniqueIdentifier>{cd27040a-aedc-4159-adbf-2c40f4688bef}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Biogram\View\Graphic\WhatboxGraphic">
+      <UniqueIdentifier>{9227cf8e-57f0-48ce-a010-b758633fea5b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Biogram\Model\SystemInfo">
+      <UniqueIdentifier>{a5930846-e6da-461f-8941-1e2f9ae3dd92}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Biogram\Model\SystemInfo\SystemInfo">
+      <UniqueIdentifier>{411a8c5b-8773-42cb-9afd-eec4b8f5f74a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Biogram\Model\SystemInfo\WhatboxSystemInfo">
+      <UniqueIdentifier>{dcb209c4-9dca-4b4b-86c5-91393acb7c5d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Biogram\Model\Utility">
+      <UniqueIdentifier>{9100d791-e687-4121-b935-31c97dbbc0ff}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="WhatboxFramework">
+      <UniqueIdentifier>{3d28a5e7-b938-4aad-899e-29b325416e84}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="WhatboxFramework\System">
+      <UniqueIdentifier>{16d90b35-17df-491f-a18e-efa98c75bf37}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="WhatboxFramework\System\Core">
+      <UniqueIdentifier>{b07b028a-9c64-498b-b940-5923ddd8f0f3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="WhatboxFramework\System\Engine">
+      <UniqueIdentifier>{00d7e48f-a022-46cd-a9cd-c2a21ad380f9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="WhatboxFramework\System\D3DDevice">
+      <UniqueIdentifier>{aa5b8172-2d28-41e9-b020-7409f130cd9c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="WhatboxFramework\System\Input">
+      <UniqueIdentifier>{4d207d0b-a8f9-4d7a-a80e-717151f3baec}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="WhatboxFramework\System\Sprite">
+      <UniqueIdentifier>{97b64fff-a09d-4a2b-806a-c870dea2b86a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="WhatboxFramework\System\D3DVtxBuffer">
+      <UniqueIdentifier>{816f2c9b-ace9-4fbf-a577-44775c1cb1df}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="WhatboxFramework\System\D3DIdxBuffer">
+      <UniqueIdentifier>{9c1920d8-e997-4dbd-b718-1281f87bf19f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="WhatboxFramework\System\D3DSound">
+      <UniqueIdentifier>{35a72c09-c3dd-4451-a493-fefd08736acd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="WhatboxFramework\System\ImgListRender">
+      <UniqueIdentifier>{ba29c632-a101-419d-8175-def0e3ddda7a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="WhatboxFramework\System\Log">
+      <UniqueIdentifier>{7e6a7d8c-955c-485a-a770-cf611589800e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="WhatboxFramework\System\ResourceLoad">
+      <UniqueIdentifier>{1c459fc6-f3d8-4e2a-9506-bc1f45232908}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="WhatboxFramework\System\D3DAudio">
+      <UniqueIdentifier>{1f5835b4-09c6-476d-b8f3-b4720efcecfb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="WhatboxFramework\System\2DImgListRender">
+      <UniqueIdentifier>{82633bbf-df92-407e-a6bd-e77e57b8bff2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="WhatboxFramework\System\NumberRender">
+      <UniqueIdentifier>{42848fc2-4cb4-4b0d-9872-c57d556953e9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="WhatboxFramework\System\Timer">
+      <UniqueIdentifier>{94503d02-9600-463d-ae55-3b85e592e895}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="WhatboxFramework\System\FileWriter">
+      <UniqueIdentifier>{1b43a3f8-7c20-42d6-b7e1-da34d0767415}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="WhatboxFramework\System\FileReader">
+      <UniqueIdentifier>{22cbb2db-a089-4709-a7e6-1a2eb2bd527a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="WhatboxFramework\Sequence">
+      <UniqueIdentifier>{ef5a17fb-474a-467f-a7c4-c4e4ecbd172f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="WhatboxFramework\Sequence\Base">
+      <UniqueIdentifier>{3861e1e0-aa40-49dd-a7c8-70e86a95d3f2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="WhatboxFramework\Object">
+      <UniqueIdentifier>{783267f3-5925-40e5-a9be-7fce547faf41}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="WhatboxFramework\Object\Camera">
+      <UniqueIdentifier>{a0fa7d52-1b67-4a80-9e6c-ff1903cdefa4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="WhatboxFramework\Object\Line">
+      <UniqueIdentifier>{980a6cb6-5727-41f0-9110-a7ab069897a8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="WhatboxFramework\Object\Coordinate">
+      <UniqueIdentifier>{b148134f-032a-4684-b92a-829dd7773688}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="WhatboxFramework\Object\RSLight">
+      <UniqueIdentifier>{e9dd0dc2-4571-4d93-b534-b60defab20b5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="WhatboxFramework\Object\Plane">
+      <UniqueIdentifier>{21302902-4fb2-4c4c-bcda-555e2c227a30}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="WhatboxFramework\Object\Textbox">
+      <UniqueIdentifier>{53b8e68f-fea5-4998-8d98-3c19ea1ae7be}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="WhatboxFramework\Object\Fade">
+      <UniqueIdentifier>{770814f5-c758-457f-9daf-e13cccb6c131}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="WhatboxFramework\Object\SknMesh">
+      <UniqueIdentifier>{ccdc833a-e23f-45bb-a63c-30d85a6e5d95}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="WhatboxFramework\Object\Topography">
+      <UniqueIdentifier>{de0fa8b5-532b-43cb-bfe0-d081339b4ab0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="WhatboxFramework\Object\Shape">
+      <UniqueIdentifier>{8fa3498c-8a25-4065-8cec-6a240722a425}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="WhatboxFramework\Object\Shape\3DPoint">
+      <UniqueIdentifier>{81c0114e-5ca9-487a-80d1-5b7be3aaf727}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="WhatboxFramework\Object\Shape\ShapeMath">
+      <UniqueIdentifier>{7c546723-166a-4828-8d69-85668073335f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="WhatboxFramework\Object\Shape\Shp_Sphere">
+      <UniqueIdentifier>{d44baa83-3011-48a0-8eab-979b84e34b26}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="WhatboxFramework\Object\Shape\Shp_Line">
+      <UniqueIdentifier>{651001d7-becd-4a29-97bd-6ed7c5721179}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="WhatboxFramework\Object\Shape\Shp_Rectangle">
+      <UniqueIdentifier>{e2c6af03-fbe8-4e73-9796-997f9ac89be3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="WhatboxFramework\Object\Shape\cShp_Polygon">
+      <UniqueIdentifier>{2d801792-db80-465c-bb0b-e90c23cc8fb5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="WhatboxFramework\Object\Shape\Shape">
+      <UniqueIdentifier>{4d483c4d-402c-4d35-b35b-e88ce5cd9469}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="WhatboxFramework\Object\Shape\Shp_Triangle">
+      <UniqueIdentifier>{0fda9bc5-e175-436f-8c34-f1a48d767fa9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="WhatboxFramework\Object\Surface">
+      <UniqueIdentifier>{e164ea1f-d073-4438-979a-317ac563fe33}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="WhatboxFramework\Object\2DCamera">
+      <UniqueIdentifier>{7f46774c-f87f-4cea-b1f5-79236bb1e0cf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="WhatboxFramework\Object\Tile">
+      <UniqueIdentifier>{df573bdf-c529-4356-9baf-1f8c5b102475}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="WhatboxFramework\Object\Action">
+      <UniqueIdentifier>{2c69416b-fc33-4b07-9419-63ab42c6d0bf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="WhatboxFramework\Object\UIControl">
+      <UniqueIdentifier>{97aa8653-ce0d-46c8-a7e2-5db952ef9cdf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="WhatboxFramework\Object\UIControl\UIControl">
+      <UniqueIdentifier>{5214f75e-e93f-49d4-a35e-d25f0c9dfa94}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="WhatboxFramework\Object\UIControl\Button">
+      <UniqueIdentifier>{5a4e08c1-3973-4afd-90d4-d35e5a4b2870}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="WhatboxFramework\Object\UIControl\TransformButton">
+      <UniqueIdentifier>{2edc4f3c-ed62-4cd8-a1c3-f1f576c3778b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="WhatboxFramework\Object\UIControl\Label">
+      <UniqueIdentifier>{a06cc89a-61fa-4f6b-88e8-01f97cb71128}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="WhatboxFramework\Object\UIControl\ScrollBar">
+      <UniqueIdentifier>{167df4e1-7d87-4e79-bb5f-74ebe4098dd5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="WhatboxFramework\Object\UIControl\CheckBox">
+      <UniqueIdentifier>{f4eec8d5-2a2e-4799-badb-b36a7fa177f3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="WhatboxFramework\Object\EditBox">
+      <UniqueIdentifier>{54d86b6c-5536-4430-bf86-e14d8ba27c89}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="WhatboxFramework\Object\TileMap">
+      <UniqueIdentifier>{f4e50889-fc8c-43cc-8d76-6233108e96c2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="WhatboxFramework\Object\MessageMgr">
+      <UniqueIdentifier>{b99e2822-bf01-4e5e-9e08-038a38b64433}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="WhatboxFramework\Object\Graph">
+      <UniqueIdentifier>{52101ce8-07fd-4e17-9d14-55738adec027}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="WhatboxFramework\Object\Graph\Graph">
+      <UniqueIdentifier>{b9a763ff-08cf-466c-8ee2-f7510e709853}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="WhatboxFramework\Object\FX">
+      <UniqueIdentifier>{a4ccc412-bbae-44f2-accc-5fee54a856ce}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="WhatboxFramework\Object\FX\FXMgr">
+      <UniqueIdentifier>{74657134-4b1a-440a-8770-85c4791e945e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="WhatboxFramework\Object\FX\FX">
+      <UniqueIdentifier>{28cfc045-f655-4b6e-a07e-2d5b29acdef3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="WhatboxFramework\Object\FX\FX_ScaleUp">
+      <UniqueIdentifier>{699fa0a5-c6e5-491b-99bb-68fcc45ebdb3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="WhatboxFramework\Object\FX\FX_ScaleDown">
+      <UniqueIdentifier>{0450e4b1-97ef-4fc3-85fa-ad3f680d9083}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="WhatboxFramework\Object\FX\FX_SoftRandomScale">
+      <UniqueIdentifier>{b8454f75-3572-4e3e-a8ea-026d6359aacb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="WhatboxFramework\Object\FX\FX_Shake">
+      <UniqueIdentifier>{59fabd45-30db-4064-bf5b-70046b461979}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="WhatboxFramework\Object\FX\FX_Explosion">
+      <UniqueIdentifier>{8dbd398b-94e7-4eef-8dec-da21fe1b37a0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="WhatboxFramework\Object\FX\FX_ColorAnimation">
+      <UniqueIdentifier>{01b2a365-5dcb-4a1e-a5af-cd767290003b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="WhatboxFramework\Object\FX\FX_Firework">
+      <UniqueIdentifier>{9786e726-4d8e-42ed-b12f-58d9a65bcae7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="WhatboxFramework\Object\FX\FX_Fade">
+      <UniqueIdentifier>{d549b42a-4452-42bb-ac57-e82caa34cb66}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="WhatboxFramework\Object\FX\FX_Laser">
+      <UniqueIdentifier>{bfa5aa71-809f-4735-bd50-6eff33f55447}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="WhatboxFramework\Object\FX\FX_Tail">
+      <UniqueIdentifier>{c0915c61-591d-4146-a57a-26a81221ff7c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="WhatboxFramework\Object\ParticleWorld">
+      <UniqueIdentifier>{124d4bd7-1252-453c-a4b3-5ae70414d9c9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="WhatboxFramework\Object\ParticleWorld\Particle">
+      <UniqueIdentifier>{7f687f36-e652-4169-b034-f34803f85b56}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="WhatboxFramework\Object\ParticleWorld\Particle\Particle">
+      <UniqueIdentifier>{33ede03e-2e87-42bd-8086-566f0c7f45cc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="WhatboxFramework\Object\ParticleWorld\Particle\Particle_Basic">
+      <UniqueIdentifier>{0379d635-4803-478c-a5e2-32956337a03d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="WhatboxFramework\Object\ParticleWorld\Force">
+      <UniqueIdentifier>{f9fbcf5c-ccc5-4c07-bfb7-9b291249b1aa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="WhatboxFramework\Object\ParticleWorld\Force\Force">
+      <UniqueIdentifier>{0c8fe29d-5586-4a18-9f9a-2d3877e52bff}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="WhatboxFramework\Object\ParticleWorld\Force\Force_AirResist">
+      <UniqueIdentifier>{1b8f5aac-473a-40ea-9d08-df99e3d982f7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="WhatboxFramework\Object\ParticleWorld\Force\Force_Wind">
+      <UniqueIdentifier>{298cf459-5c0c-49b9-829b-9cddb8e75703}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="WhatboxFramework\Object\ParticleWorld\Force\Force_Gravity">
+      <UniqueIdentifier>{52a49688-86cb-404b-a94d-d2e41363235d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="WhatboxFramework\Object\ParticleWorld\Spawner">
+      <UniqueIdentifier>{f60b8ba5-b2bf-49af-80e0-bdfc821c285e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="WhatboxFramework\Object\ParticleWorld\Spawner\Spawner">
+      <UniqueIdentifier>{d9d71fef-4710-4695-bc8b-e6f3cbe6bc56}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="WhatboxFramework\Object\ParticleWorld\Spawner\BasicSpawner">
+      <UniqueIdentifier>{5fddd3dc-3122-45b7-9f09-24e9c406ba94}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="WhatboxFramework\Object\QuatAni">
+      <UniqueIdentifier>{d081e5de-cf35-4507-bea1-d69912df723c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="WhatboxFramework\Object\QuatAction">
+      <UniqueIdentifier>{ef2b5133-7dee-48ee-8244-dd935508cf02}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="WhatboxFramework\Resource">
+      <UniqueIdentifier>{76bb7a4f-3d4e-4cd2-918c-2eb0f1bf3e98}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="WhatboxFramework\Resource\Resource">
+      <UniqueIdentifier>{e5b6d4f4-3a16-4d2b-b3e9-d3d9d0e319f2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="WhatboxFramework\Resource\Texture">
+      <UniqueIdentifier>{cc5ea7fa-e72a-47fe-b1cf-43032428734b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="WhatboxFramework\Resource\Texture\TextureList">
+      <UniqueIdentifier>{b1b28b8f-3871-47b0-9d03-1558720900e7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="WhatboxFramework\Resource\Font">
+      <UniqueIdentifier>{4daa3bfa-b7ea-42a1-a084-ea9ac98c36a6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="WhatboxFramework\Resource\Mesh">
+      <UniqueIdentifier>{f394dd07-ef6d-4566-9a68-876e6255cddc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="WhatboxFramework\Resource\Mesh\MeshList">
+      <UniqueIdentifier>{353b4a62-b9c7-4862-9890-d821beef3b38}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="WhatboxFramework\Resource\Text">
+      <UniqueIdentifier>{0765a916-2be3-407e-bdaa-e1aacd0fa724}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="WhatboxFramework\Resource\SkinnedMesh">
+      <UniqueIdentifier>{0042f2bb-a334-4d7b-9fe0-7efc70f4ff45}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="WhatboxFramework\Resource\SkinnedMesh\SkinnedMesh">
+      <UniqueIdentifier>{41098e89-e129-41ed-a38c-ced8b52aa42e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="WhatboxFramework\Resource\SkinnedMesh\LcXSkin">
+      <UniqueIdentifier>{8b54cf4b-db18-4a19-8eed-bd6ae3b7a9e4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="WhatboxFramework\Resource\SkinnedMesh\SknMeshList">
+      <UniqueIdentifier>{af4c3441-b120-42a4-b01e-cdece816c10d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="WhatboxFramework\Resource\2DSound">
+      <UniqueIdentifier>{d6c8ee70-9925-4d38-91e6-8ef50b331e06}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="WhatboxFramework\Resource\2DSound\2DSoundList">
+      <UniqueIdentifier>{679f4687-b698-40cc-a116-dfe6fcb84f95}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="WhatboxFramework\Resource\3DSound">
+      <UniqueIdentifier>{0d765eb0-4d59-441a-8f95-fb2b0f86ceef}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="WhatboxFramework\Resource\2DLine">
+      <UniqueIdentifier>{bba82a23-4585-405c-bd22-6469503e68bf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="WhatboxFramework\Resource\WavBuffer">
+      <UniqueIdentifier>{1a60ce27-823b-4323-802f-26d56f083b63}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="WhatboxFramework\Util">
+      <UniqueIdentifier>{d2214034-11f0-4462-bfec-41278546cf38}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="WhatboxFramework\Util\D3D">
+      <UniqueIdentifier>{6d3980c3-f1cb-48c1-bca4-f626b060db42}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="WhatboxFramework\Util\Interpolar">
+      <UniqueIdentifier>{a110a34a-feb7-48bc-b820-7e76c6ad185e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="WhatboxFramework\Util\FuncSequence">
+      <UniqueIdentifier>{e2f3274b-8caa-4782-9e44-7089d4b3a439}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="WhatboxFramework\Util\FuncList">
+      <UniqueIdentifier>{b612ea23-ae51-4993-b2b4-a56ea20722a2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="WhatboxFramework\Util\LockQueue">
+      <UniqueIdentifier>{800e87e8-64cb-4fef-91f0-10c7c6e32741}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="WhatboxFramework\Util\TickTimer">
+      <UniqueIdentifier>{4059d453-c4d0-4dad-816d-e05a825c0c7f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="WhatboxFramework\Util\ValueProcMgr">
+      <UniqueIdentifier>{4b44eca4-a80e-40ca-bb26-4a81b269190e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="WhatboxFramework\Option">
+      <UniqueIdentifier>{a36c5fd5-40d0-47ca-9926-e452712f102a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="WhatboxFramework\Physics">
+      <UniqueIdentifier>{6e9a72df-ce63-4d15-835f-8127689db90c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="WhatboxFramework\Physics\Coord">
+      <UniqueIdentifier>{e08fde22-e90a-48a6-a524-5b8c09704ff5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="WhatboxFramework\Physics\2DCoord">
+      <UniqueIdentifier>{c37857ef-f618-4740-918b-4176cdbe21b8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="WhatboxFramework\Physics\QuatCoord">
+      <UniqueIdentifier>{02da14df-20eb-4691-b51b-ba0ecdb971e1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="WhatboxFramework\Network">
+      <UniqueIdentifier>{33377337-b679-4b66-93d9-9644a75563a6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="WhatboxFramework\Network\Network">
+      <UniqueIdentifier>{85e090bf-6e82-4d6e-acdd-119c3fbec6eb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="WhatboxFramework\Network\Network\Array">
+      <UniqueIdentifier>{710a26b7-64e0-441e-bcc7-1d0e5eeaba49}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="WhatboxFramework\Network\Network\BinaryReader">
+      <UniqueIdentifier>{6bf65328-cd26-4f85-9d33-a8b5e98e1b36}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="WhatboxFramework\Network\Network\BinaryWriter">
+      <UniqueIdentifier>{1c9a20fe-ea4c-4e52-8f01-d21ae06fb290}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="WhatboxFramework\Network\Network\Lock">
+      <UniqueIdentifier>{9109429e-6fcb-47f6-973a-a076a4c70566}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="WhatboxFramework\Network\Network\LockVal">
+      <UniqueIdentifier>{aad259b5-fa39-40b8-b922-fb1d499acfc8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="WhatboxFramework\Network\Network\MessageReceiver">
+      <UniqueIdentifier>{028545a8-9957-48b7-9ba3-ebdb10e1f2ac}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="WhatboxFramework\Network\Network\MessageSender">
+      <UniqueIdentifier>{13373ca0-4a21-4610-8b54-79de4ab354bf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="WhatboxFramework\Network\Network\NetBody">
+      <UniqueIdentifier>{ad6c6afe-8d9d-4012-b459-76a5d6a1ac89}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="WhatboxFramework\Network\Network\NetClient">
+      <UniqueIdentifier>{ddff56d2-5f07-40fe-8906-2d2b7c8417f0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="WhatboxFramework\Network\Network\NetHeader">
+      <UniqueIdentifier>{bec93238-801e-4b5e-b5ee-457d36c904c4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="WhatboxFramework\Network\Network\NetMessage">
+      <UniqueIdentifier>{f64a7956-ef41-4edf-a0d1-c27b18bff3c0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="WhatboxFramework\Network\Network\NetMsgUtil">
+      <UniqueIdentifier>{24c03e09-086e-44f6-831b-2aa3f2ab13c4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="WhatboxFramework\Network\Network\NetServer">
+      <UniqueIdentifier>{965836cb-209d-4dff-9ed0-30b8f05c01dc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="WhatboxFramework\Network\Network\SygnMgr">
+      <UniqueIdentifier>{df034aca-95cc-4d54-83db-da575aa20f31}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="WhatboxFramework\Network\Network\SygnMgr\ClientSygnMgr">
+      <UniqueIdentifier>{c3be954e-1d79-49ce-9035-943ca81c29c1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="WhatboxFramework\Network\Network\SygnMgr\ServerSygnMgr">
+      <UniqueIdentifier>{977f332a-0ee4-4149-a73a-2b4ff6c71139}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="WhatboxFramework\Network\Network\SygnVal">
+      <UniqueIdentifier>{a02e32fb-c6e1-47fe-b81b-03a211bf9efb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="WhatboxFramework\Network\Network\NetChating">
+      <UniqueIdentifier>{eb2ece04-c872-4e58-a37c-a0003b54bcb5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="WhatboxFramework\Network\Network\NetPushMsgSender">
+      <UniqueIdentifier>{bae0cfd4-1042-48ef-bde5-c44f8d915453}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="WhatboxFramework\Network\Network\NetFileSender">
+      <UniqueIdentifier>{91e5a150-beec-439b-b592-098a254d0bc3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="WhatboxFramework\Network\Network\NetFileReceiver">
+      <UniqueIdentifier>{761ffc6b-8aac-4c64-9f62-e2b49635b9db}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="WhatboxFramework\World">
+      <UniqueIdentifier>{f6605afc-d71e-448e-9248-434b75ee141b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="WhatboxFramework\World\World">
+      <UniqueIdentifier>{0c19b573-a51e-4112-a89c-d9767e0064d5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="WhatboxFramework\World\Layer">
+      <UniqueIdentifier>{61301339-4b93-40db-aec5-0d6f65586ed7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="WhatboxFramework\World\Layer\Layer">
+      <UniqueIdentifier>{203da2e2-bb35-41a9-bbb9-8e7d397bd1bf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="WhatboxFramework\World\Layer\Layer_Fade">
+      <UniqueIdentifier>{df596b8a-eb27-47d6-b0a2-bd5b0c2fd52f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="WhatboxFramework\World\Layer\Layer_UI">
+      <UniqueIdentifier>{2f540d91-a1e3-4c85-86cc-f2e925c88925}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="WhatboxFramework\World\Layer\Layer_Effect">
+      <UniqueIdentifier>{1735b18a-31a8-459a-910d-0737ac21d604}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="WhatboxFramework\World\Layer\Layer_Unit">
+      <UniqueIdentifier>{3da3fd46-276e-4bfd-b677-dc648fe8aacd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="WhatboxFramework\World\Layer\Layer_Back">
+      <UniqueIdentifier>{cc13adc0-659c-4a72-9551-2e15011d8630}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="WhatboxFramework\World\Effect">
+      <UniqueIdentifier>{3e99d2f2-5349-4997-b096-48e347ec151f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="WhatboxFramework\World\Unit">
+      <UniqueIdentifier>{4705c0a3-9009-433d-86d9-36a3205744ae}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="WhatboxFramework\PhysicalWorld">
+      <UniqueIdentifier>{72caedc4-6217-4a87-8730-e475055d02bc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="WhatboxFramework\PhysicalWorld\Box2D_Lite">
+      <UniqueIdentifier>{28742978-22d9-45fe-a400-e14c31105e7d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="WhatboxFramework\PhysicalWorld\PhysicalWorld">
+      <UniqueIdentifier>{829a3b8a-b35e-4424-9362-dfaa927f8d3a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="WhatboxFramework\PhysicalWorld\BoxBody">
+      <UniqueIdentifier>{58c9b4a0-5440-448a-a653-bc46119de347}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="WhatboxFramework\PhysicalWorld\BoxJoint">
+      <UniqueIdentifier>{071acec8-cba2-428a-9d6e-663c228214b3}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="main.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="cEngine.cpp">
+      <Filter>WhatboxFramework\System\Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="cCore.cpp">
+      <Filter>WhatboxFramework\System\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="cD3DDevice.cpp">
+      <Filter>WhatboxFramework\System\D3DDevice</Filter>
+    </ClCompile>
+    <ClCompile Include="cSqMgr.cpp">
+      <Filter>WhatboxFramework\Sequence\Base</Filter>
+    </ClCompile>
+    <ClCompile Include="cSq_Load.cpp">
+      <Filter>WhatboxFramework\Sequence</Filter>
+    </ClCompile>
+    <ClCompile Include="cCamera.cpp">
+      <Filter>WhatboxFramework\Object\Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="cInput.cpp">
+      <Filter>WhatboxFramework\System\Input</Filter>
+    </ClCompile>
+    <ClCompile Include="cResource.cpp">
+      <Filter>WhatboxFramework\Resource\Resource</Filter>
+    </ClCompile>
+    <ClCompile Include="cTexture.cpp">
+      <Filter>WhatboxFramework\Resource\Texture</Filter>
+    </ClCompile>
+    <ClCompile Include="cFont.cpp">
+      <Filter>WhatboxFramework\Resource\Font</Filter>
+    </ClCompile>
+    <ClCompile Include="Util.cpp">
+      <Filter>WhatboxFramework\Util</Filter>
+    </ClCompile>
+    <ClCompile Include="cSprite.cpp">
+      <Filter>WhatboxFramework\System\Sprite</Filter>
+    </ClCompile>
+    <ClCompile Include="cLine.cpp">
+      <Filter>WhatboxFramework\Object\Line</Filter>
+    </ClCompile>
+    <ClCompile Include="cCoordinate.cpp">
+      <Filter>WhatboxFramework\Object\Coordinate</Filter>
+    </ClCompile>
+    <ClCompile Include="cD3DVtxBuffer.cpp">
+      <Filter>WhatboxFramework\System\D3DVtxBuffer</Filter>
+    </ClCompile>
+    <ClCompile Include="cD3DIdxBuffer.cpp">
+      <Filter>WhatboxFramework\System\D3DIdxBuffer</Filter>
+    </ClCompile>
+    <ClCompile Include="cD3DSound.cpp">
+      <Filter>WhatboxFramework\System\D3DSound</Filter>
+    </ClCompile>
+    <ClCompile Include="c2DSound.cpp">
+      <Filter>WhatboxFramework\Resource\2DSound</Filter>
+    </ClCompile>
+    <ClCompile Include="cTextureList.cpp">
+      <Filter>WhatboxFramework\Resource\Texture\TextureList</Filter>
+    </ClCompile>
+    <ClCompile Include="c2DSoundList.cpp">
+      <Filter>WhatboxFramework\Resource\2DSound\2DSoundList</Filter>
+    </ClCompile>
+    <ClCompile Include="cRSLight.cpp">
+      <Filter>WhatboxFramework\Object\RSLight</Filter>
+    </ClCompile>
+    <ClCompile Include="cPlane.cpp">
+      <Filter>WhatboxFramework\Object\Plane</Filter>
+    </ClCompile>
+    <ClCompile Include="cCoord.cpp">
+      <Filter>WhatboxFramework\Physics\Coord</Filter>
+    </ClCompile>
+    <ClCompile Include="cSq_End.cpp">
+      <Filter>WhatboxFramework\Sequence</Filter>
+    </ClCompile>
+    <ClCompile Include="cSq_Game.cpp">
+      <Filter>WhatboxFramework\Sequence</Filter>
+    </ClCompile>
+    <ClCompile Include="cSq_Intro.cpp">
+      <Filter>WhatboxFramework\Sequence</Filter>
+    </ClCompile>
+    <ClCompile Include="cSq_Main.cpp">
+      <Filter>WhatboxFramework\Sequence</Filter>
+    </ClCompile>
+    <ClCompile Include="cTextbox.cpp">
+      <Filter>WhatboxFramework\Object\Textbox</Filter>
+    </ClCompile>
+    <ClCompile Include="cImgListRender.cpp">
+      <Filter>WhatboxFramework\System\ImgListRender</Filter>
+    </ClCompile>
+    <ClCompile Include="cFade.cpp">
+      <Filter>WhatboxFramework\Object\Fade</Filter>
+    </ClCompile>
+    <ClCompile Include="cMesh.cpp">
+      <Filter>WhatboxFramework\Resource\Mesh</Filter>
+    </ClCompile>
+    <ClCompile Include="cText.cpp">
+      <Filter>WhatboxFramework\Resource\Text</Filter>
+    </ClCompile>
+    <ClCompile Include="cMeshList.cpp">
+      <Filter>WhatboxFramework\Resource\Mesh\MeshList</Filter>
+    </ClCompile>
+    <ClCompile Include="cSkinnedMesh.cpp">
+      <Filter>WhatboxFramework\Resource\SkinnedMesh\SkinnedMesh</Filter>
+    </ClCompile>
+    <ClCompile Include="D3D\dxutil.cpp">
+      <Filter>WhatboxFramework\Util\D3D</Filter>
+    </ClCompile>
+    <ClCompile Include="LcXSkin\ILcMdl.cpp">
+      <Filter>WhatboxFramework\Resource\SkinnedMesh\LcXSkin</Filter>
+    </ClCompile>
+    <ClCompile Include="LcXSkin\LcXSkin.cpp">
+      <Filter>WhatboxFramework\Resource\SkinnedMesh\LcXSkin</Filter>
+    </ClCompile>
+    <ClCompile Include="LcXSkin\LcXSkinAlloc.cpp">
+      <Filter>WhatboxFramework\Resource\SkinnedMesh\LcXSkin</Filter>
+    </ClCompile>
+    <ClCompile Include="LcXSkin\LcXSkinIns.cpp">
+      <Filter>WhatboxFramework\Resource\SkinnedMesh\LcXSkin</Filter>
+    </ClCompile>
+    <ClCompile Include="LcXSkin\LcXSkinSrc.cpp">
+      <Filter>WhatboxFramework\Resource\SkinnedMesh\LcXSkin</Filter>
+    </ClCompile>
+    <ClCompile Include="D3D\d3denum.cpp">
+      <Filter>WhatboxFramework\Util\D3D</Filter>
+    </ClCompile>
+    <ClCompile Include="D3D\d3dutil.cpp">
+      <Filter>WhatboxFramework\Util\D3D</Filter>
+    </ClCompile>
+    <ClCompile Include="cSknMesh.cpp">
+      <Filter>WhatboxFramework\Object\SknMesh</Filter>
+    </ClCompile>
+    <ClCompile Include="cSknMeshList.cpp">
+      <Filter>WhatboxFramework\Resource\SkinnedMesh\SknMeshList</Filter>
+    </ClCompile>
+    <ClCompile Include="cLog.cpp">
+      <Filter>WhatboxFramework\System\Log</Filter>
+    </ClCompile>
+    <ClCompile Include="cTopography.cpp">
+      <Filter>WhatboxFramework\Object\Topography</Filter>
+    </ClCompile>
+    <ClCompile Include="cResourceLoad.cpp">
+      <Filter>WhatboxFramework\System\ResourceLoad</Filter>
+    </ClCompile>
+    <ClCompile Include="cInterpolar.cpp">
+      <Filter>WhatboxFramework\Util\Interpolar</Filter>
+    </ClCompile>
+    <ClCompile Include="DXUT.cpp">
+      <Filter>WhatboxFramework\Util\D3D</Filter>
+    </ClCompile>
+    <ClCompile Include="DXUTmisc.cpp">
+      <Filter>WhatboxFramework\Util\D3D</Filter>
+    </ClCompile>
+    <ClCompile Include="SDKwavefile.cpp">
+      <Filter>WhatboxFramework\Util\D3D</Filter>
+    </ClCompile>
+    <ClCompile Include="SDKmisc.cpp">
+      <Filter>WhatboxFramework\Util\D3D</Filter>
+    </ClCompile>
+    <ClCompile Include="DXUTenum.cpp">
+      <Filter>WhatboxFramework\Util\D3D</Filter>
+    </ClCompile>
+    <ClCompile Include="DXUTres.cpp">
+      <Filter>WhatboxFramework\Util\D3D</Filter>
+    </ClCompile>
+    <ClCompile Include="cD3DAudio.cpp">
+      <Filter>WhatboxFramework\System\D3DAudio</Filter>
+    </ClCompile>
+    <ClCompile Include="c3DSound.cpp">
+      <Filter>WhatboxFramework\Resource\3DSound</Filter>
+    </ClCompile>
+    <ClCompile Include="cSurface.cpp">
+      <Filter>WhatboxFramework\Object\Surface</Filter>
+    </ClCompile>
+    <ClCompile Include="cShapeMath.cpp">
+      <Filter>WhatboxFramework\Object\Shape\ShapeMath</Filter>
+    </ClCompile>
+    <ClCompile Include="cShp_Sphere.cpp">
+      <Filter>WhatboxFramework\Object\Shape\Shp_Sphere</Filter>
+    </ClCompile>
+    <ClCompile Include="cShp_Line.cpp">
+      <Filter>WhatboxFramework\Object\Shape\Shp_Line</Filter>
+    </ClCompile>
+    <ClCompile Include="c2DCoord.cpp">
+      <Filter>WhatboxFramework\Physics\2DCoord</Filter>
+    </ClCompile>
+    <ClCompile Include="cShp_Rectangle.cpp">
+      <Filter>WhatboxFramework\Object\Shape\Shp_Rectangle</Filter>
+    </ClCompile>
+    <ClCompile Include="c2DLine.cpp">
+      <Filter>WhatboxFramework\Resource\2DLine</Filter>
+    </ClCompile>
+    <ClCompile Include="c2DImgListRender.cpp">
+      <Filter>WhatboxFramework\System\2DImgListRender</Filter>
+    </ClCompile>
+    <ClCompile Include="cNumberRender.cpp">
+      <Filter>WhatboxFramework\System\NumberRender</Filter>
+    </ClCompile>
+    <ClCompile Include="cTimer.cpp">
+      <Filter>WhatboxFramework\System\Timer</Filter>
+    </ClCompile>
+    <ClCompile Include="c2DCamera.cpp">
+      <Filter>WhatboxFramework\Object\2DCamera</Filter>
+    </ClCompile>
+    <ClCompile Include="cButton.cpp">
+      <Filter>WhatboxFramework\Object\UIControl\Button</Filter>
+    </ClCompile>
+    <ClCompile Include="cShp_Polygon.cpp">
+      <Filter>WhatboxFramework\Object\Shape\cShp_Polygon</Filter>
+    </ClCompile>
+    <ClCompile Include="cShape.cpp">
+      <Filter>WhatboxFramework\Object\Shape\Shape</Filter>
+    </ClCompile>
+    <ClCompile Include="cTile.cpp">
+      <Filter>WhatboxFramework\Object\Tile</Filter>
+    </ClCompile>
+    <ClCompile Include="cFileWriter.cpp">
+      <Filter>WhatboxFramework\System\FileWriter</Filter>
+    </ClCompile>
+    <ClCompile Include="cFileReader.cpp">
+      <Filter>WhatboxFramework\System\FileReader</Filter>
+    </ClCompile>
+    <ClCompile Include="cBinaryReader.cpp">
+      <Filter>WhatboxFramework\Network\Network\BinaryReader</Filter>
+    </ClCompile>
+    <ClCompile Include="cBinaryWriter.cpp">
+      <Filter>WhatboxFramework\Network\Network\BinaryWriter</Filter>
+    </ClCompile>
+    <ClCompile Include="Array.cpp">
+      <Filter>WhatboxFramework\Network\Network\Array</Filter>
+    </ClCompile>
+    <ClCompile Include="cLock.cpp">
+      <Filter>WhatboxFramework\Network\Network\Lock</Filter>
+    </ClCompile>
+    <ClCompile Include="cLockVal.cpp">
+      <Filter>WhatboxFramework\Network\Network\LockVal</Filter>
+    </ClCompile>
+    <ClCompile Include="cMessageReceiver.cpp">
+      <Filter>WhatboxFramework\Network\Network\MessageReceiver</Filter>
+    </ClCompile>
+    <ClCompile Include="cMessageSender.cpp">
+      <Filter>WhatboxFramework\Network\Network\MessageSender</Filter>
+    </ClCompile>
+    <ClCompile Include="cNetBody.cpp">
+      <Filter>WhatboxFramework\Network\Network\NetBody</Filter>
+    </ClCompile>
+    <ClCompile Include="cNetClient.cpp">
+      <Filter>WhatboxFramework\Network\Network\NetClient</Filter>
+    </ClCompile>
+    <ClCompile Include="cNetHeader.cpp">
+      <Filter>WhatboxFramework\Network\Network\NetHeader</Filter>
+    </ClCompile>
+    <ClCompile Include="cNetMessage.cpp">
+      <Filter>WhatboxFramework\Network\Network\NetMessage</Filter>
+    </ClCompile>
+    <ClCompile Include="NetMsgUtil.cpp">
+      <Filter>WhatboxFramework\Network\Network\NetMsgUtil</Filter>
+    </ClCompile>
+    <ClCompile Include="cNetServer.cpp">
+      <Filter>WhatboxFramework\Network\Network\NetServer</Filter>
+    </ClCompile>
+    <ClCompile Include="cSygnVal.cpp">
+      <Filter>WhatboxFramework\Network\Network\SygnVal</Filter>
+    </ClCompile>
+    <ClCompile Include="cClientSygnMgr.cpp">
+      <Filter>WhatboxFramework\Network\Network\SygnMgr\ClientSygnMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="cServerSygnMgr.cpp">
+      <Filter>WhatboxFramework\Network\Network\SygnMgr\ServerSygnMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="cAction.cpp">
+      <Filter>WhatboxFramework\Object\Action</Filter>
+    </ClCompile>
+    <ClCompile Include="cWorld.cpp">
+      <Filter>WhatboxFramework\World\World</Filter>
+    </ClCompile>
+    <ClCompile Include="cLayer.cpp">
+      <Filter>WhatboxFramework\World\Layer\Layer</Filter>
+    </ClCompile>
+    <ClCompile Include="cLayer_Fade.cpp">
+      <Filter>WhatboxFramework\World\Layer\Layer_Fade</Filter>
+    </ClCompile>
+    <ClCompile Include="cLayer_UI.cpp">
+      <Filter>WhatboxFramework\World\Layer\Layer_UI</Filter>
+    </ClCompile>
+    <ClCompile Include="cUIControl.cpp">
+      <Filter>WhatboxFramework\Object\UIControl\UIControl</Filter>
+    </ClCompile>
+    <ClCompile Include="cEffect.cpp">
+      <Filter>WhatboxFramework\World\Effect</Filter>
+    </ClCompile>
+    <ClCompile Include="cLayer_Effect.cpp">
+      <Filter>WhatboxFramework\World\Layer\Layer_Effect</Filter>
+    </ClCompile>
+    <ClCompile Include="cUnit.cpp">
+      <Filter>WhatboxFramework\World\Unit</Filter>
+    </ClCompile>
+    <ClCompile Include="cLayer_Unit.cpp">
+      <Filter>WhatboxFramework\World\Layer\Layer_Unit</Filter>
+    </ClCompile>
+    <ClCompile Include="cLayer_Back.cpp">
+      <Filter>WhatboxFramework\World\Layer\Layer_Back</Filter>
+    </ClCompile>
+    <ClCompile Include="cEditBox.cpp">
+      <Filter>WhatboxFramework\Object\EditBox</Filter>
+    </ClCompile>
+    <ClCompile Include="cShp_Triangle.cpp">
+      <Filter>WhatboxFramework\Object\Shape\Shp_Triangle</Filter>
+    </ClCompile>
+    <ClCompile Include="cTransformButton.cpp">
+      <Filter>WhatboxFramework\Object\UIControl\TransformButton</Filter>
+    </ClCompile>
+    <ClCompile Include="cFuncSequence.cpp">
+      <Filter>WhatboxFramework\Util\FuncSequence</Filter>
+    </ClCompile>
+    <ClCompile Include="cSq_LoginUser.cpp">
+      <Filter>WhatboxFramework\Sequence</Filter>
+    </ClCompile>
+    <ClCompile Include="cLabel.cpp">
+      <Filter>WhatboxFramework\Object\UIControl\Label</Filter>
+    </ClCompile>
+    <ClCompile Include="cFuncList.cpp">
+      <Filter>WhatboxFramework\Util\FuncList</Filter>
+    </ClCompile>
+    <ClCompile Include="cTileMap.cpp">
+      <Filter>WhatboxFramework\Object\TileMap</Filter>
+    </ClCompile>
+    <ClCompile Include="cLockQueue.cpp">
+      <Filter>WhatboxFramework\Util\LockQueue</Filter>
+    </ClCompile>
+    <ClCompile Include="cMessageMgr.cpp">
+      <Filter>WhatboxFramework\Object\MessageMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="cMyMessage.cpp">
+      <Filter>WhatboxFramework\Object\MessageMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="cSq_NetGame.cpp">
+      <Filter>WhatboxFramework\Sequence</Filter>
+    </ClCompile>
+    <ClCompile Include="cSq_NetConnect.cpp">
+      <Filter>WhatboxFramework\Sequence</Filter>
+    </ClCompile>
+    <ClCompile Include="cNetChating.cpp">
+      <Filter>WhatboxFramework\Network\Network\NetChating</Filter>
+    </ClCompile>
+    <ClCompile Include="cNetPushMsgSender.cpp">
+      <Filter>WhatboxFramework\Network\Network\NetPushMsgSender</Filter>
+    </ClCompile>
+    <ClCompile Include="cTickTimer.cpp">
+      <Filter>WhatboxFramework\Util\TickTimer</Filter>
+    </ClCompile>
+    <ClCompile Include="cGraph.cpp">
+      <Filter>WhatboxFramework\Object\Graph\Graph</Filter>
+    </ClCompile>
+    <ClCompile Include="cValueProcMgr.cpp">
+      <Filter>WhatboxFramework\Util\ValueProcMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="cFX.cpp">
+      <Filter>WhatboxFramework\Object\FX\FX</Filter>
+    </ClCompile>
+    <ClCompile Include="cFXMgr.cpp">
+      <Filter>WhatboxFramework\Object\FX\FXMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="cFX_ScaleUp.cpp">
+      <Filter>WhatboxFramework\Object\FX\FX_ScaleUp</Filter>
+    </ClCompile>
+    <ClCompile Include="cWavBuffer.cpp">
+      <Filter>WhatboxFramework\Resource\WavBuffer</Filter>
+    </ClCompile>
+    <ClCompile Include="cFX_ScaleDown.cpp">
+      <Filter>WhatboxFramework\Object\FX\FX_ScaleDown</Filter>
+    </ClCompile>
+    <ClCompile Include="cFX_SoftRandomScale.cpp">
+      <Filter>WhatboxFramework\Object\FX\FX_SoftRandomScale</Filter>
+    </ClCompile>
+    <ClCompile Include="cFX_Shake.cpp">
+      <Filter>WhatboxFramework\Object\FX\FX_Shake</Filter>
+    </ClCompile>
+    <ClCompile Include="cFX_Explosion.cpp">
+      <Filter>WhatboxFramework\Object\FX\FX_Explosion</Filter>
+    </ClCompile>
+    <ClCompile Include="Box2D_Lite\Arbiter.cpp">
+      <Filter>WhatboxFramework\PhysicalWorld\Box2D_Lite</Filter>
+    </ClCompile>
+    <ClCompile Include="Box2D_Lite\Body.cpp">
+      <Filter>WhatboxFramework\PhysicalWorld\Box2D_Lite</Filter>
+    </ClCompile>
+    <ClCompile Include="Box2D_Lite\Collide.cpp">
+      <Filter>WhatboxFramework\PhysicalWorld\Box2D_Lite</Filter>
+    </ClCompile>
+    <ClCompile Include="Box2D_Lite\Joint.cpp">
+      <Filter>WhatboxFramework\PhysicalWorld\Box2D_Lite</Filter>
+    </ClCompile>
+    <ClCompile Include="Box2D_Lite\World.cpp">
+      <Filter>WhatboxFramework\PhysicalWorld\Box2D_Lite</Filter>
+    </ClCompile>
+    <ClCompile Include="cPhysicalWorld.cpp">
+      <Filter>WhatboxFramework\PhysicalWorld\PhysicalWorld</Filter>
+    </ClCompile>
+    <ClCompile Include="cBoxBody.cpp">
+      <Filter>WhatboxFramework\PhysicalWorld\BoxBody</Filter>
+    </ClCompile>
+    <ClCompile Include="cBoxJoint.cpp">
+      <Filter>WhatboxFramework\PhysicalWorld\BoxJoint</Filter>
+    </ClCompile>
+    <ClCompile Include="cFX_ColorAnimation.cpp">
+      <Filter>WhatboxFramework\Object\FX\FX_ColorAnimation</Filter>
+    </ClCompile>
+    <ClCompile Include="cFX_Firework.cpp">
+      <Filter>WhatboxFramework\Object\FX\FX_Firework</Filter>
+    </ClCompile>
+    <ClCompile Include="cQuatCoord.cpp">
+      <Filter>WhatboxFramework\Physics\QuatCoord</Filter>
+    </ClCompile>
+    <ClCompile Include="cFX_Fade.cpp">
+      <Filter>WhatboxFramework\Object\FX\FX_Fade</Filter>
+    </ClCompile>
+    <ClCompile Include="cFX_Laser.cpp">
+      <Filter>WhatboxFramework\Object\FX\FX_Laser</Filter>
+    </ClCompile>
+    <ClCompile Include="cFX_Tail.cpp">
+      <Filter>WhatboxFramework\Object\FX\FX_Tail</Filter>
+    </ClCompile>
+    <ClCompile Include="cScrollBar.cpp">
+      <Filter>WhatboxFramework\Object\UIControl\ScrollBar</Filter>
+    </ClCompile>
+    <ClCompile Include="cParticleWorld.cpp">
+      <Filter>WhatboxFramework\Object\ParticleWorld</Filter>
+    </ClCompile>
+    <ClCompile Include="cParticle.cpp">
+      <Filter>WhatboxFramework\Object\ParticleWorld\Particle\Particle</Filter>
+    </ClCompile>
+    <ClCompile Include="cParticle_Basic.cpp">
+      <Filter>WhatboxFramework\Object\ParticleWorld\Particle\Particle_Basic</Filter>
+    </ClCompile>
+    <ClCompile Include="cBasicSpawner.cpp">
+      <Filter>WhatboxFramework\Object\ParticleWorld\Spawner\BasicSpawner</Filter>
+    </ClCompile>
+    <ClCompile Include="cSpawner.cpp">
+      <Filter>WhatboxFramework\Object\ParticleWorld\Spawner\Spawner</Filter>
+    </ClCompile>
+    <ClCompile Include="cForce.cpp">
+      <Filter>WhatboxFramework\Object\ParticleWorld\Force\Force</Filter>
+    </ClCompile>
+    <ClCompile Include="cForce_Wind.cpp">
+      <Filter>WhatboxFramework\Object\ParticleWorld\Force\Force_Wind</Filter>
+    </ClCompile>
+    <ClCompile Include="cForce_AirResist.cpp">
+      <Filter>WhatboxFramework\Object\ParticleWorld\Force\Force_AirResist</Filter>
+    </ClCompile>
+    <ClCompile Include="cForce_Gravity.cpp">
+      <Filter>WhatboxFramework\Object\ParticleWorld\Force\Force_Gravity</Filter>
+    </ClCompile>
+    <ClCompile Include="cCheckBox.cpp">
+      <Filter>WhatboxFramework\Object\UIControl\CheckBox</Filter>
+    </ClCompile>
+    <ClCompile Include="cQuatAni.cpp">
+      <Filter>WhatboxFramework\Object\QuatAni</Filter>
+    </ClCompile>
+    <ClCompile Include="cQuatAction.cpp">
+      <Filter>WhatboxFramework\Object\QuatAction</Filter>
+    </ClCompile>
+    <ClCompile Include="cNetFileSender.cpp">
+      <Filter>WhatboxFramework\Network\Network\NetFileSender</Filter>
+    </ClCompile>
+    <ClCompile Include="cNetFileReceiver.cpp">
+      <Filter>WhatboxFramework\Network\Network\NetFileReceiver</Filter>
+    </ClCompile>
+    <ClCompile Include="BiogramApp.cpp">
+      <Filter>Biogram\BiogramApp</Filter>
+    </ClCompile>
+    <ClCompile Include="System.cpp">
+      <Filter>Biogram\Model\System</Filter>
+    </ClCompile>
+    <ClCompile Include="UserInputController.cpp">
+      <Filter>Biogram\Controller\UserInputController\UserInputController</Filter>
+    </ClCompile>
+    <ClCompile Include="WhatboxUserInputController.cpp">
+      <Filter>Biogram\Controller\UserInputController\WhatboxUserInputController</Filter>
+    </ClCompile>
+    <ClCompile Include="Graphic.cpp">
+      <Filter>Biogram\View\Graphic\Graphic</Filter>
+    </ClCompile>
+    <ClCompile Include="WhatboxGraphic.cpp">
+      <Filter>Biogram\View\Graphic\WhatboxGraphic</Filter>
+    </ClCompile>
+    <ClCompile Include="SystemInfo.cpp">
+      <Filter>Biogram\Model\SystemInfo\SystemInfo</Filter>
+    </ClCompile>
+    <ClCompile Include="WhatboxSystemInfo.cpp">
+      <Filter>Biogram\Model\SystemInfo\WhatboxSystemInfo</Filter>
+    </ClCompile>
+    <ClCompile Include="Utility.cpp">
+      <Filter>Biogram\Model\Utility</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="cEngine.h">
+      <Filter>WhatboxFramework\System\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="cCore.h">
+      <Filter>WhatboxFramework\System\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="cD3DDevice.h">
+      <Filter>WhatboxFramework\System\D3DDevice</Filter>
+    </ClInclude>
+    <ClInclude Include="cSequence.h">
+      <Filter>WhatboxFramework\Sequence\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="cSqMgr.h">
+      <Filter>WhatboxFramework\Sequence\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="cSq_Load.h">
+      <Filter>WhatboxFramework\Sequence</Filter>
+    </ClInclude>
+    <ClInclude Include="cCamera.h">
+      <Filter>WhatboxFramework\Object\Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="cInput.h">
+      <Filter>WhatboxFramework\System\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="cResource.h">
+      <Filter>WhatboxFramework\Resource\Resource</Filter>
+    </ClInclude>
+    <ClInclude Include="cTexture.h">
+      <Filter>WhatboxFramework\Resource\Texture</Filter>
+    </ClInclude>
+    <ClInclude Include="cFont.h">
+      <Filter>WhatboxFramework\Resource\Font</Filter>
+    </ClInclude>
+    <ClInclude Include="Util.h">
+      <Filter>WhatboxFramework\Util</Filter>
+    </ClInclude>
+    <ClInclude Include="cSprite.h">
+      <Filter>WhatboxFramework\System\Sprite</Filter>
+    </ClInclude>
+    <ClInclude Include="cLine.h">
+      <Filter>WhatboxFramework\Object\Line</Filter>
+    </ClInclude>
+    <ClInclude Include="cCoordinate.h">
+      <Filter>WhatboxFramework\Object\Coordinate</Filter>
+    </ClInclude>
+    <ClInclude Include="Option.h">
+      <Filter>WhatboxFramework\Option</Filter>
+    </ClInclude>
+    <ClInclude Include="cD3DVtxBuffer.h">
+      <Filter>WhatboxFramework\System\D3DVtxBuffer</Filter>
+    </ClInclude>
+    <ClInclude Include="cD3DIdxBuffer.h">
+      <Filter>WhatboxFramework\System\D3DIdxBuffer</Filter>
+    </ClInclude>
+    <ClInclude Include="cD3DSound.h">
+      <Filter>WhatboxFramework\System\D3DSound</Filter>
+    </ClInclude>
+    <ClInclude Include="c2DSound.h">
+      <Filter>WhatboxFramework\Resource\2DSound</Filter>
+    </ClInclude>
+    <ClInclude Include="cTextureList.h">
+      <Filter>WhatboxFramework\Resource\Texture\TextureList</Filter>
+    </ClInclude>
+    <ClInclude Include="c2DSoundList.h">
+      <Filter>WhatboxFramework\Resource\2DSound\2DSoundList</Filter>
+    </ClInclude>
+    <ClInclude Include="cRSLight.h">
+      <Filter>WhatboxFramework\Object\RSLight</Filter>
+    </ClInclude>
+    <ClInclude Include="cPlane.h">
+      <Filter>WhatboxFramework\Object\Plane</Filter>
+    </ClInclude>
+    <ClInclude Include="cCoord.h">
+      <Filter>WhatboxFramework\Physics\Coord</Filter>
+    </ClInclude>
+    <ClInclude Include="cSq_End.h">
+      <Filter>WhatboxFramework\Sequence</Filter>
+    </ClInclude>
+    <ClInclude Include="cSq_Game.h">
+      <Filter>WhatboxFramework\Sequence</Filter>
+    </ClInclude>
+    <ClInclude Include="cSq_Intro.h">
+      <Filter>WhatboxFramework\Sequence</Filter>
+    </ClInclude>
+    <ClInclude Include="cSq_Main.h">
+      <Filter>WhatboxFramework\Sequence</Filter>
+    </ClInclude>
+    <ClInclude Include="cTextbox.h">
+      <Filter>WhatboxFramework\Object\Textbox</Filter>
+    </ClInclude>
+    <ClInclude Include="cImgListRender.h">
+      <Filter>WhatboxFramework\System\ImgListRender</Filter>
+    </ClInclude>
+    <ClInclude Include="ImgListName.h">
+      <Filter>WhatboxFramework\Resource\Texture\TextureList</Filter>
+    </ClInclude>
+    <ClInclude Include="cFade.h">
+      <Filter>WhatboxFramework\Object\Fade</Filter>
+    </ClInclude>
+    <ClInclude Include="cMesh.h">
+      <Filter>WhatboxFramework\Resource\Mesh</Filter>
+    </ClInclude>
+    <ClInclude Include="cText.h">
+      <Filter>WhatboxFramework\Resource\Text</Filter>
+    </ClInclude>
+    <ClInclude Include="cMeshList.h">
+      <Filter>WhatboxFramework\Resource\Mesh\MeshList</Filter>
+    </ClInclude>
+    <ClInclude Include="MshListName.h">
+      <Filter>WhatboxFramework\Resource\Mesh\MeshList</Filter>
+    </ClInclude>
+    <ClInclude Include="cSkinnedMesh.h">
+      <Filter>WhatboxFramework\Resource\SkinnedMesh\SkinnedMesh</Filter>
+    </ClInclude>
+    <ClInclude Include="D3D\dxutil.h">
+      <Filter>WhatboxFramework\Util\D3D</Filter>
+    </ClInclude>
+    <ClInclude Include="LcXSkin\ILcMdl.h">
+      <Filter>WhatboxFramework\Resource\SkinnedMesh\LcXSkin</Filter>
+    </ClInclude>
+    <ClInclude Include="LcXSkin\LcXSkin.h">
+      <Filter>WhatboxFramework\Resource\SkinnedMesh\LcXSkin</Filter>
+    </ClInclude>
+    <ClInclude Include="LcXSkin\LcXSkinAlloc.h">
+      <Filter>WhatboxFramework\Resource\SkinnedMesh\LcXSkin</Filter>
+    </ClInclude>
+    <ClInclude Include="LcXSkin\LcXSkinIns.h">
+      <Filter>WhatboxFramework\Resource\SkinnedMesh\LcXSkin</Filter>
+    </ClInclude>
+    <ClInclude Include="LcXSkin\LcXSkinSrc.h">
+      <Filter>WhatboxFramework\Resource\SkinnedMesh\LcXSkin</Filter>
+    </ClInclude>
+    <ClInclude Include="D3D\d3denum.h">
+      <Filter>WhatboxFramework\Util\D3D</Filter>
+    </ClInclude>
+    <ClInclude Include="D3D\d3dsettings.h">
+      <Filter>WhatboxFramework\Util\D3D</Filter>
+    </ClInclude>
+    <ClInclude Include="D3D\d3dutil.h">
+      <Filter>WhatboxFramework\Util\D3D</Filter>
+    </ClInclude>
+    <ClInclude Include="cSknMesh.h">
+      <Filter>WhatboxFramework\Object\SknMesh</Filter>
+    </ClInclude>
+    <ClInclude Include="cSknMeshList.h">
+      <Filter>WhatboxFramework\Resource\SkinnedMesh\SknMeshList</Filter>
+    </ClInclude>
+    <ClInclude Include="SknMeshListName.h">
+      <Filter>WhatboxFramework\Resource\SkinnedMesh\SknMeshList</Filter>
+    </ClInclude>
+    <ClInclude Include="cLog.h">
+      <Filter>WhatboxFramework\System\Log</Filter>
+    </ClInclude>
+    <ClInclude Include="cTopography.h">
+      <Filter>WhatboxFramework\Object\Topography</Filter>
+    </ClInclude>
+    <ClInclude Include="cResourceLoad.h">
+      <Filter>WhatboxFramework\System\ResourceLoad</Filter>
+    </ClInclude>
+    <ClInclude Include="cInterpolar.h">
+      <Filter>WhatboxFramework\Util\Interpolar</Filter>
+    </ClInclude>
+    <ClInclude Include="c3DPoint.h">
+      <Filter>WhatboxFramework\Object\Shape\3DPoint</Filter>
+    </ClInclude>
+    <ClInclude Include="LcXSkin\ATTRIB_Enum.h">
+      <Filter>WhatboxFramework\Resource\SkinnedMesh</Filter>
+    </ClInclude>
+    <ClInclude Include="DXUT.h">
+      <Filter>WhatboxFramework\Util\D3D</Filter>
+    </ClInclude>
+    <ClInclude Include="DXUTmisc.h">
+      <Filter>WhatboxFramework\Util\D3D</Filter>
+    </ClInclude>
+    <ClInclude Include="SDKwavefile.h">
+      <Filter>WhatboxFramework\Util\D3D</Filter>
+    </ClInclude>
+    <ClInclude Include="SDKmisc.h">
+      <Filter>WhatboxFramework\Util\D3D</Filter>
+    </ClInclude>
+    <ClInclude Include="DXUTenum.h">
+      <Filter>WhatboxFramework\Util\D3D</Filter>
+    </ClInclude>
+    <ClInclude Include="DXUTres.h">
+      <Filter>WhatboxFramework\Util\D3D</Filter>
+    </ClInclude>
+    <ClInclude Include="cD3DAudio.h">
+      <Filter>WhatboxFramework\System\D3DAudio</Filter>
+    </ClInclude>
+    <ClInclude Include="c3DSound.h">
+      <Filter>WhatboxFramework\Resource\3DSound</Filter>
+    </ClInclude>
+    <ClInclude Include="cSurface.h">
+      <Filter>WhatboxFramework\Object\Surface</Filter>
+    </ClInclude>
+    <ClInclude Include="cShapeMath.h">
+      <Filter>WhatboxFramework\Object\Shape\ShapeMath</Filter>
+    </ClInclude>
+    <ClInclude Include="cShp_Sphere.h">
+      <Filter>WhatboxFramework\Object\Shape\Shp_Sphere</Filter>
+    </ClInclude>
+    <ClInclude Include="cShp_Line.h">
+      <Filter>WhatboxFramework\Object\Shape\Shp_Line</Filter>
+    </ClInclude>
+    <ClInclude Include="c2DCoord.h">
+      <Filter>WhatboxFramework\Physics\2DCoord</Filter>
+    </ClInclude>
+    <ClInclude Include="cShp_Rectangle.h">
+      <Filter>WhatboxFramework\Object\Shape\Shp_Rectangle</Filter>
+    </ClInclude>
+    <ClInclude Include="c2DLine.h">
+      <Filter>WhatboxFramework\Resource\2DLine</Filter>
+    </ClInclude>
+    <ClInclude Include="c2DImgListRender.h">
+      <Filter>WhatboxFramework\System\2DImgListRender</Filter>
+    </ClInclude>
+    <ClInclude Include="resource.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="cNumberRender.h">
+      <Filter>WhatboxFramework\System\NumberRender</Filter>
+    </ClInclude>
+    <ClInclude Include="cTimer.h">
+      <Filter>WhatboxFramework\System\Timer</Filter>
+    </ClInclude>
+    <ClInclude Include="c2DCamera.h">
+      <Filter>WhatboxFramework\Object\2DCamera</Filter>
+    </ClInclude>
+    <ClInclude Include="cButton.h">
+      <Filter>WhatboxFramework\Object\UIControl\Button</Filter>
+    </ClInclude>
+    <ClInclude Include="cShp_Polygon.h">
+      <Filter>WhatboxFramework\Object\Shape\cShp_Polygon</Filter>
+    </ClInclude>
+    <ClInclude Include="cShape.h">
+      <Filter>WhatboxFramework\Object\Shape\Shape</Filter>
+    </ClInclude>
+    <ClInclude Include="cTile.h">
+      <Filter>WhatboxFramework\Object\Tile</Filter>
+    </ClInclude>
+    <ClInclude Include="cFileWriter.h">
+      <Filter>WhatboxFramework\System\FileWriter</Filter>
+    </ClInclude>
+    <ClInclude Include="cFileReader.h">
+      <Filter>WhatboxFramework\System\FileReader</Filter>
+    </ClInclude>
+    <ClInclude Include="cBinaryReader.h">
+      <Filter>WhatboxFramework\Network\Network\BinaryReader</Filter>
+    </ClInclude>
+    <ClInclude Include="cBinaryWriter.h">
+      <Filter>WhatboxFramework\Network\Network\BinaryWriter</Filter>
+    </ClInclude>
+    <ClInclude Include="Array.h">
+      <Filter>WhatboxFramework\Network\Network\Array</Filter>
+    </ClInclude>
+    <ClInclude Include="cLock.h">
+      <Filter>WhatboxFramework\Network\Network\Lock</Filter>
+    </ClInclude>
+    <ClInclude Include="cLockVal.h">
+      <Filter>WhatboxFramework\Network\Network\LockVal</Filter>
+    </ClInclude>
+    <ClInclude Include="cLockVal_Def.h">
+      <Filter>WhatboxFramework\Network\Network\LockVal</Filter>
+    </ClInclude>
+    <ClInclude Include="cMessageReceiver.h">
+      <Filter>WhatboxFramework\Network\Network\MessageReceiver</Filter>
+    </ClInclude>
+    <ClInclude Include="cMessageSender.h">
+      <Filter>WhatboxFramework\Network\Network\MessageSender</Filter>
+    </ClInclude>
+    <ClInclude Include="cNetBody.h">
+      <Filter>WhatboxFramework\Network\Network\NetBody</Filter>
+    </ClInclude>
+    <ClInclude Include="cNetClient.h">
+      <Filter>WhatboxFramework\Network\Network\NetClient</Filter>
+    </ClInclude>
+    <ClInclude Include="cNetHeader.h">
+      <Filter>WhatboxFramework\Network\Network\NetHeader</Filter>
+    </ClInclude>
+    <ClInclude Include="cNetMessage.h">
+      <Filter>WhatboxFramework\Network\Network\NetMessage</Filter>
+    </ClInclude>
+    <ClInclude Include="NetMsgUtil.h">
+      <Filter>WhatboxFramework\Network\Network\NetMsgUtil</Filter>
+    </ClInclude>
+    <ClInclude Include="cNetServer.h">
+      <Filter>WhatboxFramework\Network\Network\NetServer</Filter>
+    </ClInclude>
+    <ClInclude Include="cNetPacket.h">
+      <Filter>WhatboxFramework\Network</Filter>
+    </ClInclude>
+    <ClInclude Include="NetDefine.h">
+      <Filter>WhatboxFramework\Network</Filter>
+    </ClInclude>
+    <ClInclude Include="NetMsgType.h">
+      <Filter>WhatboxFramework\Network</Filter>
+    </ClInclude>
+    <ClInclude Include="Network.h">
+      <Filter>WhatboxFramework\Network</Filter>
+    </ClInclude>
+    <ClInclude Include="cSygnVal.h">
+      <Filter>WhatboxFramework\Network\Network\SygnVal</Filter>
+    </ClInclude>
+    <ClInclude Include="cClientSygnMgr.h">
+      <Filter>WhatboxFramework\Network\Network\SygnMgr\ClientSygnMgr</Filter>
+    </ClInclude>
+    <ClInclude Include="cServerSygnMgr.h">
+      <Filter>WhatboxFramework\Network\Network\SygnMgr\ServerSygnMgr</Filter>
+    </ClInclude>
+    <ClInclude Include="cAction.h">
+      <Filter>WhatboxFramework\Object\Action</Filter>
+    </ClInclude>
+    <ClInclude Include="cWorld.h">
+      <Filter>WhatboxFramework\World\World</Filter>
+    </ClInclude>
+    <ClInclude Include="cLayer.h">
+      <Filter>WhatboxFramework\World\Layer\Layer</Filter>
+    </ClInclude>
+    <ClInclude Include="cLayer_Fade.h">
+      <Filter>WhatboxFramework\World\Layer\Layer_Fade</Filter>
+    </ClInclude>
+    <ClInclude Include="cLayer_UI.h">
+      <Filter>WhatboxFramework\World\Layer\Layer_UI</Filter>
+    </ClInclude>
+    <ClInclude Include="cUIControl.h">
+      <Filter>WhatboxFramework\Object\UIControl\UIControl</Filter>
+    </ClInclude>
+    <ClInclude Include="cEffect.h">
+      <Filter>WhatboxFramework\World\Effect</Filter>
+    </ClInclude>
+    <ClInclude Include="cLayer_Effect.h">
+      <Filter>WhatboxFramework\World\Layer\Layer_Effect</Filter>
+    </ClInclude>
+    <ClInclude Include="cUnit.h">
+      <Filter>WhatboxFramework\World\Unit</Filter>
+    </ClInclude>
+    <ClInclude Include="cLayer_Unit.h">
+      <Filter>WhatboxFramework\World\Layer\Layer_Unit</Filter>
+    </ClInclude>
+    <ClInclude Include="cLayer_Back.h">
+      <Filter>WhatboxFramework\World\Layer\Layer_Back</Filter>
+    </ClInclude>
+    <ClInclude Include="cEditBox.h">
+      <Filter>WhatboxFramework\Object\EditBox</Filter>
+    </ClInclude>
+    <ClInclude Include="cShp_Triangle.h">
+      <Filter>WhatboxFramework\Object\Shape\Shp_Triangle</Filter>
+    </ClInclude>
+    <ClInclude Include="SndListName.h">
+      <Filter>WhatboxFramework\Resource\2DSound\2DSoundList</Filter>
+    </ClInclude>
+    <ClInclude Include="cTransformButton.h">
+      <Filter>WhatboxFramework\Object\UIControl\TransformButton</Filter>
+    </ClInclude>
+    <ClInclude Include="cFuncSequence.h">
+      <Filter>WhatboxFramework\Util\FuncSequence</Filter>
+    </ClInclude>
+    <ClInclude Include="cSq_LoginUser.h">
+      <Filter>WhatboxFramework\Sequence</Filter>
+    </ClInclude>
+    <ClInclude Include="cLabel.h">
+      <Filter>WhatboxFramework\Object\UIControl\Label</Filter>
+    </ClInclude>
+    <ClInclude Include="cFuncList.h">
+      <Filter>WhatboxFramework\Util\FuncList</Filter>
+    </ClInclude>
+    <ClInclude Include="cTileMap.h">
+      <Filter>WhatboxFramework\Object\TileMap</Filter>
+    </ClInclude>
+    <ClInclude Include="cTileMap_Def.h">
+      <Filter>WhatboxFramework\Object\TileMap</Filter>
+    </ClInclude>
+    <ClInclude Include="cLockQueue.h">
+      <Filter>WhatboxFramework\Util\LockQueue</Filter>
+    </ClInclude>
+    <ClInclude Include="cLockQueue_Def.h">
+      <Filter>WhatboxFramework\Util\LockQueue</Filter>
+    </ClInclude>
+    <ClInclude Include="cMessageMgr.h">
+      <Filter>WhatboxFramework\Object\MessageMgr</Filter>
+    </ClInclude>
+    <ClInclude Include="cSq_NetGame.h">
+      <Filter>WhatboxFramework\Sequence</Filter>
+    </ClInclude>
+    <ClInclude Include="cSq_NetConnect.h">
+      <Filter>WhatboxFramework\Sequence</Filter>
+    </ClInclude>
+    <ClInclude Include="cNetChating.h">
+      <Filter>WhatboxFramework\Network\Network\NetChating</Filter>
+    </ClInclude>
+    <ClInclude Include="cNetPushMsgSender.h">
+      <Filter>WhatboxFramework\Network\Network\NetPushMsgSender</Filter>
+    </ClInclude>
+    <ClInclude Include="cTickTimer.h">
+      <Filter>WhatboxFramework\Util\TickTimer</Filter>
+    </ClInclude>
+    <ClInclude Include="cGraph.h">
+      <Filter>WhatboxFramework\Object\Graph\Graph</Filter>
+    </ClInclude>
+    <ClInclude Include="cValueProcMgr.h">
+      <Filter>WhatboxFramework\Util\ValueProcMgr</Filter>
+    </ClInclude>
+    <ClInclude Include="cFX.h">
+      <Filter>WhatboxFramework\Object\FX\FX</Filter>
+    </ClInclude>
+    <ClInclude Include="cFXMgr.h">
+      <Filter>WhatboxFramework\Object\FX\FXMgr</Filter>
+    </ClInclude>
+    <ClInclude Include="cFX_ScaleUp.h">
+      <Filter>WhatboxFramework\Object\FX\FX_ScaleUp</Filter>
+    </ClInclude>
+    <ClInclude Include="cWavBuffer.h">
+      <Filter>WhatboxFramework\Resource\WavBuffer</Filter>
+    </ClInclude>
+    <ClInclude Include="cFX_ScaleDown.h">
+      <Filter>WhatboxFramework\Object\FX\FX_ScaleDown</Filter>
+    </ClInclude>
+    <ClInclude Include="cFX_SoftRandomScale.h">
+      <Filter>WhatboxFramework\Object\FX\FX_SoftRandomScale</Filter>
+    </ClInclude>
+    <ClInclude Include="cFX_Shake.h">
+      <Filter>WhatboxFramework\Object\FX\FX_Shake</Filter>
+    </ClInclude>
+    <ClInclude Include="cFX_Explosion.h">
+      <Filter>WhatboxFramework\Object\FX\FX_Explosion</Filter>
+    </ClInclude>
+    <ClInclude Include="Box2D_Lite\Arbiter.h">
+      <Filter>WhatboxFramework\PhysicalWorld\Box2D_Lite</Filter>
+    </ClInclude>
+    <ClInclude Include="Box2D_Lite\Body.h">
+      <Filter>WhatboxFramework\PhysicalWorld\Box2D_Lite</Filter>
+    </ClInclude>
+    <ClInclude Include="Box2D_Lite\Joint.h">
+      <Filter>WhatboxFramework\PhysicalWorld\Box2D_Lite</Filter>
+    </ClInclude>
+    <ClInclude Include="Box2D_Lite\MathUtils.h">
+      <Filter>WhatboxFramework\PhysicalWorld\Box2D_Lite</Filter>
+    </ClInclude>
+    <ClInclude Include="Box2D_Lite\World.h">
+      <Filter>WhatboxFramework\PhysicalWorld\Box2D_Lite</Filter>
+    </ClInclude>
+    <ClInclude Include="cPhysicalWorld.h">
+      <Filter>WhatboxFramework\PhysicalWorld\PhysicalWorld</Filter>
+    </ClInclude>
+    <ClInclude Include="cBoxBody.h">
+      <Filter>WhatboxFramework\PhysicalWorld\BoxBody</Filter>
+    </ClInclude>
+    <ClInclude Include="cBoxJoint.h">
+      <Filter>WhatboxFramework\PhysicalWorld\BoxJoint</Filter>
+    </ClInclude>
+    <ClInclude Include="cFX_ColorAnimation.h">
+      <Filter>WhatboxFramework\Object\FX\FX_ColorAnimation</Filter>
+    </ClInclude>
+    <ClInclude Include="cFX_Firework.h">
+      <Filter>WhatboxFramework\Object\FX\FX_Firework</Filter>
+    </ClInclude>
+    <ClInclude Include="cQuatCoord.h">
+      <Filter>WhatboxFramework\Physics\QuatCoord</Filter>
+    </ClInclude>
+    <ClInclude Include="cFX_Fade.h">
+      <Filter>WhatboxFramework\Object\FX\FX_Fade</Filter>
+    </ClInclude>
+    <ClInclude Include="cFX_Laser.h">
+      <Filter>WhatboxFramework\Object\FX\FX_Laser</Filter>
+    </ClInclude>
+    <ClInclude Include="cFX_Tail.h">
+      <Filter>WhatboxFramework\Object\FX\FX_Tail</Filter>
+    </ClInclude>
+    <ClInclude Include="cScrollBar.h">
+      <Filter>WhatboxFramework\Object\UIControl\ScrollBar</Filter>
+    </ClInclude>
+    <ClInclude Include="cParticleWorld.h">
+      <Filter>WhatboxFramework\Object\ParticleWorld</Filter>
+    </ClInclude>
+    <ClInclude Include="cParticle.h">
+      <Filter>WhatboxFramework\Object\ParticleWorld\Particle\Particle</Filter>
+    </ClInclude>
+    <ClInclude Include="cParticle_Basic.h">
+      <Filter>WhatboxFramework\Object\ParticleWorld\Particle\Particle_Basic</Filter>
+    </ClInclude>
+    <ClInclude Include="cBasicSpawner.h">
+      <Filter>WhatboxFramework\Object\ParticleWorld\Spawner\BasicSpawner</Filter>
+    </ClInclude>
+    <ClInclude Include="cSpawner.h">
+      <Filter>WhatboxFramework\Object\ParticleWorld\Spawner\Spawner</Filter>
+    </ClInclude>
+    <ClInclude Include="cForce.h">
+      <Filter>WhatboxFramework\Object\ParticleWorld\Force\Force</Filter>
+    </ClInclude>
+    <ClInclude Include="cForce_Wind.h">
+      <Filter>WhatboxFramework\Object\ParticleWorld\Force\Force_Wind</Filter>
+    </ClInclude>
+    <ClInclude Include="cForce_AirResist.h">
+      <Filter>WhatboxFramework\Object\ParticleWorld\Force\Force_AirResist</Filter>
+    </ClInclude>
+    <ClInclude Include="cForce_Gravity.h">
+      <Filter>WhatboxFramework\Object\ParticleWorld\Force\Force_Gravity</Filter>
+    </ClInclude>
+    <ClInclude Include="cCheckBox.h">
+      <Filter>WhatboxFramework\Object\UIControl\CheckBox</Filter>
+    </ClInclude>
+    <ClInclude Include="cQuatAni.h">
+      <Filter>WhatboxFramework\Object\QuatAni</Filter>
+    </ClInclude>
+    <ClInclude Include="cQuatAction.h">
+      <Filter>WhatboxFramework\Object\QuatAction</Filter>
+    </ClInclude>
+    <ClInclude Include="cNetFileSender.h">
+      <Filter>WhatboxFramework\Network\Network\NetFileSender</Filter>
+    </ClInclude>
+    <ClInclude Include="cNetFileReceiver.h">
+      <Filter>WhatboxFramework\Network\Network\NetFileReceiver</Filter>
+    </ClInclude>
+    <ClInclude Include="BiogramApp.h">
+      <Filter>Biogram\BiogramApp</Filter>
+    </ClInclude>
+    <ClInclude Include="System.h">
+      <Filter>Biogram\Model\System</Filter>
+    </ClInclude>
+    <ClInclude Include="UserInputController.h">
+      <Filter>Biogram\Controller\UserInputController\UserInputController</Filter>
+    </ClInclude>
+    <ClInclude Include="WhatboxUserInputController.h">
+      <Filter>Biogram\Controller\UserInputController\WhatboxUserInputController</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphic.h">
+      <Filter>Biogram\View\Graphic\Graphic</Filter>
+    </ClInclude>
+    <ClInclude Include="WhatboxGraphic.h">
+      <Filter>Biogram\View\Graphic\WhatboxGraphic</Filter>
+    </ClInclude>
+    <ClInclude Include="SystemInfo.h">
+      <Filter>Biogram\Model\SystemInfo\SystemInfo</Filter>
+    </ClInclude>
+    <ClInclude Include="WhatboxSystemInfo.h">
+      <Filter>Biogram\Model\SystemInfo\WhatboxSystemInfo</Filter>
+    </ClInclude>
+    <ClInclude Include="Utility.h">
+      <Filter>Biogram\Model\Utility</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="ReadMe.txt">
+      <Filter>WhatboxFramework</Filter>
+    </Text>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="WhatBox.rc">
+      <Filter>리소스 파일</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="MainIcon.ico">
+      <Filter>리소스 파일</Filter>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Utility.inl">
+      <Filter>Biogram\Model\Utility</Filter>
+    </None>
+  </ItemGroup>
+</Project>

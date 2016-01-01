@@ -1,0 +1,458 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{04D9F996-0BF3-4E8F-809B-D6A5900938C1}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <RootNamespace>WhatBox</RootNamespace>
+    <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
+    <ProjectName>Biogram</ProjectName>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v140</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v140</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+    <IncludePath>C:\Program Files %28x86%29\Microsoft DirectX SDK %28February 2010%29\Include;$(IncludePath)</IncludePath>
+    <LibraryPath>C:\Program Files %28x86%29\Microsoft DirectX SDK %28February 2010%29\Lib\x86;$(LibraryPath)</LibraryPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+    <IncludePath>C:\Program Files %28x86%29\Microsoft DirectX SDK %28February 2010%29\Include;$(IncludePath)</IncludePath>
+    <LibraryPath>C:\Program Files %28x86%29\Microsoft DirectX SDK %28February 2010%29\Lib\x86;$(LibraryPath)</LibraryPath>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;_WINSOCK2API_;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <SDLCheck>true</SDLCheck>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>winmm.lib;d3d9.lib;d3dx9.lib;dsound.lib;dxguid.lib;d3dx10d.lib;ws2_32.lib;x3daudio.lib;dxerr.lib;d3dx9d.lib;comctl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+    <PostBuildEvent>
+      <Command>copy $(TargetPath) $(SolutionDir)Build\</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;_WINSOCK2API_;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <SDLCheck>true</SDLCheck>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <AdditionalDependencies>winmm.lib;d3d9.lib;d3dx9.lib;dsound.lib;dxguid.lib;d3dx10d.lib;ws2_32.lib;x3daudio.lib;dxerr.lib;d3dx9d.lib;comctl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+    <PostBuildEvent>
+      <Command>copy $(TargetPath) $(SolutionDir)Build\</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="Array.cpp" />
+    <ClCompile Include="BiogramApp.cpp" />
+    <ClCompile Include="Box2D_Lite\Arbiter.cpp" />
+    <ClCompile Include="Box2D_Lite\Body.cpp" />
+    <ClCompile Include="Box2D_Lite\Collide.cpp" />
+    <ClCompile Include="Box2D_Lite\Joint.cpp" />
+    <ClCompile Include="Box2D_Lite\World.cpp" />
+    <ClCompile Include="c2DCamera.cpp" />
+    <ClCompile Include="c2DCoord.cpp" />
+    <ClCompile Include="c2DImgListRender.cpp" />
+    <ClCompile Include="c2DLine.cpp" />
+    <ClCompile Include="c2DSoundList.cpp" />
+    <ClCompile Include="c3DSound.cpp" />
+    <ClCompile Include="cAction.cpp" />
+    <ClCompile Include="cBinaryReader.cpp" />
+    <ClCompile Include="cBinaryWriter.cpp" />
+    <ClCompile Include="cBoxBody.cpp" />
+    <ClCompile Include="cBoxJoint.cpp" />
+    <ClCompile Include="cButton.cpp" />
+    <ClCompile Include="cCamera.cpp" />
+    <ClCompile Include="cCheckBox.cpp" />
+    <ClCompile Include="cCoord.cpp" />
+    <ClCompile Include="cCoordinate.cpp" />
+    <ClCompile Include="cCore.cpp" />
+    <ClCompile Include="cD3DAudio.cpp" />
+    <ClCompile Include="cD3DDevice.cpp" />
+    <ClCompile Include="cD3DIdxBuffer.cpp" />
+    <ClCompile Include="cD3DSound.cpp" />
+    <ClCompile Include="cD3DVtxBuffer.cpp" />
+    <ClCompile Include="cEditBox.cpp" />
+    <ClCompile Include="cEffect.cpp" />
+    <ClCompile Include="cEngine.cpp" />
+    <ClCompile Include="cFade.cpp" />
+    <ClCompile Include="cFileReader.cpp" />
+    <ClCompile Include="cFileWriter.cpp" />
+    <ClCompile Include="cFont.cpp" />
+    <ClCompile Include="cForce.cpp" />
+    <ClCompile Include="cForce_AirResist.cpp" />
+    <ClCompile Include="cForce_Gravity.cpp" />
+    <ClCompile Include="cForce_Wind.cpp" />
+    <ClCompile Include="cFuncList.cpp" />
+    <ClCompile Include="cFuncSequence.cpp" />
+    <ClCompile Include="cFX.cpp" />
+    <ClCompile Include="cFXMgr.cpp" />
+    <ClCompile Include="cFX_ColorAnimation.cpp" />
+    <ClCompile Include="cFX_Explosion.cpp" />
+    <ClCompile Include="cFX_Fade.cpp" />
+    <ClCompile Include="cFX_Firework.cpp" />
+    <ClCompile Include="cFX_Laser.cpp" />
+    <ClCompile Include="cFX_ScaleDown.cpp" />
+    <ClCompile Include="cFX_ScaleUp.cpp" />
+    <ClCompile Include="cFX_Shake.cpp" />
+    <ClCompile Include="cFX_SoftRandomScale.cpp" />
+    <ClCompile Include="cFX_Tail.cpp" />
+    <ClCompile Include="cGraph.cpp" />
+    <ClCompile Include="cLabel.cpp" />
+    <ClCompile Include="cLayer.cpp" />
+    <ClCompile Include="cLayer_Back.cpp" />
+    <ClCompile Include="cLayer_Effect.cpp" />
+    <ClCompile Include="cLayer_Fade.cpp" />
+    <ClCompile Include="cLayer_UI.cpp" />
+    <ClCompile Include="cLayer_Unit.cpp" />
+    <ClCompile Include="cLock.cpp" />
+    <ClCompile Include="cLockQueue.cpp" />
+    <ClCompile Include="cLockVal.cpp" />
+    <ClCompile Include="cMessageMgr.cpp" />
+    <ClCompile Include="cMessageReceiver.cpp" />
+    <ClCompile Include="cMessageSender.cpp" />
+    <ClCompile Include="cMyMessage.cpp" />
+    <ClCompile Include="cNetBody.cpp" />
+    <ClCompile Include="cNetChating.cpp" />
+    <ClCompile Include="cNetClient.cpp" />
+    <ClCompile Include="cNetFileReceiver.cpp" />
+    <ClCompile Include="cNetFileSender.cpp" />
+    <ClCompile Include="cNetHeader.cpp" />
+    <ClCompile Include="cNetMessage.cpp" />
+    <ClCompile Include="cNetPushMsgSender.cpp" />
+    <ClCompile Include="cNetServer.cpp" />
+    <ClCompile Include="cNumberRender.cpp" />
+    <ClCompile Include="cImgListRender.cpp" />
+    <ClCompile Include="cInterpolar.cpp" />
+    <ClCompile Include="cParticle.cpp" />
+    <ClCompile Include="cParticleWorld.cpp" />
+    <ClCompile Include="cParticle_Basic.cpp" />
+    <ClCompile Include="cPhysicalWorld.cpp" />
+    <ClCompile Include="cQuatAction.cpp" />
+    <ClCompile Include="cQuatAni.cpp" />
+    <ClCompile Include="cQuatCoord.cpp" />
+    <ClCompile Include="cScrollBar.cpp" />
+    <ClCompile Include="cServerSygnMgr.cpp" />
+    <ClCompile Include="cShape.cpp" />
+    <ClCompile Include="cShp_Polygon.cpp" />
+    <ClCompile Include="cShapeMath.cpp" />
+    <ClCompile Include="cShp_Line.cpp" />
+    <ClCompile Include="cShp_Rectangle.cpp" />
+    <ClCompile Include="cShp_Sphere.cpp" />
+    <ClCompile Include="cShp_Triangle.cpp" />
+    <ClCompile Include="cBasicSpawner.cpp" />
+    <ClCompile Include="cSpawner.cpp" />
+    <ClCompile Include="cSq_LoginUser.cpp" />
+    <ClCompile Include="cSq_NetConnect.cpp" />
+    <ClCompile Include="cSq_NetGame.cpp" />
+    <ClCompile Include="cSurface.cpp" />
+    <ClCompile Include="cResourceLoad.cpp" />
+    <ClCompile Include="cInput.cpp" />
+    <ClCompile Include="cLine.cpp" />
+    <ClCompile Include="cLog.cpp" />
+    <ClCompile Include="cMesh.cpp" />
+    <ClCompile Include="cMeshList.cpp" />
+    <ClCompile Include="cPlane.cpp" />
+    <ClCompile Include="cResource.cpp" />
+    <ClCompile Include="c2DSound.cpp" />
+    <ClCompile Include="cRSLight.cpp" />
+    <ClCompile Include="cSkinnedMesh.cpp" />
+    <ClCompile Include="cSknMesh.cpp" />
+    <ClCompile Include="cSknMeshList.cpp" />
+    <ClCompile Include="cSprite.cpp" />
+    <ClCompile Include="cSqMgr.cpp" />
+    <ClCompile Include="cSq_End.cpp" />
+    <ClCompile Include="cSq_Game.cpp" />
+    <ClCompile Include="cSq_Intro.cpp" />
+    <ClCompile Include="cSq_Load.cpp" />
+    <ClCompile Include="cSq_Main.cpp" />
+    <ClCompile Include="cClientSygnMgr.cpp" />
+    <ClCompile Include="cSygnVal.cpp" />
+    <ClCompile Include="cText.cpp" />
+    <ClCompile Include="cTextbox.cpp" />
+    <ClCompile Include="cTexture.cpp" />
+    <ClCompile Include="cTextureList.cpp" />
+    <ClCompile Include="cTickTimer.cpp" />
+    <ClCompile Include="cTile.cpp" />
+    <ClCompile Include="cTileMap.cpp" />
+    <ClCompile Include="cTimer.cpp" />
+    <ClCompile Include="cTopography.cpp" />
+    <ClCompile Include="cTransformButton.cpp" />
+    <ClCompile Include="cUIControl.cpp" />
+    <ClCompile Include="cUnit.cpp" />
+    <ClCompile Include="cValueProcMgr.cpp" />
+    <ClCompile Include="cWavBuffer.cpp" />
+    <ClCompile Include="cWorld.cpp" />
+    <ClCompile Include="D3D\d3denum.cpp" />
+    <ClCompile Include="D3D\d3dutil.cpp" />
+    <ClCompile Include="D3D\dxutil.cpp" />
+    <ClCompile Include="DXUT.cpp" />
+    <ClCompile Include="DXUTenum.cpp" />
+    <ClCompile Include="DXUTmisc.cpp" />
+    <ClCompile Include="DXUTres.cpp" />
+    <ClCompile Include="Graphic.cpp" />
+    <ClCompile Include="LcXSkin\ILcMdl.cpp" />
+    <ClCompile Include="LcXSkin\LcXSkin.cpp" />
+    <ClCompile Include="LcXSkin\LcXSkinAlloc.cpp" />
+    <ClCompile Include="LcXSkin\LcXSkinIns.cpp" />
+    <ClCompile Include="LcXSkin\LcXSkinSrc.cpp" />
+    <ClCompile Include="NetMsgUtil.cpp" />
+    <ClCompile Include="SDKmisc.cpp" />
+    <ClCompile Include="SDKwavefile.cpp" />
+    <ClCompile Include="System.cpp" />
+    <ClCompile Include="SystemInfo.cpp" />
+    <ClCompile Include="UserInputController.cpp" />
+    <ClCompile Include="Util.cpp" />
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="Utility.cpp" />
+    <ClCompile Include="WhatboxGraphic.cpp" />
+    <ClCompile Include="WhatboxSystemInfo.cpp" />
+    <ClCompile Include="WhatboxUserInputController.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Array.h" />
+    <ClInclude Include="BiogramApp.h" />
+    <ClInclude Include="Box2D_Lite\Arbiter.h" />
+    <ClInclude Include="Box2D_Lite\Body.h" />
+    <ClInclude Include="Box2D_Lite\Joint.h" />
+    <ClInclude Include="Box2D_Lite\MathUtils.h" />
+    <ClInclude Include="Box2D_Lite\World.h" />
+    <ClInclude Include="c2DCamera.h" />
+    <ClInclude Include="c2DCoord.h" />
+    <ClInclude Include="c2DImgListRender.h" />
+    <ClInclude Include="c2DLine.h" />
+    <ClInclude Include="c2DSoundList.h" />
+    <ClInclude Include="c3DPoint.h" />
+    <ClInclude Include="cAction.h" />
+    <ClInclude Include="cBinaryReader.h" />
+    <ClInclude Include="cBinaryWriter.h" />
+    <ClInclude Include="cBoxBody.h" />
+    <ClInclude Include="cBoxJoint.h" />
+    <ClInclude Include="cButton.h" />
+    <ClInclude Include="cCheckBox.h" />
+    <ClInclude Include="cEditBox.h" />
+    <ClInclude Include="cEffect.h" />
+    <ClInclude Include="cFileReader.h" />
+    <ClInclude Include="cNetFileReceiver.h" />
+    <ClInclude Include="cNetFileSender.h" />
+    <ClInclude Include="cFileWriter.h" />
+    <ClInclude Include="cForce.h" />
+    <ClInclude Include="cForce_AirResist.h" />
+    <ClInclude Include="cForce_Gravity.h" />
+    <ClInclude Include="cForce_Wind.h" />
+    <ClInclude Include="cFuncList.h" />
+    <ClInclude Include="cFuncSequence.h" />
+    <ClInclude Include="cFX.h" />
+    <ClInclude Include="cFXMgr.h" />
+    <ClInclude Include="cFX_Explosion.h" />
+    <ClInclude Include="cFX_Fade.h" />
+    <ClInclude Include="cFX_Firework.h" />
+    <ClInclude Include="cFX_Laser.h" />
+    <ClInclude Include="cFX_ScaleDown.h" />
+    <ClInclude Include="cFX_ScaleUp.h" />
+    <ClInclude Include="cFX_Shake.h" />
+    <ClInclude Include="cFX_SoftRandomScale.h" />
+    <ClInclude Include="cFX_Tail.h" />
+    <ClInclude Include="cGraph.h" />
+    <ClInclude Include="cLabel.h" />
+    <ClInclude Include="cLayer.h" />
+    <ClInclude Include="cLayer_Back.h" />
+    <ClInclude Include="cLayer_Effect.h" />
+    <ClInclude Include="cLayer_Fade.h" />
+    <ClInclude Include="cLayer_UI.h" />
+    <ClInclude Include="cLayer_Unit.h" />
+    <ClInclude Include="cLock.h" />
+    <ClInclude Include="cLockQueue.h" />
+    <ClInclude Include="cLockQueue_Def.h" />
+    <ClInclude Include="cLockVal.h" />
+    <ClInclude Include="cLockVal_Def.h" />
+    <ClInclude Include="cMessageMgr.h" />
+    <ClInclude Include="cMessageReceiver.h" />
+    <ClInclude Include="cMessageSender.h" />
+    <ClInclude Include="cNetBody.h" />
+    <ClInclude Include="cNetChating.h" />
+    <ClInclude Include="cNetClient.h" />
+    <ClInclude Include="cNetHeader.h" />
+    <ClInclude Include="cNetMessage.h" />
+    <ClInclude Include="cNetPacket.h" />
+    <ClInclude Include="cNetPushMsgSender.h" />
+    <ClInclude Include="cNetServer.h" />
+    <ClInclude Include="cNumberRender.h" />
+    <ClInclude Include="c3DSound.h" />
+    <ClInclude Include="cCamera.h" />
+    <ClInclude Include="cCoord.h" />
+    <ClInclude Include="cCoordinate.h" />
+    <ClInclude Include="cCore.h" />
+    <ClInclude Include="cD3DAudio.h" />
+    <ClInclude Include="cD3DDevice.h" />
+    <ClInclude Include="cD3DIdxBuffer.h" />
+    <ClInclude Include="cD3DSound.h" />
+    <ClInclude Include="cD3DVtxBuffer.h" />
+    <ClInclude Include="cEngine.h" />
+    <ClInclude Include="cFade.h" />
+    <ClInclude Include="cFont.h" />
+    <ClInclude Include="cImgListRender.h" />
+    <ClInclude Include="cInterpolar.h" />
+    <ClInclude Include="Graphic.h" />
+    <ClInclude Include="System.h" />
+    <ClInclude Include="cParticle.h" />
+    <ClInclude Include="cParticleWorld.h" />
+    <ClInclude Include="cParticle_Basic.h" />
+    <ClInclude Include="cPhysicalWorld.h" />
+    <ClInclude Include="cQuatAction.h" />
+    <ClInclude Include="cQuatAni.h" />
+    <ClInclude Include="cQuatCoord.h" />
+    <ClInclude Include="cScrollBar.h" />
+    <ClInclude Include="cServerSygnMgr.h" />
+    <ClInclude Include="cShape.h" />
+    <ClInclude Include="cShp_Polygon.h" />
+    <ClInclude Include="cShapeMath.h" />
+    <ClInclude Include="cShp_Line.h" />
+    <ClInclude Include="cShp_Rectangle.h" />
+    <ClInclude Include="cShp_Sphere.h" />
+    <ClInclude Include="cShp_Triangle.h" />
+    <ClInclude Include="cBasicSpawner.h" />
+    <ClInclude Include="cSpawner.h" />
+    <ClInclude Include="cSq_LoginUser.h" />
+    <ClInclude Include="cSq_NetConnect.h" />
+    <ClInclude Include="cSq_NetGame.h" />
+    <ClInclude Include="cSurface.h" />
+    <ClInclude Include="cResourceLoad.h" />
+    <ClInclude Include="cInput.h" />
+    <ClInclude Include="cLine.h" />
+    <ClInclude Include="cLog.h" />
+    <ClInclude Include="cMesh.h" />
+    <ClInclude Include="cMeshList.h" />
+    <ClInclude Include="cPlane.h" />
+    <ClInclude Include="cResource.h" />
+    <ClInclude Include="cRSLight.h" />
+    <ClInclude Include="cSequence.h" />
+    <ClInclude Include="c2DSound.h" />
+    <ClInclude Include="cSkinnedMesh.h" />
+    <ClInclude Include="cSknMesh.h" />
+    <ClInclude Include="cSknMeshList.h" />
+    <ClInclude Include="cSprite.h" />
+    <ClInclude Include="cSqMgr.h" />
+    <ClInclude Include="cSq_End.h" />
+    <ClInclude Include="cSq_Game.h" />
+    <ClInclude Include="cSq_Intro.h" />
+    <ClInclude Include="cSq_Load.h" />
+    <ClInclude Include="cSq_Main.h" />
+    <ClInclude Include="cClientSygnMgr.h" />
+    <ClInclude Include="cSygnVal.h" />
+    <ClInclude Include="cText.h" />
+    <ClInclude Include="cTextbox.h" />
+    <ClInclude Include="cTexture.h" />
+    <ClInclude Include="cTextureList.h" />
+    <ClInclude Include="cTickTimer.h" />
+    <ClInclude Include="cTile.h" />
+    <ClInclude Include="cTileMap.h" />
+    <ClInclude Include="cTileMap_Def.h" />
+    <ClInclude Include="cTimer.h" />
+    <ClInclude Include="cTopography.h" />
+    <ClInclude Include="cTransformButton.h" />
+    <ClInclude Include="cUIControl.h" />
+    <ClInclude Include="cUnit.h" />
+    <ClInclude Include="cValueProcMgr.h" />
+    <ClInclude Include="cWavBuffer.h" />
+    <ClInclude Include="cWorld.h" />
+    <ClInclude Include="D3D\d3denum.h" />
+    <ClInclude Include="D3D\d3dsettings.h" />
+    <ClInclude Include="D3D\d3dutil.h" />
+    <ClInclude Include="D3D\dxutil.h" />
+    <ClInclude Include="DXUT.h" />
+    <ClInclude Include="DXUTenum.h" />
+    <ClInclude Include="DXUTmisc.h" />
+    <ClInclude Include="DXUTres.h" />
+    <ClInclude Include="cFX_ColorAnimation.h" />
+    <ClInclude Include="ImgListName.h" />
+    <ClInclude Include="LcXSkin\ATTRIB_Enum.h" />
+    <ClInclude Include="LcXSkin\ILcMdl.h" />
+    <ClInclude Include="LcXSkin\LcXSkin.h" />
+    <ClInclude Include="LcXSkin\LcXSkinAlloc.h" />
+    <ClInclude Include="LcXSkin\LcXSkinIns.h" />
+    <ClInclude Include="LcXSkin\LcXSkinSrc.h" />
+    <ClInclude Include="MshListName.h" />
+    <ClInclude Include="NetDefine.h" />
+    <ClInclude Include="NetMsgType.h" />
+    <ClInclude Include="NetMsgUtil.h" />
+    <ClInclude Include="Network.h" />
+    <ClInclude Include="Option.h" />
+    <ClInclude Include="resource.h" />
+    <ClInclude Include="SDKmisc.h" />
+    <ClInclude Include="SDKwavefile.h" />
+    <ClInclude Include="SknMeshListName.h" />
+    <ClInclude Include="SndListName.h" />
+    <ClInclude Include="SystemInfo.h" />
+    <ClInclude Include="UserInputController.h" />
+    <ClInclude Include="Util.h" />
+    <ClInclude Include="Utility.h" />
+    <ClInclude Include="WhatboxGraphic.h" />
+    <ClInclude Include="WhatboxSystemInfo.h" />
+    <ClInclude Include="WhatboxUserInputController.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="ReadMe.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="WhatBox.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="MainIcon.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Utility.inl" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>
