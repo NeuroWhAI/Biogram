@@ -517,6 +517,27 @@
     <Filter Include="WhatboxFramework\PhysicalWorld\BoxJoint">
       <UniqueIdentifier>{071acec8-cba2-428a-9d6e-663c228214b3}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Biogram\Model\Biogram">
+      <UniqueIdentifier>{ea993aaf-6263-4ad6-935f-2cf7655e237e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Biogram\Model\Biogram\BiogramWorld">
+      <UniqueIdentifier>{644455d4-f7cc-4109-9cb8-bb6a54c6543c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Biogram\Model\Biogram\Unit">
+      <UniqueIdentifier>{8d9b2391-fc1b-4514-aa20-24191f24b812}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Biogram\Model\Biogram\Linker">
+      <UniqueIdentifier>{a29de517-b9c4-4957-ab77-5af03a15e5b1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Biogram\Model\Biogram\Energy">
+      <UniqueIdentifier>{22ec270a-af80-498f-9f0f-d42eca602852}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Biogram\Model\Biogram\Object">
+      <UniqueIdentifier>{a7c34c1e-7026-4311-a65b-0118005518f6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Biogram\Model\Biogram\TimeManager">
+      <UniqueIdentifier>{00cb4535-9133-474d-9697-a91b171e8f3c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -1013,6 +1034,21 @@
     </ClCompile>
     <ClCompile Include="Utility.cpp">
       <Filter>Biogram\Model\Utility</Filter>
+    </ClCompile>
+    <ClCompile Include="BiogramWorld.cpp">
+      <Filter>Biogram\Model\Biogram\BiogramWorld</Filter>
+    </ClCompile>
+    <ClCompile Include="Energy.cpp">
+      <Filter>Biogram\Model\Biogram\Energy</Filter>
+    </ClCompile>
+    <ClCompile Include="Object.cpp">
+      <Filter>Biogram\Model\Biogram\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="Unit.cpp">
+      <Filter>Biogram\Model\Biogram\Unit</Filter>
+    </ClCompile>
+    <ClCompile Include="TimeManager.cpp">
+      <Filter>Biogram\Model\Biogram\TimeManager</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -1555,6 +1591,21 @@
     </ClInclude>
     <ClInclude Include="Utility.h">
       <Filter>Biogram\Model\Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="BiogramWorld.h">
+      <Filter>Biogram\Model\Biogram\BiogramWorld</Filter>
+    </ClInclude>
+    <ClInclude Include="Energy.h">
+      <Filter>Biogram\Model\Biogram\Energy</Filter>
+    </ClInclude>
+    <ClInclude Include="Object.h">
+      <Filter>Biogram\Model\Biogram\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Unit.h">
+      <Filter>Biogram\Model\Biogram\Unit</Filter>
+    </ClInclude>
+    <ClInclude Include="TimeManager.h">
+      <Filter>Biogram\Model\Biogram\TimeManager</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

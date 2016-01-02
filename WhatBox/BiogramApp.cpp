@@ -2,6 +2,8 @@
 
 #include "System.h"
 
+#include "BiogramWorld.h"
+
 
 
 
@@ -29,6 +31,7 @@
 
 
 BiogramApp::BiogramApp()
+	: m_pBiogramWorld(std::make_shared<BiogramWorld>())
 {
 
 }
@@ -61,7 +64,7 @@ int BiogramApp::release()
 
 int BiogramApp::update()
 {
-
+	m_pBiogramWorld->update();
 
 
 	return 0;
@@ -71,8 +74,7 @@ int BiogramApp::update()
 int BiogramApp::render()
 {
 	System::getInstance().getGraphic().
-		drawText("Hello, World!", 32, 32, false,
-			0, 255, 255);
+		drawBiogramWorld(*m_pBiogramWorld);
 
 
 	return 0;

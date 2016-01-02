@@ -1,6 +1,11 @@
 #include "WhatboxGraphic.h"
 
+#include <sstream>
+
 #include "cCore.h"
+
+#include "BiogramWorld.h"
+#include "Unit.h"
 
 
 
@@ -118,5 +123,32 @@ int WhatboxGraphic::drawText(std::wstring text, Utility::PointF location, bool i
 {
 	return drawText(text, location.x, location.y, isCenter,
 		color.r, color.g, color.b, color.a);
+}
+
+//###############################################################
+
+int WhatboxGraphic::drawBiogramWorld(const BiogramWorld& world) const
+{
+	cCore::Sprite.BeginDraw();
+
+	auto& pUnitList = world.getUnitList();
+	for (auto& pUnit : pUnitList)
+	{
+		auto location = pUnit->getLocation();
+
+		cCore::Sprite.DrawTextureCenter(cCore::Resource.m_pTxList[TxList_Biogram]->GetTexture(0),
+			D3DXVECTOR2(location.x, location.y));
+	}
+
+	cCore::Sprite.EndDraw();
+
+
+	std::wostringstream oss;
+	oss << L"TimeSpeed: " << world.getTimeSpeed() << "x";
+	drawText(oss.str(),
+		Utility::Point(8, 8), false, Utility::Color::BLACK);
+
+
+	return 0;
 }
 

@@ -29,6 +29,9 @@
 namespace Utility
 {
 	template <typename T>
+	class SizeT;
+
+	template <typename T>
 	class PointT
 	{
 	public:
@@ -40,13 +43,46 @@ namespace Utility
 		PointT(const PointT<RT>& right);
 
 		template <typename RT>
+		PointT(const SizeT<RT>& right);
+
+		template <typename RT>
 		PointT<T>& operator= (const PointT<RT>& right);
 
 	public:
 		T x, y;
+
+	public:
+		T getLength() const;
+		T getLengthSq() const;
+
+	public:
+		template <typename RT>
+		PointT<T> operator+ (const PointT<RT>& right) const;
+		
+		template <typename RT>
+		PointT<T> operator- (const PointT<RT>& right) const;
+
+		template <typename RT>
+		PointT<T> operator* (RT right) const;
+
+		template <typename RT>
+		PointT<T> operator/ (RT right) const;
+	
+		template <typename RT>
+		PointT<T>& operator+= (const PointT<RT>& right);
+
+		template <typename RT>
+		PointT<T>& operator-= (const PointT<RT>& right);
+
+		template <typename RT>
+		PointT<T>& operator*= (RT right);
+
+		template <typename RT>
+		PointT<T>& operator/= (RT right);
 	};
 	using Point = PointT<int>;
 	using PointF = PointT<float>;
+	using PointD = PointT<double>;
 
 
 	template <typename T>
@@ -61,13 +97,21 @@ namespace Utility
 		SizeT(const SizeT<RT>& right);
 
 		template <typename RT>
+		SizeT(const PointT<RT>& right);
+
+		template <typename RT>
 		SizeT<T>& operator= (const SizeT<RT>& right);
 
 	public:
 		T width, height;
+
+	public:
+		SizeT<T> operator* (T right) const;
+		SizeT<T> operator/ (T right) const;
 	};
 	using Size = SizeT<int>;
 	using SizeF = SizeT<float>;
+	using SizeD = SizeT<double>;
 
 
 	template <typename T>
@@ -89,6 +133,7 @@ namespace Utility
 	};
 	using Rect = RectT<int>;
 	using RectF = RectT<float>;
+	using RectD = RectT<double>;
 
 
 	template <typename T>
@@ -107,9 +152,21 @@ namespace Utility
 
 	public:
 		T r, g, b, a;
+
+	public:
+		static const ColorT<T> WHITE;
+		static const ColorT<T> YELLOW;
+		static const ColorT<T> BLUE;
+		static const ColorT<T> GREEN;
+		static const ColorT<T> RED;
+		static const ColorT<T> MAGENTA;
+		static const ColorT<T> BLACK;
+		static const ColorT<T> ORANGE;
+		static const ColorT<T> GRAY;
 	};
 	using Color = ColorT<int>;
 	using ColorF = ColorT<float>;
+	using ColorD = ColorT<double>;
 }
 
 

@@ -17,6 +17,7 @@ enum ImgListName_
 	TxList_None,			// 자유 리소스
 	TxList_Framework,		// 페이드인/아웃, 텍스트박스, 로그인버튼, 회원가입버튼 add...
 	TxList_Particle,		// 파티클
+	TxList_Biogram,
 	// add...
 };
 

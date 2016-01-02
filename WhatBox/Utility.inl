@@ -1,5 +1,7 @@
 #include "Utility.h"
 
+#include <cmath>
+
 
 
 
@@ -58,6 +60,16 @@ namespace Utility
 
 	template <typename T>
 	template <typename RT>
+	PointT<T>::PointT(const SizeT<RT>& right)
+		: x(right.width)
+		, y(right.height)
+	{
+
+	}
+
+
+	template <typename T>
+	template <typename RT>
 	PointT<T>& PointT<T>::operator=(const PointT<RT>& right)
 	{
 		if (this == &right) return *this;
@@ -65,6 +77,91 @@ namespace Utility
 
 		this->x = right.x;
 		this->y = right.y;
+	}
+
+	//-----------------------------------------------------------
+
+	template <typename T>
+	T PointT<T>::getLength() const
+	{
+		return std::sqrt(x*x + y*y);
+	}
+
+
+	template <typename T>
+	T PointT<T>::getLengthSq() const
+	{
+		return (x*x + y*y);
+	}
+
+	//-----------------------------------------------------------
+
+	template <typename T>
+	template <typename RT>
+	PointT<T> PointT<T>::operator+ (const PointT<RT>& right) const
+	{
+		return PointT<T>(x + right.x, y + right.y);
+	}
+
+	template <typename T>
+	template <typename RT>
+	PointT<T> PointT<T>::operator- (const PointT<RT>& right) const
+	{
+		return PointT<T>(x - right.x, y - right.y);
+	}
+
+	template <typename T>
+	template <typename RT>
+	PointT<T> PointT<T>::operator* (RT right) const
+	{
+		return PointT<T>(x * right, y * right);
+	}
+
+	template <typename T>
+	template <typename RT>
+	PointT<T> PointT<T>::operator/ (RT right) const
+	{
+		return PointT<T>(x / right, y / right);
+	}
+
+	template <typename T>
+	template <typename RT>
+	PointT<T>& PointT<T>::operator+= (const PointT<RT>& right)
+	{
+		x += right.x;
+		y += right.y;
+
+		return *this;
+	}
+
+	template <typename T>
+	template <typename RT>
+	PointT<T>& PointT<T>::operator-= (const PointT<RT>& right)
+	{
+		x -= right.x;
+		y -= right.y;
+
+		return *this;
+	}
+
+	template <typename T>
+	template <typename RT>
+	PointT<T>& PointT<T>::operator*= (RT right)
+	{
+		x *= right.x;
+		y *= right.y;
+
+		return *this;
+	}
+
+	template <typename T>
+	template <typename RT>
+	PointT<T>& PointT<T>::operator/= (RT right)
+	{
+		x /= right.x;
+		y /= right.y;
+
+		return *this;
 	}
 
 	//###########################################################
@@ -99,6 +196,16 @@ namespace Utility
 
 	template <typename T>
 	template <typename RT>
+	SizeT<T>::SizeT(const PointT<RT>& right)
+		: width(right.x)
+		, height(right.y)
+	{
+
+	}
+
+
+	template <typename T>
+	template <typename RT>
 	SizeT<T>& SizeT<T>::operator=(const SizeT<RT>& right)
 	{
 		if (this == &right) return *this;
@@ -106,6 +213,21 @@ namespace Utility
 
 		this->width = right.width;
 		this->height = right.height;
+	}
+
+	//-----------------------------------------------------------
+
+	template <typename T>
+	SizeT<T> SizeT<T>::operator* (T right) const
+	{
+		return{ width*right, height*right };
+	}
+
+
+	template <typename T>
+	SizeT<T> SizeT<T>::operator/ (T right) const
+	{
+		return{ width/right, height/right };
 	}
 
 	//###########################################################
@@ -205,4 +327,24 @@ namespace Utility
 		this->b = right.b;
 		this->a = right.a;
 	}
+
+
+	template <typename T>
+	const ColorT<T> ColorT<T>::WHITE(255, 255, 255);
+	template <typename T>
+	const ColorT<T> ColorT<T>::YELLOW(255, 255, 0);
+	template <typename T>
+	const ColorT<T> ColorT<T>::GREEN(0, 255, 0);
+	template <typename T>
+	const ColorT<T> ColorT<T>::BLUE(0, 0, 255);
+	template <typename T>
+	const ColorT<T> ColorT<T>::RED(255, 0, 0);
+	template <typename T>
+	const ColorT<T> ColorT<T>::MAGENTA(255, 0, 255);
+	template <typename T>
+	const ColorT<T> ColorT<T>::BLACK(0, 0, 0);
+	template <typename T>
+	const ColorT<T> ColorT<T>::ORANGE(255, 127, 0);
+	template <typename T>
+	const ColorT<T> ColorT<T>::GRAY(166, 166, 166);
 }

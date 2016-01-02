@@ -4,6 +4,8 @@
 
 #include "Utility.h"
 
+class BiogramWorld;
+
 
 
 
@@ -37,7 +39,7 @@ public:
 	virtual ~Graphic();
 
 
-public:
+public: // 저수준 그래픽
 	virtual int drawLineBegin(float width) const = 0;
 	virtual int drawLine(float x1, float y1, float x2, float y2,
 		int r, int g, int b, int a = 255) const = 0;
@@ -53,5 +55,9 @@ public:
 		int r, int g, int b, int a = 255) const = 0;
 	virtual int drawText(std::wstring text, Utility::PointF location, bool isCenter,
 		Utility::Color color) const = 0;
+
+
+public: // 오브젝트 그래픽
+	virtual int drawBiogramWorld(const BiogramWorld& world) const = 0;
 };
 

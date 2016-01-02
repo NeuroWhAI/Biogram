@@ -51,5 +51,9 @@ public:
 		int r, int g, int b, int a = 255) const override;
 	virtual int drawText(std::wstring text, Utility::PointF location, bool isCenter,
 		Utility::Color color) const override;
+
+
+public:
+	virtual int drawBiogramWorld(const BiogramWorld& world) const override;
 };
 
