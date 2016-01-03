@@ -174,6 +174,8 @@
     <ClCompile Include="cNumberRender.cpp" />
     <ClCompile Include="cImgListRender.cpp" />
     <ClCompile Include="cInterpolar.cpp" />
+    <ClCompile Include="CommandFunction.cpp" />
+    <ClCompile Include="CommandOperator.cpp" />
     <ClCompile Include="cParticle.cpp" />
     <ClCompile Include="cParticleWorld.cpp" />
     <ClCompile Include="cParticle_Basic.cpp" />
@@ -247,6 +249,8 @@
     <ClCompile Include="LcXSkin\LcXSkinAlloc.cpp" />
     <ClCompile Include="LcXSkin\LcXSkinIns.cpp" />
     <ClCompile Include="LcXSkin\LcXSkinSrc.cpp" />
+    <ClCompile Include="Linker.cpp" />
+    <ClCompile Include="LinkHelper.cpp" />
     <ClCompile Include="NetMsgUtil.cpp" />
     <ClCompile Include="Object.cpp" />
     <ClCompile Include="SDKmisc.cpp" />
@@ -348,8 +352,12 @@
     <ClInclude Include="cFont.h" />
     <ClInclude Include="cImgListRender.h" />
     <ClInclude Include="cInterpolar.h" />
+    <ClInclude Include="CommandFunction.h" />
+    <ClInclude Include="CommandOperator.h" />
     <ClInclude Include="Energy.h" />
     <ClInclude Include="Graphic.h" />
+    <ClInclude Include="Linker.h" />
+    <ClInclude Include="LinkHelper.h" />
     <ClInclude Include="Object.h" />
     <ClInclude Include="System.h" />
     <ClInclude Include="cParticle.h" />

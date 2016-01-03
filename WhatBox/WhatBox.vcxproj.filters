@@ -538,6 +538,12 @@
     <Filter Include="Biogram\Model\Biogram\TimeManager">
       <UniqueIdentifier>{00cb4535-9133-474d-9697-a91b171e8f3c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Biogram\Model\Biogram\LinkHelper">
+      <UniqueIdentifier>{ae5ff100-65b2-4cb0-adb5-f8162f5ad6a4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Biogram\Model\Biogram\CommandOperator">
+      <UniqueIdentifier>{07cffe34-4cf3-4c90-89bd-cbecab40f509}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -1049,6 +1055,18 @@
     </ClCompile>
     <ClCompile Include="TimeManager.cpp">
       <Filter>Biogram\Model\Biogram\TimeManager</Filter>
+    </ClCompile>
+    <ClCompile Include="Linker.cpp">
+      <Filter>Biogram\Model\Biogram\Linker</Filter>
+    </ClCompile>
+    <ClCompile Include="LinkHelper.cpp">
+      <Filter>Biogram\Model\Biogram\LinkHelper</Filter>
+    </ClCompile>
+    <ClCompile Include="CommandOperator.cpp">
+      <Filter>Biogram\Model\Biogram\CommandOperator</Filter>
+    </ClCompile>
+    <ClCompile Include="CommandFunction.cpp">
+      <Filter>Biogram\Model\Biogram\CommandOperator</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -1606,6 +1624,18 @@
     </ClInclude>
     <ClInclude Include="TimeManager.h">
       <Filter>Biogram\Model\Biogram\TimeManager</Filter>
+    </ClInclude>
+    <ClInclude Include="Linker.h">
+      <Filter>Biogram\Model\Biogram\Linker</Filter>
+    </ClInclude>
+    <ClInclude Include="LinkHelper.h">
+      <Filter>Biogram\Model\Biogram\LinkHelper</Filter>
+    </ClInclude>
+    <ClInclude Include="CommandOperator.h">
+      <Filter>Biogram\Model\Biogram\CommandOperator</Filter>
+    </ClInclude>
+    <ClInclude Include="CommandFunction.h">
+      <Filter>Biogram\Model\Biogram\CommandOperator</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

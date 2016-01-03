@@ -84,6 +84,12 @@ void cFont::Restore()
 
 int cFont::ShowText(std::string Str, int x, int y, D3DXCOLOR Color, DWORD dt)
 {
+	const D3DXMATRIX* pCameraMat = cCore::Camera2D.Matrix();
+
+	x = static_cast<int>(x + pCameraMat->_41);
+	y = static_cast<int>(y + pCameraMat->_42);
+
+
 	WCHAR* wFontName = new WCHAR[Str.size()+1];
 
 	DXUtil_ConvertAnsiStringToWideCch(wFontName, Str.c_str(), Str.size()+1);
@@ -100,6 +106,11 @@ int cFont::ShowText(std::string Str, int x, int y, D3DXCOLOR Color, DWORD dt)
 
 int cFont::ShowText(std::wstring Str, int x, int y, D3DXCOLOR Color, DWORD dt)
 {
+	const D3DXMATRIX* pCameraMat = cCore::Camera2D.Matrix();
+
+	x = static_cast<int>(x + pCameraMat->_41);
+	y = static_cast<int>(y + pCameraMat->_42);
+
 	RECT rc = {((dt==DT_CENTER)?(x<<1):x), y, -1, -1};
 	m_pFont->DrawText( NULL, Str.c_str(), -1, &rc, dt | DT_NOCLIP, Color );
 
@@ -111,8 +122,10 @@ int cFont::ShowText(std::wstring Str, int x, int y, D3DXCOLOR Color, DWORD dt)
 
 int cFont::ShowText(std::string Str, float fx, float fy, D3DXCOLOR Color, DWORD dt)
 {
-	int x = static_cast<int>(fx);
-	int y = static_cast<int>(fy);
+	const D3DXMATRIX* pCameraMat = cCore::Camera2D.Matrix();
+
+	int x = static_cast<int>(fx + pCameraMat->_41);
+	int y = static_cast<int>(fy + pCameraMat->_42);
 
 	WCHAR* wFontName = new WCHAR[Str.size()+1];
 
@@ -130,8 +143,10 @@ int cFont::ShowText(std::string Str, float fx, float fy, D3DXCOLOR Color, DWORD 
 
 int cFont::ShowText(std::wstring Str, float fx, float fy, D3DXCOLOR Color, DWORD dt)
 {
-	int x = static_cast<int>(fx);
-	int y = static_cast<int>(fy);
+	const D3DXMATRIX* pCameraMat = cCore::Camera2D.Matrix();
+
+	int x = static_cast<int>(fx + pCameraMat->_41);
+	int y = static_cast<int>(fy + pCameraMat->_42);
 
 	RECT rc = {((dt==DT_CENTER)?(x<<1):x), y, -1, -1};
 	m_pFont->DrawText( NULL, Str.c_str(), -1, &rc, dt | DT_NOCLIP, Color );

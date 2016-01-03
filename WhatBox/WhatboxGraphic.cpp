@@ -6,6 +6,8 @@
 
 #include "BiogramWorld.h"
 #include "Unit.h"
+#include "Linker.h"
+#include "CommandOperator.h"
 
 
 
@@ -129,24 +131,82 @@ int WhatboxGraphic::drawText(std::wstring text, Utility::PointF location, bool i
 
 int WhatboxGraphic::drawBiogramWorld(const BiogramWorld& world) const
 {
+	std::wostringstream oss;
+
+
+	// 인자연결선 그리기
+	drawLineBegin(4.0f);
+
+	const auto& pParamLinkerList = world.getParamLinkerList();
+	for (auto& pLinker : pParamLinkerList)
+	{
+		auto pInUnit = pLinker->getInUnit();
+		auto pOutUnit = pLinker->getOutUnit();
+
+		if (pInUnit && pOutUnit)
+		{
+			drawLine(pInUnit->getLocation(), pOutUnit->getLocation(),
+				Utility::Color::ORANGE);
+		}
+	}
+
+	drawLineEnd();
+
+
+	// 실행흐름선 그리기
+	drawLineBegin(8.0f);
+
+	const auto& pFlowLinkerList = world.getFlowLinkerList();
+	for (auto& pLinker : pFlowLinkerList)
+	{
+		auto pInUnit = pLinker->getInUnit();
+		auto pOutUnit = pLinker->getOutUnit();
+
+		if (pInUnit && pOutUnit)
+		{
+			drawLine(pInUnit->getLocation(), pOutUnit->getLocation(),
+				Utility::Color::GRAY);
+		}
+	}
+
+	drawLineEnd();
+
+
+	// 유닛 그리기
 	cCore::Sprite.BeginDraw();
 
-	auto& pUnitList = world.getUnitList();
+	const auto& pUnitList = world.getUnitList();
 	for (auto& pUnit : pUnitList)
 	{
 		auto location = pUnit->getLocation();
 
 		cCore::Sprite.DrawTextureCenter(cCore::Resource.m_pTxList[TxList_Biogram]->GetTexture(0),
 			D3DXVECTOR2(location.x, location.y));
+		cCore::Sprite.EndDraw();
+
+		oss.str(L"");
+		oss << pUnit->getTimeGage();
+		drawText(oss.str(),
+			location, true, Utility::Color::BLACK);
+		cCore::Sprite.BeginDraw();
 	}
 
 	cCore::Sprite.EndDraw();
 
 
-	std::wostringstream oss;
+	// 명령어 진행 상태 표시
+	oss.str(L"");
+	auto cmdOperator = world.getCmdOperator();
+	oss << L"CurrentUnitCount: " << cmdOperator->getCurrentUnitCount();
+	drawText(oss.str(),
+		Utility::PointF(8, 32), false, Utility::Color::BLACK);
+
+
+	// 시간흐름 속도 표시
+	oss.str(L"");
 	oss << L"TimeSpeed: " << world.getTimeSpeed() << "x";
 	drawText(oss.str(),
-		Utility::Point(8, 8), false, Utility::Color::BLACK);
+		Utility::PointF(8, 8), false, Utility::Color::BLACK);
 
 
 	return 0;
