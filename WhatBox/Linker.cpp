@@ -66,8 +66,11 @@ int Linker::update(double timePitch)
 		subVec /= distance;
 		subVec *= subDistance * static_cast<float>(timePitch);
 
-		m_pInUnit->addSpeed(subVec);
-		m_pOutUnit->addSpeed(-subVec);
+		float inUnitMass = m_pInUnit->getMass();
+		float massRate = inUnitMass / (inUnitMass + m_pOutUnit->getMass());
+
+		m_pInUnit->addSpeed(subVec * (1.0f - massRate));
+		m_pOutUnit->addSpeed(-subVec * massRate);
 	}
 
 

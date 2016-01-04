@@ -86,7 +86,7 @@ int BiogramWorld::update()
 
 		unit->setLocation(m_pUnitList.size()*100.0f,
 			m_pUnitList.size() % 2 * 100.0f);
-		unit->setCmdNumber(0);
+		unit->setCmdNumber(m_pUnitList.size()*50);
 
 		auto linker = LinkHelper::ConnectFlow(m_pUnitList[m_pUnitList.size() - 1],
 			unit);
