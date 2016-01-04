@@ -158,6 +158,7 @@
     <ClCompile Include="cLock.cpp" />
     <ClCompile Include="cLockQueue.cpp" />
     <ClCompile Include="cLockVal.cpp" />
+    <ClCompile Include="CloseUnitTile.cpp" />
     <ClCompile Include="cMessageMgr.cpp" />
     <ClCompile Include="cMessageReceiver.cpp" />
     <ClCompile Include="cMessageSender.cpp" />
@@ -257,6 +258,9 @@
     <ClCompile Include="SDKwavefile.cpp" />
     <ClCompile Include="System.cpp" />
     <ClCompile Include="SystemInfo.cpp" />
+    <ClCompile Include="Tile.cpp" />
+    <ClCompile Include="TileMap.cpp" />
+    <ClCompile Include="TileObjectIterator.cpp" />
     <ClCompile Include="TimeManager.cpp" />
     <ClCompile Include="Unit.cpp" />
     <ClCompile Include="UserInputController.cpp" />
@@ -292,6 +296,7 @@
     <ClInclude Include="cEditBox.h" />
     <ClInclude Include="cEffect.h" />
     <ClInclude Include="cFileReader.h" />
+    <ClInclude Include="CloseUnitTile.h" />
     <ClInclude Include="cNetFileReceiver.h" />
     <ClInclude Include="cNetFileSender.h" />
     <ClInclude Include="cFileWriter.h" />
@@ -449,6 +454,9 @@
     <ClInclude Include="SknMeshListName.h" />
     <ClInclude Include="SndListName.h" />
     <ClInclude Include="SystemInfo.h" />
+    <ClInclude Include="Tile.h" />
+    <ClInclude Include="TileMap.h" />
+    <ClInclude Include="TileObjectIterator.h" />
     <ClInclude Include="TimeManager.h" />
     <ClInclude Include="Unit.h" />
     <ClInclude Include="UserInputController.h" />
@@ -468,6 +476,9 @@
     <Image Include="MainIcon.ico" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Tile.inl" />
+    <None Include="TileMap.inl" />
+    <None Include="TileObjectIterator.inl" />
     <None Include="Utility.inl" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

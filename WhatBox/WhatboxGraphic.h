@@ -55,5 +55,6 @@ public:
 
 public:
 	virtual int drawBiogramWorld(const BiogramWorld& world) const override;
+	virtual int drawUnitDetail(const Unit& unit) const override;
 };
 

@@ -56,7 +56,7 @@ int cD3DDevice::Create(bool bWindowed, bool bTransparent)
 	m_d3dpp.BackBufferFormat = (bTransparent ? D3DFMT_A8R8G8B8 : D3DFMT_X8R8G8B8);
 	m_d3dpp.EnableAutoDepthStencil = TRUE;
 	m_d3dpp.AutoDepthStencilFormat = D3DFMT_D24S8;
-	m_d3dpp.PresentationInterval = D3DPRESENT_DONOTWAIT;//D3DPRESENT_INTERVAL_IMMEDIATE; // FIX: 이게 없어야 프레임이 60으로 고정됨
+	m_d3dpp.PresentationInterval = D3DPRESENT_INTERVAL_IMMEDIATE;
 
 	if (bTransparent == false)
 	{

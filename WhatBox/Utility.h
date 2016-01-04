@@ -1,5 +1,7 @@
 #pragma once
 
+#include <vector>
+
 
 
 
@@ -29,6 +31,10 @@
 namespace Utility
 {
 	template <typename T>
+	bool removeFrom(std::vector<T>* pList, const T& target);
+
+
+	template <typename T>
 	class SizeT;
 
 	template <typename T>
@@ -56,6 +62,10 @@ namespace Utility
 		T getLengthSq() const;
 
 	public:
+		PointT<T> operator+ () const;
+
+		PointT<T> operator- () const;
+
 		template <typename RT>
 		PointT<T> operator+ (const PointT<RT>& right) const;
 		

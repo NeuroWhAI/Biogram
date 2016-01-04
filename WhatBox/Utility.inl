@@ -31,6 +31,28 @@
 namespace Utility
 {
 	template <typename T>
+	bool removeFrom(std::vector<T>* pList, const T& target)
+	{
+		int index = 0;
+		for (const auto& item : *pList)
+		{
+			if (item == target)
+			{
+				pList->erase(pList->begin() + index);
+
+				return true;
+			}
+
+			++index;
+		}
+
+
+		return false;
+	}
+
+	//###########################################################
+
+	template <typename T>
 	PointT<T>::PointT()
 		: x(T())
 		, y(T())
@@ -51,8 +73,8 @@ namespace Utility
 	template <typename T>
 	template <typename RT>
 	PointT<T>::PointT(const PointT<RT>& right)
-		: x(right.x)
-		, y(right.y)
+		: x(static_cast<T>(right.x))
+		, y(static_cast<T>(right.y))
 	{
 
 	}
@@ -61,8 +83,8 @@ namespace Utility
 	template <typename T>
 	template <typename RT>
 	PointT<T>::PointT(const SizeT<RT>& right)
-		: x(right.width)
-		, y(right.height)
+		: x(static_cast<T>(right.width))
+		, y(static_cast<T>(right.height))
 	{
 
 	}
@@ -95,6 +117,20 @@ namespace Utility
 	}
 
 	//-----------------------------------------------------------
+
+	template <typename T>
+	PointT<T> PointT<T>::operator+ () const
+	{
+		return *this;
+	}
+
+
+	template <typename T>
+	PointT<T> PointT<T>::operator- () const
+	{
+		return PointT<T>(-x, -y);
+	}
+
 
 	template <typename T>
 	template <typename RT>
@@ -148,8 +184,8 @@ namespace Utility
 	template <typename RT>
 	PointT<T>& PointT<T>::operator*= (RT right)
 	{
-		x *= right.x;
-		y *= right.y;
+		x *= right;
+		y *= right;
 
 		return *this;
 	}
@@ -158,8 +194,8 @@ namespace Utility
 	template <typename RT>
 	PointT<T>& PointT<T>::operator/= (RT right)
 	{
-		x /= right.x;
-		y /= right.y;
+		x /= right;
+		y /= right;
 
 		return *this;
 	}

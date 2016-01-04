@@ -51,11 +51,16 @@ protected:
 
 	// * 인자 연결
 	std::array<std::shared_ptr<Linker>, 2> m_pParamLinkers;
+	std::vector<std::shared_ptr<Linker>> m_pOutParamLinkers;
 
 	
 protected:
 	// * 수행된 시간
 	double m_timeGage;
+
+
+protected:
+	void updateRadius();
 
 
 public:
@@ -77,15 +82,19 @@ public:
 	std::shared_ptr<Linker> getInLinker() const;
 	std::shared_ptr<Linker> getOutLinker() const;
 
+	size_t getParamCount() const;
 	int setParamLinker(std::shared_ptr<Linker> pParamLinker, int index);
 	std::shared_ptr<Linker> getParamLinker(int index) const;
+
+	bool addOutParamLinker(std::shared_ptr<Linker> pOutParamLinker);
+	bool removeOutParamLinker(std::shared_ptr<Linker> pOutParamLinker);
+	std::vector<std::shared_ptr<Linker>> getOutParamLinkerList() const;
 
 	std::shared_ptr<Unit> getRelativeFlowUnit(int relativeIndex) const;
 
 
 public:
 	void setTimeGage(double gage);
-	void addTimeGage(double deltaGage);
 	double getTimeGage() const;
 };
 

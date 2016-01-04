@@ -40,6 +40,11 @@ public:
 
 protected:
 	std::shared_ptr<Unit> m_pInUnit, m_pOutUnit;
+	float m_realLength;
+
+
+public:
+	int update(double timePitch);
 
 
 public:
@@ -47,5 +52,13 @@ public:
 	int setOutUnit(std::shared_ptr<Unit> pOutUnit);
 	std::shared_ptr<Unit> getInUnit() const;
 	std::shared_ptr<Unit> getOutUnit() const;
+
+
+public:
+	float getRealLength() const;
+
+
+protected:
+	bool updateRealLength();
 };
 

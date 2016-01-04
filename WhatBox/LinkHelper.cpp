@@ -141,6 +141,7 @@ bool LinkHelper::ConnectParam(
 	UnitPtr pInUnit,
 	LinkerPtr pOutLinker)
 {
+	pInUnit->addOutParamLinker(pOutLinker);
 	pOutLinker->setInUnit(pInUnit);
 
 
@@ -166,6 +167,7 @@ LinkerPtr LinkHelper::ConnectParam(
 {
 	auto pNewLinker = std::make_shared<Linker>(pInUnit, pOutUnit);
 
+	pInUnit->addOutParamLinker(pNewLinker);
 	pOutUnit->setParamLinker(pNewLinker, paramIndex);
 
 
@@ -180,6 +182,7 @@ bool LinkHelper::DisconnectParam(
 {
 	if (pOutLinker->getInUnit() == pInUnit)
 	{
+		pInUnit->removeOutParamLinker(pOutLinker);
 		pOutLinker->setInUnit(nullptr);
 
 
@@ -201,6 +204,33 @@ bool LinkHelper::DisconnectParam(
 	{
 		pInLinker->setOutUnit(nullptr);
 		pOutUnit->setParamLinker(nullptr, paramIndex);
+
+
+		return true;
+	}
+
+
+	return false;
+}
+
+
+bool LinkHelper::DisconnectParam(
+	LinkerPtr pInLinker,
+	UnitPtr pOutUnit)
+{
+	if (pInLinker->getOutUnit() == pOutUnit)
+	{
+		pInLinker->setOutUnit(nullptr);
+
+
+		int paramCount = static_cast<int>(pOutUnit->getParamCount());
+		for (int paramIndex = 0; paramIndex < paramCount; ++paramIndex)
+		{
+			if (pOutUnit->getParamLinker(paramIndex) == pInLinker)
+			{
+				pOutUnit->setParamLinker(nullptr, paramIndex);
+			}
+		}
 
 
 		return true;

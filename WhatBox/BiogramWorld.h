@@ -7,6 +7,8 @@ class TimeManager;
 class Unit;
 class Linker;
 class CommandOperator;
+template <typename T_OBJ>
+class TileMap;
 
 
 
@@ -32,17 +34,28 @@ class CommandOperator;
 
 
 
+
+
+enum class LinkerTypes : int
+{
+	Flow,
+	Param,
+};
 
 
 class BiogramWorld
 {
 public:
-	BiogramWorld();
+	BiogramWorld(float width, float height);
 	virtual ~BiogramWorld();
 
 
 protected:
 	std::shared_ptr<TimeManager> m_pTimeManager;
+	
+
+protected:
+	std::shared_ptr<TileMap<Unit>> m_pCloseUnitBoard;
 
 
 protected:
@@ -65,7 +78,16 @@ protected:
 	//   시간이 흐르는 속도를 재계산.
 	int updateTimeSpeed();
 	int updateUnit();
+	int updateLinker();
 	int updateCommand();
+	int updateCloseUnitBoard();
+
+
+public:
+	bool addUnit(std::shared_ptr<Unit> pUnit);
+	bool removeUnit(std::shared_ptr<Unit> pUnit);
+	bool addLinker(std::shared_ptr<Linker> pLinker, LinkerTypes type);
+	bool removeLinker(std::shared_ptr<Linker> pLinker, LinkerTypes type);
 
 
 public:

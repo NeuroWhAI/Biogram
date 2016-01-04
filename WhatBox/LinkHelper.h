@@ -113,6 +113,12 @@ public: // 인자전달 연결
 		LinkerPtr pInLinker,
 		UnitPtr pOutUnit, int paramIndex);
 
+	// * pInLinker X-Param-X> )-?=)pOutUnit
+	// * @Return: 끊기성공 여부
+	static bool DisconnectParam(
+		LinkerPtr pInLinker,
+		UnitPtr pOutUnit);
+
 	// * pInUnit X-Param-X> @Return X-Param-X> )-paramIndex=)pOutUnit
 	// * @Return: 연결이 끊어진 Linker. 끊기실패시 nullptr
 	static LinkerPtr DisconnectParam(

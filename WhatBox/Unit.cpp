@@ -39,6 +39,11 @@ Unit::Unit()
 {
 	for (auto& paramLinker : m_pParamLinkers)
 		paramLinker = nullptr;
+
+
+	m_mass = 1.0 + m_cmdNumber;
+
+	updateRadius();
 }
 
 
@@ -49,9 +54,16 @@ Unit::~Unit()
 
 //###############################################################
 
+void Unit::updateRadius()
+{
+	m_radius = 0.25f * m_cmdNumber + 8.0f;
+}
+
+//###############################################################
+
 int Unit::update(double timePitch)
 {
-	m_location += m_speed * timePitch;
+	m_location += m_speed * static_cast<float>(timePitch);
 
 
 	return 0;
@@ -61,7 +73,11 @@ int Unit::update(double timePitch)
 
 void Unit::setCmdNumber(int cmdNumber)
 {
+	m_mass += cmdNumber - m_cmdNumber;
+
 	m_cmdNumber = cmdNumber;
+
+	updateRadius();
 }
 
 
@@ -122,6 +138,12 @@ std::shared_ptr<Linker> Unit::getOutLinker() const
 
 //---------------------------------------------------------------
 
+size_t Unit::getParamCount() const
+{
+	return m_pParamLinkers.size();
+}
+
+
 int Unit::setParamLinker(std::shared_ptr<Linker> pParamLinker, int index)
 {
 	m_pParamLinkers[index] = pParamLinker;
@@ -134,6 +156,28 @@ int Unit::setParamLinker(std::shared_ptr<Linker> pParamLinker, int index)
 std::shared_ptr<Linker> Unit::getParamLinker(int index) const
 {
 	return m_pParamLinkers[index];
+}
+
+//---------------------------------------------------------------
+
+bool Unit::addOutParamLinker(std::shared_ptr<Linker> pOutParamLinker)
+{
+	m_pOutParamLinkers.emplace_back(pOutParamLinker);
+
+
+	return true;
+}
+
+
+bool Unit::removeOutParamLinker(std::shared_ptr<Linker> pOutParamLinker)
+{
+	return Utility::removeFrom(&m_pOutParamLinkers, pOutParamLinker);
+}
+
+
+std::vector<std::shared_ptr<Linker>> Unit::getOutParamLinkerList() const
+{
+	return m_pOutParamLinkers;
 }
 
 //---------------------------------------------------------------
@@ -211,12 +255,6 @@ std::shared_ptr<Unit> Unit::getRelativeFlowUnit(int relativeIndex) const
 void Unit::setTimeGage(double gage)
 {
 	m_timeGage = gage;
-}
-
-
-void Unit::addTimeGage(double deltaGage)
-{
-	m_timeGage += deltaGage;
 }
 
 

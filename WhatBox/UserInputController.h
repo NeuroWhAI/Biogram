@@ -1,5 +1,7 @@
 #pragma once
 
+#include "Utility.h"
+
 
 
 
@@ -37,5 +39,9 @@ public:
 	virtual bool onKeyDown(int vKey) const = 0;
 	virtual bool onKeyPress(int vKey) const = 0;
 	virtual bool onKeyUp(int vKey) const = 0;
+
+
+public:
+	virtual Utility::Point getCursorLocation() const = 0;
 };
 

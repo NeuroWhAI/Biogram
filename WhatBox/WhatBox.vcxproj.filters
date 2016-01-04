@@ -538,11 +538,35 @@
     <Filter Include="Biogram\Model\Biogram\TimeManager">
       <UniqueIdentifier>{00cb4535-9133-474d-9697-a91b171e8f3c}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Biogram\Model\Biogram\LinkHelper">
-      <UniqueIdentifier>{ae5ff100-65b2-4cb0-adb5-f8162f5ad6a4}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Biogram\Model\Biogram\CommandOperator">
       <UniqueIdentifier>{07cffe34-4cf3-4c90-89bd-cbecab40f509}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Biogram\Model\Biogram\Utility">
+      <UniqueIdentifier>{6fe1b15f-8e31-4b4c-b759-fa58358b5e42}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Biogram\Model\Biogram\Utility\TileMap">
+      <UniqueIdentifier>{fecb3c06-8ca3-449e-84d2-3c932e5770a2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Biogram\Model\Biogram\Utility\Tile">
+      <UniqueIdentifier>{7305bb66-20ef-4dbc-8eff-43c165b8b092}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Biogram\Model\Biogram\Utility\LinkHelper">
+      <UniqueIdentifier>{ae5ff100-65b2-4cb0-adb5-f8162f5ad6a4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Biogram\Model\Biogram\Utility\Tile\Tile">
+      <UniqueIdentifier>{6e70ba89-9984-4834-a6f5-e01b21ab848a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Biogram\Model\Biogram\Utility\Tile\CloseUnitTile">
+      <UniqueIdentifier>{6bb7f546-b4e0-4f41-9187-6c9cfff56707}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Biogram\Model\Biogram\Utility\Tile\DistantUnitTile">
+      <UniqueIdentifier>{f31add3f-f998-4cab-adb7-684cee4cf5e3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Biogram\Model\Biogram\Utility\Tile\AllUnitTile">
+      <UniqueIdentifier>{2a3f2845-0968-446b-bb25-5d79f643b3dc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Biogram\Model\Biogram\Utility\Tile\Tile\TileObjectIterator">
+      <UniqueIdentifier>{ab1070f0-543a-4532-941d-5025e5cb605a}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -1060,13 +1084,25 @@
       <Filter>Biogram\Model\Biogram\Linker</Filter>
     </ClCompile>
     <ClCompile Include="LinkHelper.cpp">
-      <Filter>Biogram\Model\Biogram\LinkHelper</Filter>
+      <Filter>Biogram\Model\Biogram\Utility\LinkHelper</Filter>
     </ClCompile>
     <ClCompile Include="CommandOperator.cpp">
       <Filter>Biogram\Model\Biogram\CommandOperator</Filter>
     </ClCompile>
     <ClCompile Include="CommandFunction.cpp">
       <Filter>Biogram\Model\Biogram\CommandOperator</Filter>
+    </ClCompile>
+    <ClCompile Include="TileMap.cpp">
+      <Filter>Biogram\Model\Biogram\Utility\TileMap</Filter>
+    </ClCompile>
+    <ClCompile Include="Tile.cpp">
+      <Filter>Biogram\Model\Biogram\Utility\Tile\Tile</Filter>
+    </ClCompile>
+    <ClCompile Include="CloseUnitTile.cpp">
+      <Filter>Biogram\Model\Biogram\Utility\Tile\CloseUnitTile</Filter>
+    </ClCompile>
+    <ClCompile Include="TileObjectIterator.cpp">
+      <Filter>Biogram\Model\Biogram\Utility\Tile\Tile\TileObjectIterator</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -1629,13 +1665,25 @@
       <Filter>Biogram\Model\Biogram\Linker</Filter>
     </ClInclude>
     <ClInclude Include="LinkHelper.h">
-      <Filter>Biogram\Model\Biogram\LinkHelper</Filter>
+      <Filter>Biogram\Model\Biogram\Utility\LinkHelper</Filter>
     </ClInclude>
     <ClInclude Include="CommandOperator.h">
       <Filter>Biogram\Model\Biogram\CommandOperator</Filter>
     </ClInclude>
     <ClInclude Include="CommandFunction.h">
       <Filter>Biogram\Model\Biogram\CommandOperator</Filter>
+    </ClInclude>
+    <ClInclude Include="TileMap.h">
+      <Filter>Biogram\Model\Biogram\Utility\TileMap</Filter>
+    </ClInclude>
+    <ClInclude Include="Tile.h">
+      <Filter>Biogram\Model\Biogram\Utility\Tile\Tile</Filter>
+    </ClInclude>
+    <ClInclude Include="CloseUnitTile.h">
+      <Filter>Biogram\Model\Biogram\Utility\Tile\CloseUnitTile</Filter>
+    </ClInclude>
+    <ClInclude Include="TileObjectIterator.h">
+      <Filter>Biogram\Model\Biogram\Utility\Tile\Tile\TileObjectIterator</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -1656,6 +1704,15 @@
   <ItemGroup>
     <None Include="Utility.inl">
       <Filter>Biogram\Model\Utility</Filter>
+    </None>
+    <None Include="Tile.inl">
+      <Filter>Biogram\Model\Biogram\Utility\Tile\Tile</Filter>
+    </None>
+    <None Include="TileMap.inl">
+      <Filter>Biogram\Model\Biogram\Utility\TileMap</Filter>
+    </None>
+    <None Include="TileObjectIterator.inl">
+      <Filter>Biogram\Model\Biogram\Utility\Tile\Tile\TileObjectIterator</Filter>
     </None>
   </ItemGroup>
 </Project>

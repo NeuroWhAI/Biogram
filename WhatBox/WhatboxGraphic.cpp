@@ -131,6 +131,7 @@ int WhatboxGraphic::drawText(std::wstring text, Utility::PointF location, bool i
 
 int WhatboxGraphic::drawBiogramWorld(const BiogramWorld& world) const
 {
+	D3DXVECTOR2 camPos = *cCore::Camera2D.Pos();
 	std::wostringstream oss;
 
 
@@ -179,19 +180,35 @@ int WhatboxGraphic::drawBiogramWorld(const BiogramWorld& world) const
 	for (auto& pUnit : pUnitList)
 	{
 		auto location = pUnit->getLocation();
+		float scale = pUnit->getRadius() / 16.0f;
 
 		cCore::Sprite.DrawTextureCenter(cCore::Resource.m_pTxList[TxList_Biogram]->GetTexture(0),
-			D3DXVECTOR2(location.x, location.y));
-		cCore::Sprite.EndDraw();
-
-		oss.str(L"");
-		oss << pUnit->getTimeGage();
-		drawText(oss.str(),
-			location, true, Utility::Color::BLACK);
-		cCore::Sprite.BeginDraw();
+			D3DXVECTOR2(location.x, location.y), 0.0f,
+			D3DXVECTOR2(scale, scale));
 	}
 
 	cCore::Sprite.EndDraw();
+
+
+	// 유닛 세부정보 표시
+	for (auto& pUnit : pUnitList)
+	{
+		auto location = pUnit->getLocation();
+		D3DXVECTOR2 vec;
+		vec.x = location.x;
+		vec.y = location.y;
+
+
+		if (cCore::ShapeMath.isCollided(
+			&cCore::Input.fCursorPos(),
+			&vec,
+			pUnit->getRadius()))
+		{
+			drawUnitDetail(*pUnit);
+
+			break;
+		}
+	}
 
 
 	// 명령어 진행 상태 표시
@@ -199,16 +216,43 @@ int WhatboxGraphic::drawBiogramWorld(const BiogramWorld& world) const
 	auto cmdOperator = world.getCmdOperator();
 	oss << L"CurrentUnitCount: " << cmdOperator->getCurrentUnitCount();
 	drawText(oss.str(),
-		Utility::PointF(8, 32), false, Utility::Color::BLACK);
+		Utility::PointF(8 + camPos.x, 32 + camPos.y), false, Utility::Color::BLACK);
 
 
 	// 시간흐름 속도 표시
 	oss.str(L"");
 	oss << L"TimeSpeed: " << world.getTimeSpeed() << "x";
 	drawText(oss.str(),
-		Utility::PointF(8, 8), false, Utility::Color::BLACK);
+		Utility::PointF(8 + camPos.x, 8 + camPos.y), false, Utility::Color::BLACK);
 
 
 	return 0;
 }
+
+
+int WhatboxGraphic::drawUnitDetail(const Unit& unit) const
+{
+	std::wostringstream oss;
+
+
+	oss << "[Unit]" << std::endl;
+	oss << "CmdNumber: " << unit.getCmdNumber() << std::endl;
+	oss << "Memory: " << unit.getMemory() << std::endl;
+	
+	oss << std::endl;
+
+	oss << "[Object]" << std::endl;
+	oss << "Mass: " << unit.getMass() << std::endl;
+	oss << "Temperature: " << unit.getTemperature() << std::endl;
+	oss << "Speed: " << unit.getSpeed().getLength() << std::endl;
+
+
+	drawText(oss.str(),
+		unit.getLocation(), false, Utility::Color::BLACK);
+
+
+	return 0;
+}
+
+
 
