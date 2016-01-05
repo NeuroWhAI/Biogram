@@ -33,7 +33,7 @@
 
 
 BiogramApp::BiogramApp()
-	: m_pBiogramWorld(std::make_shared<BiogramWorld>(1024.0f, 1024.0f))
+	: m_pBiogramWorld(std::make_shared<BiogramWorld>())
 {
 
 }
@@ -88,6 +88,8 @@ int BiogramApp::render()
 		getWinSize();
 	
 	std::wostringstream oss;
+	oss << std::fixed;
+	oss.precision(1);
 	oss << 1.0 / m_elapsedTime.count() << "fps";
 
 	System::getInstance().getGraphic().

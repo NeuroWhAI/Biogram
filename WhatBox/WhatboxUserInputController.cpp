@@ -60,6 +60,25 @@ bool WhatboxUserInputController::onKeyUp(int vKey) const
 
 //###############################################################
 
+bool WhatboxUserInputController::onTouchDown() const
+{
+	return cCore::Input.MouseDown(VK_LBUTTON);
+}
+
+
+bool WhatboxUserInputController::onTouchPress() const
+{
+	return cCore::Input.MousePress(VK_LBUTTON);
+}
+
+
+bool WhatboxUserInputController::onTouchUp() const
+{
+	return cCore::Input.MouseUp(VK_LBUTTON);
+}
+
+//###############################################################
+
 Utility::Point WhatboxUserInputController::getCursorLocation() const
 {
 	POINT cursor = cCore::Input.CursorPos();

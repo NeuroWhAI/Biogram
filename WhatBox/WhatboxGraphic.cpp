@@ -5,9 +5,13 @@
 #include "cCore.h"
 
 #include "BiogramWorld.h"
+#include "BiogramCage.h"
 #include "Unit.h"
 #include "Linker.h"
 #include "CommandOperator.h"
+#include "Memory.h"
+
+#define CMD_FUNC(name) m_cmdNameList.emplace_back(L#name);
 
 
 
@@ -37,7 +41,9 @@
 
 WhatboxGraphic::WhatboxGraphic()
 {
-
+	// 명령어 함수 이름들을 목록화 함
+#include "CommandFunction.h"
+#undef CMD_FUNC
 }
 
 
@@ -131,14 +137,53 @@ int WhatboxGraphic::drawText(std::wstring text, Utility::PointF location, bool i
 
 int WhatboxGraphic::drawBiogramWorld(const BiogramWorld& world) const
 {
+	std::wostringstream oss;
+
+
+	// 공유메모리 표시
+	auto sharedMem = world.getSharedMemory();
+	auto memory = sharedMem->getMemory();
+
+	size_t count = 0;
+	size_t nlCount = memory.size() / 16;
+	for (const auto& cell : memory)
+	{
+		oss << L"[" << cell.first << L": " << cell.second << L"] ";
+
+		++count;
+		if (count > nlCount)
+		{
+			oss << std::endl;
+			count = 0;
+		}
+	}
+
+	drawText(oss.str(),
+		Utility::PointF(8.0f, 8.0f), false, Utility::Color::BLACK);
+
+
+	// 각 Cage 그리기
+	const auto& cageList = world.getCageList();
+	for (auto& cage : cageList)
+	{
+		drawBiogramCage(*cage);
+	}
+
+
+	return 0;
+}
+
+
+int WhatboxGraphic::drawBiogramCage(const BiogramCage& cage) const
+{
 	D3DXVECTOR2 camPos = *cCore::Camera2D.Pos();
 	std::wostringstream oss;
 
 
 	// 인자연결선 그리기
-	drawLineBegin(4.0f);
+	drawLineBegin(2.0f);
 
-	const auto& pParamLinkerList = world.getParamLinkerList();
+	const auto& pParamLinkerList = cage.getParamLinkerList();
 	for (auto& pLinker : pParamLinkerList)
 	{
 		auto pInUnit = pLinker->getInUnit();
@@ -155,9 +200,9 @@ int WhatboxGraphic::drawBiogramWorld(const BiogramWorld& world) const
 
 
 	// 실행흐름선 그리기
-	drawLineBegin(8.0f);
+	drawLineBegin(1.0f);
 
-	const auto& pFlowLinkerList = world.getFlowLinkerList();
+	const auto& pFlowLinkerList = cage.getFlowLinkerList();
 	for (auto& pLinker : pFlowLinkerList)
 	{
 		auto pInUnit = pLinker->getInUnit();
@@ -176,12 +221,15 @@ int WhatboxGraphic::drawBiogramWorld(const BiogramWorld& world) const
 	// 유닛 그리기
 	cCore::Sprite.BeginDraw();
 
-	const auto& pUnitList = world.getUnitList();
+	const auto& pUnitList = cage.getUnitList();
 	for (auto& pUnit : pUnitList)
 	{
 		auto location = pUnit->getLocation();
 		float scale = pUnit->getRadius() / 16.0f;
 
+		int color = (pUnit->getTimeGage() > 0.0) ? 255 : 128;
+		cCore::Sprite.SetColor(
+			D3DCOLOR_ARGB(color, 255, 255, 255));
 		cCore::Sprite.DrawTextureCenter(cCore::Resource.m_pTxList[TxList_Biogram]->GetTexture(0),
 			D3DXVECTOR2(location.x, location.y), 0.0f,
 			D3DXVECTOR2(scale, scale));
@@ -213,17 +261,10 @@ int WhatboxGraphic::drawBiogramWorld(const BiogramWorld& world) const
 
 	// 명령어 진행 상태 표시
 	oss.str(L"");
-	auto cmdOperator = world.getCmdOperator();
+	auto cmdOperator = cage.getCmdOperator();
 	oss << L"CurrentUnitCount: " << cmdOperator->getCurrentUnitCount();
 	drawText(oss.str(),
 		Utility::PointF(8 + camPos.x, 32 + camPos.y), false, Utility::Color::BLACK);
-
-
-	// 시간흐름 속도 표시
-	oss.str(L"");
-	oss << L"TimeSpeed: " << world.getTimeSpeed() << "x";
-	drawText(oss.str(),
-		Utility::PointF(8 + camPos.x, 8 + camPos.y), false, Utility::Color::BLACK);
 
 
 	return 0;
@@ -236,7 +277,11 @@ int WhatboxGraphic::drawUnitDetail(const Unit& unit) const
 
 
 	oss << "[Unit]" << std::endl;
-	oss << "CmdNumber: " << unit.getCmdNumber() << std::endl;
+	int cmdNumber = unit.getCmdNumber();
+	if(static_cast<size_t>(cmdNumber) < m_cmdNameList.size())
+		oss << "CmdNumber: " << m_cmdNameList[cmdNumber] << std::endl;
+	else
+		oss << "CmdNumber: ????" << std::endl;
 	oss << "Memory: " << unit.getMemory() << std::endl;
 	
 	oss << std::endl;
@@ -244,7 +289,6 @@ int WhatboxGraphic::drawUnitDetail(const Unit& unit) const
 	oss << "[Object]" << std::endl;
 	oss << "Mass: " << unit.getMass() << std::endl;
 	oss << "Temperature: " << unit.getTemperature() << std::endl;
-	oss << "Speed: " << unit.getSpeed().getLength() << std::endl;
 
 
 	drawText(oss.str(),

@@ -5,6 +5,7 @@
 #include "Utility.h"
 
 class BiogramWorld;
+class BiogramCage;
 class Unit;
 
 
@@ -60,6 +61,7 @@ public: // 저수준 그래픽
 
 public: // 오브젝트 그래픽
 	virtual int drawBiogramWorld(const BiogramWorld& world) const = 0;
+	virtual int drawBiogramCage(const BiogramCage& cage) const = 0;
 	virtual int drawUnitDetail(const Unit& unit) const = 0;
 };
 

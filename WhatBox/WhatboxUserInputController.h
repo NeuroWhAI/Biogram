@@ -42,6 +42,12 @@ public:
 
 
 public:
+	virtual bool onTouchDown() const override;
+	virtual bool onTouchPress() const override;
+	virtual bool onTouchUp() const override;
+
+
+public:
 	virtual Utility::Point getCursorLocation() const override;
 };
 

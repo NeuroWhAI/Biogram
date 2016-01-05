@@ -520,9 +520,6 @@
     <Filter Include="Biogram\Model\Biogram">
       <UniqueIdentifier>{ea993aaf-6263-4ad6-935f-2cf7655e237e}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Biogram\Model\Biogram\BiogramWorld">
-      <UniqueIdentifier>{644455d4-f7cc-4109-9cb8-bb6a54c6543c}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Biogram\Model\Biogram\Unit">
       <UniqueIdentifier>{8d9b2391-fc1b-4514-aa20-24191f24b812}</UniqueIdentifier>
     </Filter>
@@ -544,29 +541,26 @@
     <Filter Include="Biogram\Model\Biogram\Utility">
       <UniqueIdentifier>{6fe1b15f-8e31-4b4c-b759-fa58358b5e42}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Biogram\Model\Biogram\Utility\TileMap">
-      <UniqueIdentifier>{fecb3c06-8ca3-449e-84d2-3c932e5770a2}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Biogram\Model\Biogram\Utility\Tile">
-      <UniqueIdentifier>{7305bb66-20ef-4dbc-8eff-43c165b8b092}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Biogram\Model\Biogram\Utility\LinkHelper">
       <UniqueIdentifier>{ae5ff100-65b2-4cb0-adb5-f8162f5ad6a4}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Biogram\Model\Biogram\Utility\Tile\Tile">
-      <UniqueIdentifier>{6e70ba89-9984-4834-a6f5-e01b21ab848a}</UniqueIdentifier>
+    <Filter Include="Biogram\Model\Biogram\BiogramCage">
+      <UniqueIdentifier>{644455d4-f7cc-4109-9cb8-bb6a54c6543c}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Biogram\Model\Biogram\Utility\Tile\CloseUnitTile">
-      <UniqueIdentifier>{6bb7f546-b4e0-4f41-9187-6c9cfff56707}</UniqueIdentifier>
+    <Filter Include="Biogram\Model\Biogram\BiogramWorld">
+      <UniqueIdentifier>{703c9dba-6733-4496-90ed-2b815f4261e0}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Biogram\Model\Biogram\Utility\Tile\DistantUnitTile">
-      <UniqueIdentifier>{f31add3f-f998-4cab-adb7-684cee4cf5e3}</UniqueIdentifier>
+    <Filter Include="Biogram\Model\Biogram\BiogramLab">
+      <UniqueIdentifier>{f8acea6c-bd37-46db-b82d-f8a719aafec5}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Biogram\Model\Biogram\Utility\Tile\AllUnitTile">
-      <UniqueIdentifier>{2a3f2845-0968-446b-bb25-5d79f643b3dc}</UniqueIdentifier>
+    <Filter Include="Biogram\Model\Biogram\BiogramDNA">
+      <UniqueIdentifier>{9724e157-6b37-4e40-80d0-d41dd7cb5a82}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Biogram\Model\Biogram\Utility\Tile\Tile\TileObjectIterator">
-      <UniqueIdentifier>{ab1070f0-543a-4532-941d-5025e5cb605a}</UniqueIdentifier>
+    <Filter Include="Biogram\Model\Biogram\BiogramEgg">
+      <UniqueIdentifier>{7bd91d8c-18b9-4397-a873-c2df5b2ece66}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Biogram\Model\Biogram\Memory">
+      <UniqueIdentifier>{54ca90e7-d670-428c-849c-729ef1e466ed}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -1065,9 +1059,6 @@
     <ClCompile Include="Utility.cpp">
       <Filter>Biogram\Model\Utility</Filter>
     </ClCompile>
-    <ClCompile Include="BiogramWorld.cpp">
-      <Filter>Biogram\Model\Biogram\BiogramWorld</Filter>
-    </ClCompile>
     <ClCompile Include="Energy.cpp">
       <Filter>Biogram\Model\Biogram\Energy</Filter>
     </ClCompile>
@@ -1092,17 +1083,23 @@
     <ClCompile Include="CommandFunction.cpp">
       <Filter>Biogram\Model\Biogram\CommandOperator</Filter>
     </ClCompile>
-    <ClCompile Include="TileMap.cpp">
-      <Filter>Biogram\Model\Biogram\Utility\TileMap</Filter>
+    <ClCompile Include="BiogramWorld.cpp">
+      <Filter>Biogram\Model\Biogram\BiogramWorld</Filter>
     </ClCompile>
-    <ClCompile Include="Tile.cpp">
-      <Filter>Biogram\Model\Biogram\Utility\Tile\Tile</Filter>
+    <ClCompile Include="BiogramLab.cpp">
+      <Filter>Biogram\Model\Biogram\BiogramLab</Filter>
     </ClCompile>
-    <ClCompile Include="CloseUnitTile.cpp">
-      <Filter>Biogram\Model\Biogram\Utility\Tile\CloseUnitTile</Filter>
+    <ClCompile Include="BiogramCage.cpp">
+      <Filter>Biogram\Model\Biogram\BiogramCage</Filter>
     </ClCompile>
-    <ClCompile Include="TileObjectIterator.cpp">
-      <Filter>Biogram\Model\Biogram\Utility\Tile\Tile\TileObjectIterator</Filter>
+    <ClCompile Include="BiogramDNA.cpp">
+      <Filter>Biogram\Model\Biogram\BiogramDNA</Filter>
+    </ClCompile>
+    <ClCompile Include="BiogramEgg.cpp">
+      <Filter>Biogram\Model\Biogram\BiogramEgg</Filter>
+    </ClCompile>
+    <ClCompile Include="Memory.cpp">
+      <Filter>Biogram\Model\Biogram\Memory</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -1646,9 +1643,6 @@
     <ClInclude Include="Utility.h">
       <Filter>Biogram\Model\Utility</Filter>
     </ClInclude>
-    <ClInclude Include="BiogramWorld.h">
-      <Filter>Biogram\Model\Biogram\BiogramWorld</Filter>
-    </ClInclude>
     <ClInclude Include="Energy.h">
       <Filter>Biogram\Model\Biogram\Energy</Filter>
     </ClInclude>
@@ -1673,17 +1667,23 @@
     <ClInclude Include="CommandFunction.h">
       <Filter>Biogram\Model\Biogram\CommandOperator</Filter>
     </ClInclude>
-    <ClInclude Include="TileMap.h">
-      <Filter>Biogram\Model\Biogram\Utility\TileMap</Filter>
+    <ClInclude Include="BiogramWorld.h">
+      <Filter>Biogram\Model\Biogram\BiogramWorld</Filter>
     </ClInclude>
-    <ClInclude Include="Tile.h">
-      <Filter>Biogram\Model\Biogram\Utility\Tile\Tile</Filter>
+    <ClInclude Include="BiogramLab.h">
+      <Filter>Biogram\Model\Biogram\BiogramLab</Filter>
     </ClInclude>
-    <ClInclude Include="CloseUnitTile.h">
-      <Filter>Biogram\Model\Biogram\Utility\Tile\CloseUnitTile</Filter>
+    <ClInclude Include="BiogramCage.h">
+      <Filter>Biogram\Model\Biogram\BiogramCage</Filter>
     </ClInclude>
-    <ClInclude Include="TileObjectIterator.h">
-      <Filter>Biogram\Model\Biogram\Utility\Tile\Tile\TileObjectIterator</Filter>
+    <ClInclude Include="BiogramDNA.h">
+      <Filter>Biogram\Model\Biogram\BiogramDNA</Filter>
+    </ClInclude>
+    <ClInclude Include="BiogramEgg.h">
+      <Filter>Biogram\Model\Biogram\BiogramEgg</Filter>
+    </ClInclude>
+    <ClInclude Include="Memory.h">
+      <Filter>Biogram\Model\Biogram\Memory</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -1704,15 +1704,6 @@
   <ItemGroup>
     <None Include="Utility.inl">
       <Filter>Biogram\Model\Utility</Filter>
-    </None>
-    <None Include="Tile.inl">
-      <Filter>Biogram\Model\Biogram\Utility\Tile\Tile</Filter>
-    </None>
-    <None Include="TileMap.inl">
-      <Filter>Biogram\Model\Biogram\Utility\TileMap</Filter>
-    </None>
-    <None Include="TileObjectIterator.inl">
-      <Filter>Biogram\Model\Biogram\Utility\Tile\Tile\TileObjectIterator</Filter>
     </None>
   </ItemGroup>
 </Project>

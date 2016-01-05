@@ -6,6 +6,7 @@
 
 class Unit;
 class Linker;
+class Memory;
 
 #define CMD_FUNC_PARAM (std::shared_ptr<Unit>* pNextUnit, std::shared_ptr<Unit> here, std::shared_ptr<Unit> param1, std::shared_ptr<Unit> param2)
 #define CMD_FUNC(name) double name CMD_FUNC_PARAM
@@ -50,6 +51,10 @@ protected:
 
 
 protected:
+	std::shared_ptr<Memory> m_pSharedMemory;
+
+
+protected:
 	using CommandFuncType = double(CommandOperator::*) CMD_FUNC_PARAM;
 	std::vector<CommandFuncType> m_cmdFuncList;
 
@@ -68,6 +73,12 @@ public:
 
 public:
 	size_t getCurrentUnitCount() const;
+
+
+public:
+	int setSharedMemory(std::shared_ptr<Memory> pSharedMemory);
+	double readSharedMem(int address);
+	void writeSharedMem(int address, double value);
 
 
 protected: // 명령어실행용 함수들 선언

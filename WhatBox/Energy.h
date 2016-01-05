@@ -50,9 +50,5 @@ public:
 	void setTemperature(double temp, double mass);
 	void addTemperature(double deltaTemp, double mass);
 	double toTemperature(double mass) const;
-
-	void setSpeed(double speed, double mass);
-	void addSpeed(double deltaSpeed, double mass);
-	double toSpeed(double mass) const;
 };
 

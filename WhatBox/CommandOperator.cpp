@@ -2,6 +2,7 @@
 
 #include "Unit.h"
 #include "Linker.h"
+#include "Memory.h"
 
 #define CMD_FUNC(name) m_cmdFuncList.emplace_back(&CommandOperator::name)
 
@@ -32,6 +33,7 @@
 
 
 CommandOperator::CommandOperator()
+	: m_pSharedMemory(nullptr)
 {
 	// 명령어실행용 함수들을 목록에 추가
 #include "CommandFunction.h"
@@ -154,5 +156,36 @@ void CommandOperator::removeUnit(std::shared_ptr<Unit> pUnit)
 size_t CommandOperator::getCurrentUnitCount() const
 {
 	return m_pCurrentUnitList.size();
+}
+
+//###############################################################
+
+int CommandOperator::setSharedMemory(std::shared_ptr<Memory> pSharedMemory)
+{
+	m_pSharedMemory = pSharedMemory;
+
+
+	return 0;
+}
+
+
+double CommandOperator::readSharedMem(int address)
+{
+	if (m_pSharedMemory)
+	{
+		return m_pSharedMemory->read(address);
+	}
+
+
+	return 0.0;
+}
+
+
+void CommandOperator::writeSharedMem(int address, double value)
+{
+	if (m_pSharedMemory)
+	{
+		return m_pSharedMemory->write(address, value);
+	}
 }
 

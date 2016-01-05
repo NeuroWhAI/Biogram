@@ -55,23 +55,7 @@ Linker::~Linker()
 
 int Linker::update(double timePitch)
 {
-	// 스프링 작용 계산
-	if (m_pInUnit && m_pOutUnit)
-	{
-		auto subVec = m_pInUnit->getLocation() - m_pOutUnit->getLocation();
-		float distance = subVec.getLength();
-
-		float subDistance = (m_realLength - distance) / 512.0f;
-
-		subVec /= distance;
-		subVec *= subDistance * static_cast<float>(timePitch);
-
-		float inUnitMass = m_pInUnit->getMass();
-		float massRate = inUnitMass / (inUnitMass + m_pOutUnit->getMass());
-
-		m_pInUnit->addSpeed(subVec * (1.0f - massRate));
-		m_pOutUnit->addSpeed(-subVec * massRate);
-	}
+	
 
 
 	return 0;

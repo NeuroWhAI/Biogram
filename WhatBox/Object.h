@@ -39,7 +39,6 @@ protected:
 	double m_temperature;
 	Utility::PointF m_location;
 	float m_radius;
-	Utility::PointF m_speed;
 
 
 public:
@@ -64,15 +63,5 @@ public:
 	void setRadius(float radius);
 	void addRadius(float deltaRadius);
 	float getRadius() const;
-
-	void setSpeedX(float x);
-	void setSpeedY(float y);
-	void setSpeed(float x, float y);
-	void setSpeed(const Utility::PointF speed);
-	void addSpeedX(float dx);
-	void addSpeedY(float dy);
-	void addSpeed(float dx, float dy);
-	void addSpeed(const Utility::PointF deltaSpeed);
-	Utility::PointF getSpeed() const;
 };
 

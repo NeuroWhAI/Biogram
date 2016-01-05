@@ -31,7 +31,6 @@ Object::Object()
 	, m_temperature(0.0)
 	, m_location(0.0f, 0.0f)
 	, m_radius(0.0f)
-	, m_speed(0.0, 0.0)
 {
 	
 }
@@ -154,62 +153,5 @@ void Object::addRadius(float deltaRadius)
 float Object::getRadius() const
 {
 	return m_radius;
-}
-
-//---------------------------------------------------------------
-
-void Object::setSpeedX(float x)
-{
-	m_speed.x = x;
-}
-
-
-void Object::setSpeedY(float y)
-{
-	m_speed.y = y;
-}
-
-
-void Object::setSpeed(float x, float y)
-{
-	m_speed.x = x;
-	m_speed.y = y;
-}
-
-
-void Object::setSpeed(const Utility::PointF speed)
-{
-	m_speed = speed;
-}
-
-
-void Object::addSpeedX(float dx)
-{
-	m_speed.x += dx;
-}
-
-
-void Object::addSpeedY(float dy)
-{
-	m_speed.y += dy;
-}
-
-
-void Object::addSpeed(float dx, float dy)
-{
-	m_speed.x += dx;
-	m_speed.y += dy;
-}
-
-
-void Object::addSpeed(const Utility::PointF deltaSpeed)
-{
-	m_speed += deltaSpeed;
-}
-
-
-Utility::PointF Object::getSpeed() const
-{
-	return m_speed;
 }
 

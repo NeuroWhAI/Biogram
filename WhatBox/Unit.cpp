@@ -56,14 +56,14 @@ Unit::~Unit()
 
 void Unit::updateRadius()
 {
-	m_radius = 0.25f * m_cmdNumber + 8.0f;
+	m_radius = 0.0625f * m_cmdNumber + 4.0f;
 }
 
 //###############################################################
 
 int Unit::update(double timePitch)
 {
-	m_location += m_speed * static_cast<float>(timePitch);
+	
 
 
 	return 0;
