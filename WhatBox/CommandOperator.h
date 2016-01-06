@@ -61,6 +61,7 @@ protected:
 
 public:
 	int update(double timePitch);
+	int clear();
 
 
 public:
@@ -73,6 +74,7 @@ public:
 
 public:
 	size_t getCurrentUnitCount() const;
+	size_t getCmdFunctionCount() const;
 
 
 public:

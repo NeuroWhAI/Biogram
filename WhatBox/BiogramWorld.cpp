@@ -46,6 +46,7 @@ BiogramWorld::BiogramWorld()
 	// TODO: юс╫ц
 	auto lab = std::make_shared<BiogramLab>();
 	addCage(lab);
+	m_pTimeManager->setPitch(std::pow(2, -6));
 }
 
 
@@ -70,7 +71,22 @@ int BiogramWorld::update()
 
 int BiogramWorld::updateTimeSpeed()
 {
-	m_pTimeManager->setPitch(1.0);
+	if (System::getInstance().getUserInputController().
+		onKeyDown(0xdb))
+	{
+		m_pTimeManager->setPitch(m_pTimeManager->getPitch() / 2.0);
+	}
+	else if (System::getInstance().getUserInputController().
+		onKeyDown(0xdd))
+	{
+		m_pTimeManager->setPitch(m_pTimeManager->getPitch() * 2.0);
+	}
+
+	if (System::getInstance().getUserInputController().
+		onKeyDown(0x2E))
+	{
+		m_pSharedMemory->clear();
+	}
 
 
 	return 0;
@@ -103,6 +119,12 @@ int BiogramWorld::addCage(BiogramCagePtr pCage)
 }
 
 //###############################################################
+
+double BiogramWorld::getTimeSpeed() const
+{
+	return m_pTimeManager->getPitch();
+}
+
 
 const std::vector<BiogramCagePtr>& BiogramWorld::getCageList() const
 {

@@ -1,3 +1,6 @@
+# DNA files
+*.bmgn
+
 # Compiled Object files
 *.slo
 *.lo

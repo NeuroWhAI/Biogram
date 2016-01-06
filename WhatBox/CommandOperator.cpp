@@ -56,7 +56,6 @@ int CommandOperator::update(double timePitch)
 	{
 		double leftTime = pUnit->getTimeGage() + timePitch;
 
-		//while (spendTime + timePerCmd <= timePitch)
 		while (leftTime >= timePerCmd)
 		{
 			std::shared_ptr<Unit> nextUnit(nullptr);
@@ -135,6 +134,17 @@ int CommandOperator::update(double timePitch)
 	return 0;
 }
 
+
+int CommandOperator::clear()
+{
+	m_pCurrentUnitList.clear();
+	m_pRemovalUnitList.clear();
+	m_pNextUnitList.clear();
+
+
+	return 0;
+}
+
 //###############################################################
 
 bool CommandOperator::addUnit(std::shared_ptr<Unit> pUnit)
@@ -156,6 +166,12 @@ void CommandOperator::removeUnit(std::shared_ptr<Unit> pUnit)
 size_t CommandOperator::getCurrentUnitCount() const
 {
 	return m_pCurrentUnitList.size();
+}
+
+
+size_t CommandOperator::getCmdFunctionCount() const
+{
+	return m_cmdFuncList.size();
 }
 
 //###############################################################

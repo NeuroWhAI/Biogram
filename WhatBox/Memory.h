@@ -42,6 +42,7 @@ protected:
 public:
 	double read(int address);
 	void write(int address, double value);
+	void clear();
 
 
 public:

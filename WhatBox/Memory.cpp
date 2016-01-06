@@ -50,6 +50,12 @@ void Memory::write(int address, double value)
 	m_memory[address] = value;
 }
 
+
+void Memory::clear()
+{
+	m_memory.clear();
+}
+
 //###############################################################
 
 const std::unordered_map<int, double>& Memory::getMemory() const

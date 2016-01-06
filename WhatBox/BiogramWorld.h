@@ -69,6 +69,7 @@ public:
 
 
 public:
+	double getTimeSpeed() const;
 	const std::vector<BiogramCagePtr>& getCageList() const;
 	MemoryPtr getSharedMemory() const;
 };

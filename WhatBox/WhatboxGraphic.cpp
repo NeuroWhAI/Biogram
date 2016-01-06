@@ -140,15 +140,29 @@ int WhatboxGraphic::drawBiogramWorld(const BiogramWorld& world) const
 	std::wostringstream oss;
 
 
+	// 각 Cage 그리기
+	const auto& cageList = world.getCageList();
+	for (auto& cage : cageList)
+	{
+		drawBiogramCage(*cage);
+	}
+
+
+	// 시간 속도 표시
+	oss << "Time Speed: " << world.getTimeSpeed() << std::endl;
+
+
 	// 공유메모리 표시
+	oss << L"[Shared Memory]" << std::endl;
+
 	auto sharedMem = world.getSharedMemory();
 	auto memory = sharedMem->getMemory();
 
 	size_t count = 0;
-	size_t nlCount = memory.size() / 16;
+	size_t nlCount = memory.size() / 64;
 	for (const auto& cell : memory)
 	{
-		oss << L"[" << cell.first << L": " << cell.second << L"] ";
+		oss << L" (" << cell.first << L": " << cell.second << L")";
 
 		++count;
 		if (count > nlCount)
@@ -160,14 +174,6 @@ int WhatboxGraphic::drawBiogramWorld(const BiogramWorld& world) const
 
 	drawText(oss.str(),
 		Utility::PointF(8.0f, 8.0f), false, Utility::Color::BLACK);
-
-
-	// 각 Cage 그리기
-	const auto& cageList = world.getCageList();
-	for (auto& cage : cageList)
-	{
-		drawBiogramCage(*cage);
-	}
 
 
 	return 0;
@@ -238,6 +244,25 @@ int WhatboxGraphic::drawBiogramCage(const BiogramCage& cage) const
 	cCore::Sprite.EndDraw();
 
 
+	// 유닛 메모리 표시
+	/*oss.str(L"");
+	int count = 0;
+	for (auto& pUnit : pUnitList)
+	{
+		oss << pUnit->getMemory() << std::endl;
+		++count;
+
+		if (count > 64)
+		{
+			oss << L"...";
+			break;
+		}
+	}
+
+	drawText(oss.str(),
+		Utility::PointF(-128.0f, 8.0f), false, Utility::Color::BLACK);*/
+
+
 	// 유닛 세부정보 표시
 	for (auto& pUnit : pUnitList)
 	{
@@ -257,14 +282,6 @@ int WhatboxGraphic::drawBiogramCage(const BiogramCage& cage) const
 			break;
 		}
 	}
-
-
-	// 명령어 진행 상태 표시
-	oss.str(L"");
-	auto cmdOperator = cage.getCmdOperator();
-	oss << L"CurrentUnitCount: " << cmdOperator->getCurrentUnitCount();
-	drawText(oss.str(),
-		Utility::PointF(8 + camPos.x, 32 + camPos.y), false, Utility::Color::BLACK);
 
 
 	return 0;

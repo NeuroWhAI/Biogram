@@ -4,6 +4,8 @@
 
 #include "Utility.h"
 
+#include "BiogramDNA.h"
+
 
 
 
@@ -39,6 +41,8 @@ public:
 
 protected:
 	std::shared_ptr<Unit> m_pSelectedUnit;
+	BiogramDNA m_currentDNA;
+	bool m_bLoop;
 
 
 public:
@@ -53,5 +57,7 @@ protected:
 
 protected:
 	std::shared_ptr<Unit> getUnitContain(Utility::Point point) const;
+	int clear();
+	int initBiogram(BiogramDNA dna);
 };
 
