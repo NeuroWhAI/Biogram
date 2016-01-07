@@ -47,5 +47,6 @@ public:
 
 public:
 	int mutate(unsigned long seed, double rate);
+	int combine(const BiogramDNA& other);
 };
 

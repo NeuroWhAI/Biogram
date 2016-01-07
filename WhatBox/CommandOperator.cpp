@@ -34,6 +34,9 @@
 
 CommandOperator::CommandOperator()
 	: m_pSharedMemory(nullptr)
+	, m_pCageMemory(nullptr)
+	, m_elapsedTime(0.0)
+	, m_geneScore(0.0)
 {
 	// 명령어실행용 함수들을 목록에 추가
 #include "CommandFunction.h"
@@ -47,8 +50,11 @@ CommandOperator::~CommandOperator()
 
 //###############################################################
 
-int CommandOperator::update(double timePitch)
+int CommandOperator::update(double timePitch, double totalTime)
 {
+	m_elapsedTime = totalTime;
+
+
 	const double timePerCmd = 1.0; // 작을수록 명령어 실행속도가 빨라짐.
 	const int funcCount = static_cast<int>(m_cmdFuncList.size());
 
@@ -203,5 +209,44 @@ void CommandOperator::writeSharedMem(int address, double value)
 	{
 		return m_pSharedMemory->write(address, value);
 	}
+}
+
+
+//-----------------------------------------------------------------
+
+int CommandOperator::setCageMemory(std::shared_ptr<Memory> pCageMemory)
+{
+	m_pCageMemory = pCageMemory;
+
+
+	return 0;
+}
+
+
+double CommandOperator::readCageMem(int address)
+{
+	if (m_pCageMemory)
+	{
+		return m_pCageMemory->read(address);
+	}
+
+
+	return 0.0;
+}
+
+
+void CommandOperator::writeCageMem(int address, double value)
+{
+	if (m_pCageMemory)
+	{
+		return m_pCageMemory->write(address, value);
+	}
+}
+
+//###############################################################
+
+void CommandOperator::setGeneScore(double score)
+{
+	m_geneScore = score;
 }
 

@@ -565,6 +565,78 @@ CMD_FUNC_DECL(Cmd_WriteSharedMemFrom)
 }
 
 
+CMD_FUNC_DECL(Cmd_ReadCageMem)
+{
+	/*
+	* [1, *]
+	* 지역메모리에서 1의 값에 해당하는 주소의 값을
+	  here로 읽어온다.
+	*/
+
+
+	return Cmd_ReadCageMemTo(pNextUnit, here, here, param1);
+}
+
+
+CMD_FUNC_DECL(Cmd_ReadCageMemTo)
+{
+	/*
+	* [1, 2]
+	* 지역메모리에서 2의 값에 해당하는 주소의 값을
+	  1로 읽어온다.
+	*/
+
+
+	if (param1 && param2)
+	{
+		param1->setMemory(readCageMem(static_cast<int>(
+			param2->getMemory())));
+
+
+		return 0.0;
+	}
+
+
+	return -0.1;
+}
+
+
+CMD_FUNC_DECL(Cmd_WriteCageMem)
+{
+	/*
+	* [1, *]
+	* 지역메모리에서 here의 값에 해당하는 주소에
+	  1의 값을 쓴다.
+	*/
+
+
+	return Cmd_WriteCageMemFrom(pNextUnit, here, here, param1);
+}
+
+
+CMD_FUNC_DECL(Cmd_WriteCageMemFrom)
+{
+	/*
+	* [1, 2]
+	* 지역메모리에서 1의 값에 해당하는 주소에
+	  2의 값을 쓴다.
+	*/
+
+
+	if (param1 && param2)
+	{
+		writeCageMem(static_cast<int>(param1->getMemory()),
+			param2->getMemory());
+
+
+		return 0.0;
+	}
+
+
+	return -0.1;
+}
+
+
 CMD_FUNC_DECL(Cmd_Move)
 {
 	/*
@@ -1205,6 +1277,72 @@ CMD_FUNC_DECL(Cmd_GetLocationThis)
 
 			return 0.0;
 		}
+	}
+
+
+	return -0.1;
+}
+
+
+CMD_FUNC_DECL(Cmd_GetTime)
+{
+	/*
+	* [*, *]
+	* 현재 시간을 here의 값에 쓴다.
+	*/
+
+
+	return Cmd_GetTimeTo(pNextUnit, here, here, nullptr);
+}
+
+
+CMD_FUNC_DECL(Cmd_GetTimeTo)
+{
+	/*
+	* [1, *]
+	* 현재 시간을 1의 값에 쓴다.
+	*/
+
+
+	if (param1)
+	{
+		param1->setMemory(m_elapsedTime);
+
+
+		return 0.0;
+	}
+
+
+	return -0.1;
+}
+
+
+CMD_FUNC_DECL(Cmd_GetScore)
+{
+	/*
+	* [*, *]
+	* 적합도 점수를 here의 값에 쓴다.
+	*/
+
+
+	return Cmd_GetScoreTo(pNextUnit, here, here, nullptr);
+}
+
+
+CMD_FUNC_DECL(Cmd_GetScoreTo)
+{
+	/*
+	* [1, *]
+	* 적합도 점수를 1의 값에 쓴다.
+	*/
+
+
+	if (param1)
+	{
+		param1->setMemory(m_geneScore);
+
+
+		return 0.0;
 	}
 
 

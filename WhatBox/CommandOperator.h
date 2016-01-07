@@ -52,6 +52,9 @@ protected:
 
 protected:
 	std::shared_ptr<Memory> m_pSharedMemory;
+	std::shared_ptr<Memory> m_pCageMemory;
+	double m_elapsedTime;
+	double m_geneScore;
 
 
 protected:
@@ -60,7 +63,7 @@ protected:
 
 
 public:
-	int update(double timePitch);
+	int update(double timePitch, double totalTime);
 	int clear();
 
 
@@ -81,6 +84,14 @@ public:
 	int setSharedMemory(std::shared_ptr<Memory> pSharedMemory);
 	double readSharedMem(int address);
 	void writeSharedMem(int address, double value);
+
+	int setCageMemory(std::shared_ptr<Memory> pCageMemory);
+	double readCageMem(int address);
+	void writeCageMem(int address, double value);
+
+
+public:
+	void setGeneScore(double score);
 
 
 protected: // 명령어실행용 함수들 선언

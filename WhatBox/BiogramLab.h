@@ -57,7 +57,5 @@ protected:
 
 protected:
 	std::shared_ptr<Unit> getUnitContain(Utility::Point point) const;
-	int clear();
-	int initBiogram(BiogramDNA dna);
 };
 

@@ -69,7 +69,8 @@ public:
 
 protected:
 	size_t proceedData(int& sequence,
-		const std::vector<bool>& data,
+		std::vector<bool>::const_iterator begin,
+		size_t bufferSize,
 		std::vector<UnitPtr>* pUnitOut,
 		std::vector<LinkerPtr>* pFlowLinkerOut,
 		std::vector<LinkerPtr>* pParamLinkerOut,
@@ -78,11 +79,13 @@ protected:
 	* data를 이진수 형식으로 받아들여 정수로 바꾼다.
 	* @Return: 변환된 정수 값
 	*/
-	int toInt(const std::vector<bool>& data);
+	int toInt(std::vector<bool>::const_iterator begin,
+		size_t size);
 	/*
 	* data의 각 비트를 더해서 정수로 바꾼다.
 	* @Return: 변환된 정수 값
 	*/
-	int bitTotal(const std::vector<bool>& data);
+	int bitTotal(std::vector<bool>::const_iterator begin,
+		size_t size);
 };
 

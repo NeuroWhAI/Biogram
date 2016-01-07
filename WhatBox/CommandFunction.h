@@ -19,6 +19,10 @@ CMD_FUNC(Cmd_ReadSharedMem);
 CMD_FUNC(Cmd_ReadSharedMemTo);
 CMD_FUNC(Cmd_WriteSharedMem);
 CMD_FUNC(Cmd_WriteSharedMemFrom);
+CMD_FUNC(Cmd_ReadCageMem);
+CMD_FUNC(Cmd_ReadCageMemTo);
+CMD_FUNC(Cmd_WriteCageMem);
+CMD_FUNC(Cmd_WriteCageMemFrom);
 CMD_FUNC(Cmd_Move);
 CMD_FUNC(Cmd_MoveTo);
 CMD_FUNC(Cmd_Increase);
@@ -53,6 +57,10 @@ CMD_FUNC(Cmd_GetRadius);
 CMD_FUNC(Cmd_GetRadiusTo);
 CMD_FUNC(Cmd_GetLocation);
 CMD_FUNC(Cmd_GetLocationThis);
+CMD_FUNC(Cmd_GetTime);
+CMD_FUNC(Cmd_GetTimeTo);
+CMD_FUNC(Cmd_GetScore);
+CMD_FUNC(Cmd_GetScoreTo);
 
 //CMD_FUNC(Cmd_);
 

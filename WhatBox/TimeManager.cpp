@@ -29,6 +29,8 @@
 TimeManager::TimeManager()
 	: m_pitch(1.0)
 	, m_pitchF(1.0f)
+
+	, m_elapsedTime(0.0)
 {
 
 }
@@ -37,6 +39,16 @@ TimeManager::TimeManager()
 TimeManager::~TimeManager()
 {
 
+}
+
+//###############################################################
+
+int TimeManager::update()
+{
+	m_elapsedTime += m_pitch;
+
+
+	return 0;
 }
 
 //###############################################################
@@ -65,5 +77,18 @@ double TimeManager::getPitch() const
 float TimeManager::getPitchF() const
 {
 	return m_pitchF;
+}
+
+//###############################################################
+
+double TimeManager::getElapsedTime() const
+{
+	return m_elapsedTime;
+}
+
+
+void TimeManager::resetElapsedTime()
+{
+	m_elapsedTime = 0.0;
 }
 

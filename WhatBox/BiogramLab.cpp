@@ -9,6 +9,7 @@
 #include "LinkHelper.h"
 #include "BiogramEgg.h"
 #include "CommandOperator.h"
+#include "Memory.h"
 
 
 
@@ -41,7 +42,7 @@ BiogramLab::BiogramLab()
 	, m_bLoop(false)
 {
 	// TODO: 임시
-	initBiogram(BiogramDNA(static_cast<unsigned long>(std::time(nullptr))));
+	buildBiogram(BiogramDNA(static_cast<unsigned long>(std::time(nullptr))));
 }
 
 
@@ -55,6 +56,7 @@ BiogramLab::~BiogramLab()
 int BiogramLab::update(double timeSpeed)
 {
 	BiogramCage::update(timeSpeed);
+
 
 	if (m_bLoop
 		&&
@@ -97,7 +99,7 @@ int BiogramLab::update(double timeSpeed)
 
 	if (inputMgr.onKeyDown(0x0D/*Enter*/))
 	{
-		initBiogram(BiogramDNA(static_cast<unsigned long>(std::time(nullptr))));
+		buildBiogram(BiogramDNA(static_cast<unsigned long>(std::time(nullptr))));
 	}
 
 	if (inputMgr.onKeyDown(0x2E/*Delete*/))
@@ -115,7 +117,7 @@ int BiogramLab::update(double timeSpeed)
 		m_currentDNA.mutate(static_cast<unsigned long>(std::time(nullptr)),
 			rate);
 
-		initBiogram(m_currentDNA);
+		buildBiogram(m_currentDNA);
 	}
 
 	if (inputMgr.onKeyDown('S')
@@ -154,7 +156,7 @@ int BiogramLab::update(double timeSpeed)
 			fr.close();
 		}
 
-		initBiogram(BiogramDNA(data));
+		buildBiogram(BiogramDNA(data));
 	}
 
 
@@ -222,48 +224,5 @@ std::shared_ptr<Unit> BiogramLab::getUnitContain(Utility::Point point) const
 
 
 	return nullptr;
-}
-
-
-int BiogramLab::clear()
-{
-	m_pSelectedUnit = nullptr;
-	m_pUnitList.clear();
-	m_pFlowLinkerList.clear();
-	m_pParamLinkerList.clear();
-	m_pCmdOperator->clear();
-
-
-	return 0;
-}
-
-
-int BiogramLab::initBiogram(BiogramDNA dna)
-{
-	// 초기화
-	this->clear();
-
-
-	// 랜덤 Biogram 생성
-	m_currentDNA = dna;
-	BiogramEgg bioMaker(dna);
-
-	std::vector<std::shared_ptr<Unit>> pUnitList;
-	std::vector<std::shared_ptr<Linker>> pFlowLinkerList;
-	std::vector<std::shared_ptr<Linker>> pParamLinkerList;
-
-	bioMaker.buildBiogram(&pUnitList,
-		&pFlowLinkerList, &pParamLinkerList,
-		m_pCmdOperator);
-
-	for (auto& unit : pUnitList)
-		this->addUnit(unit);
-	for (auto& linker : pFlowLinkerList)
-		this->addLinker(linker, LinkerTypes::Flow);
-	for (auto& linker : pParamLinkerList)
-		this->addLinker(linker, LinkerTypes::Param);
-
-
-	return 0;
 }
 

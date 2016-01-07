@@ -1,11 +1,17 @@
 #include "BiogramCage.h"
 
+#include <fstream>
+
 #include "LinkHelper.h"
 
 #include "Unit.h"
 #include "Linker.h"
 #include "CommandOperator.h"
 #include "Memory.h"
+#include "ComPort.h"
+#include "BiogramDNA.h"
+
+#include "BiogramEgg.h"
 
 
 
@@ -34,9 +40,16 @@
 
 
 BiogramCage::BiogramCage()
-	: m_pCmdOperator(std::make_shared<CommandOperator>())
-{
+	: m_elapsedTime(0.0)
+
+	, m_DNA(nullptr)
+	, m_geneScore(0.0)
 	
+	, m_cageMemory(std::make_shared<Memory>())
+
+	, m_pCmdOperator(std::make_shared<CommandOperator>())
+{
+	m_pCmdOperator->setCageMemory(m_cageMemory);
 }
 
 
@@ -58,11 +71,16 @@ int BiogramCage::setSharedMemory(std::shared_ptr<Memory> sharedMemory)
 
 int BiogramCage::update(double timeSpeed)
 {
-	//updateUnit(timeSpeed);
+	// 적합도 점수 감소
+	updateScore(timeSpeed);
 
-	//updateLinker(timeSpeed);
 
+	// 명령어 실행 진행
 	updateCommand(timeSpeed);
+
+
+	// 총 경과시간 누적
+	m_elapsedTime += timeSpeed;
 
 
 	return 0;
@@ -70,55 +88,132 @@ int BiogramCage::update(double timeSpeed)
 
 //###############################################################
 
-int BiogramCage::updateUnit(double timeSpeed)
-{
-	for (auto& pUnit : m_pUnitList)
-	{
-		pUnit->update(timeSpeed);
-	}
-
-
-	return 0;
-}
-
-
-int BiogramCage::updateLinker(double timeSpeed)
-{	
-	for (auto& pLinker : m_pFlowLinkerList)
-	{
-		pLinker->update(timeSpeed);
-	}
-
-	for (auto& pLinker : m_pParamLinkerList)
-	{
-		pLinker->update(timeSpeed);
-	}
-
-
-	return 0;
-}
-
-
 int BiogramCage::updateCommand(double timeSpeed)
 {
-	m_pCmdOperator->update(timeSpeed);
+	m_pCmdOperator->setGeneScore(m_geneScore);
+
+	m_pCmdOperator->update(timeSpeed, m_elapsedTime);
 
 
 	return 0;
+}
+
+
+int BiogramCage::updateScore(double timeSpeed)
+{
+	m_geneScore -= m_geneScore / 32 * timeSpeed;
+
+
+	return 0;
+}
+
+//###############################################################
+
+std::shared_ptr<const BiogramDNA> BiogramCage::getDNA() const
+{
+	return m_DNA;
+}
+
+
+void BiogramCage::setGeneScore(double score)
+{
+	m_geneScore = score;
+}
+
+
+double BiogramCage::getGeneScore() const
+{
+	return m_geneScore;
+}
+
+//###############################################################
+
+int BiogramCage::buildBiogram(const BiogramDNA& dna)
+{
+	this->clear();
+
+
+	buildBiogramWithoutClear(dna);
+
+
+	return 0;
+}
+
+
+int BiogramCage::buildBiogramWithoutClear(const BiogramDNA& dna)
+{
+	m_DNA = std::make_shared<BiogramDNA>(dna);
+	BiogramEgg bioMaker(dna);
+
+	std::vector<std::shared_ptr<Unit>> pUnitList;
+	std::vector<std::shared_ptr<Linker>> pFlowLinkerList;
+	std::vector<std::shared_ptr<Linker>> pParamLinkerList;
+
+	bioMaker.buildBiogram(&pUnitList,
+		&pFlowLinkerList, &pParamLinkerList,
+		m_pCmdOperator);
+
+	for (auto& unit : pUnitList)
+		this->addUnit(unit);
+	for (auto& linker : pFlowLinkerList)
+		this->addLinker(linker, LinkerTypes::Flow);
+	for (auto& linker : pParamLinkerList)
+		this->addLinker(linker, LinkerTypes::Param);
+
+
+	return 0;
+}
+
+
+int BiogramCage::clear()
+{
+	clearWithoutComPort();
+	
+	m_comPortList.clear();
+
+
+	return 0;
+}
+
+
+int BiogramCage::clearWithoutComPort()
+{
+	m_elapsedTime = 0.0;
+
+
+	m_DNA = nullptr;
+	m_geneScore = 0.0;
+
+
+	m_pCmdOperator->clear();
+
+
+	m_pFlowLinkerList.clear();
+	m_pParamLinkerList.clear();
+	m_pUnitList.clear();
+
+	m_cageMemory->clear();
+
+
+	return 0;
+}
+
+//###############################################################
+
+double BiogramCage::getElapsedTime() const
+{
+	return m_elapsedTime;
 }
 
 //###############################################################
 
 bool BiogramCage::addUnit(std::shared_ptr<Unit> pUnit)
 {
-	bool bFail = false;
-
-
 	// 목록에 추가
 	m_pUnitList.emplace_back(pUnit);
 
 
-	return !bFail;
+	return true;
 }
 
 
@@ -228,6 +323,36 @@ bool BiogramCage::removeLinker(std::shared_ptr<Linker> pLinker, LinkerTypes type
 
 //###############################################################
 
+std::shared_ptr<ComPort> BiogramCage::assignComPort(
+	std::vector<std::pair<int, int>> portNum_address)
+{
+	// ComPort 생성 후 Cage 메모리에 연결
+	auto pNewCom = std::make_shared<ComPort>();
+	pNewCom->connectMemory(m_cageMemory);
+
+
+	// ComPort와 메모리간의 연결포트 설정
+	for (const auto& info : portNum_address)
+	{
+		bool result = pNewCom->assignPort(info.first, info.second);
+		
+		// 포트설정에 실패하면 ComPort 생성을 취소
+		if (result == false)
+		{
+			return nullptr;
+		}
+	}
+
+
+	// 목록에 등록
+	m_comPortList.emplace_back(pNewCom);
+
+
+	return pNewCom;
+}
+
+//###############################################################
+
 const std::vector<std::shared_ptr<Unit>>& BiogramCage::getUnitList() const
 {
 	return m_pUnitList;
@@ -243,6 +368,12 @@ const std::vector<std::shared_ptr<Linker>>& BiogramCage::getFlowLinkerList() con
 const std::vector<std::shared_ptr<Linker>>& BiogramCage::getParamLinkerList() const
 {
 	return m_pParamLinkerList;
+}
+
+
+std::shared_ptr<const Memory> BiogramCage::getCageMemory() const
+{
+	return m_cageMemory;
 }
 
 

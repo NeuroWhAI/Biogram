@@ -85,7 +85,7 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalDependencies>winmm.lib;d3d9.lib;d3dx9.lib;dsound.lib;dxguid.lib;d3dx10d.lib;ws2_32.lib;x3daudio.lib;dxerr.lib;d3dx9d.lib;comctl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>winmm.lib;d3d9.lib;d3dx9.lib;dsound.lib;dxguid.lib;d3dx10d.lib;ws2_32.lib;x3daudio.lib;d3dx9d.lib;comctl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
       <Command>copy $(TargetPath) $(SolutionDir)Build\</Command>
@@ -180,6 +180,7 @@
     <ClCompile Include="cInterpolar.cpp" />
     <ClCompile Include="CommandFunction.cpp" />
     <ClCompile Include="CommandOperator.cpp" />
+    <ClCompile Include="ComPort.cpp" />
     <ClCompile Include="cParticle.cpp" />
     <ClCompile Include="cParticleWorld.cpp" />
     <ClCompile Include="cParticle_Basic.cpp" />
@@ -242,10 +243,20 @@
     <ClCompile Include="D3D\d3denum.cpp" />
     <ClCompile Include="D3D\d3dutil.cpp" />
     <ClCompile Include="D3D\dxutil.cpp" />
-    <ClCompile Include="DXUT.cpp" />
-    <ClCompile Include="DXUTenum.cpp" />
-    <ClCompile Include="DXUTmisc.cpp" />
-    <ClCompile Include="DXUTres.cpp" />
+    <ClCompile Include="Device.cpp" />
+    <ClCompile Include="Director.cpp" />
+    <ClCompile Include="DXUT.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="DXUTenum.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="DXUTmisc.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="DXUTres.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="Energy.cpp" />
     <ClCompile Include="Graphic.cpp" />
     <ClCompile Include="LcXSkin\ILcMdl.cpp" />
@@ -257,11 +268,16 @@
     <ClCompile Include="LinkHelper.cpp" />
     <ClCompile Include="NetMsgUtil.cpp" />
     <ClCompile Include="Object.cpp" />
-    <ClCompile Include="SDKmisc.cpp" />
+    <ClCompile Include="ObjectViewer.cpp" />
+    <ClCompile Include="SDKmisc.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="SDKwavefile.cpp" />
     <ClCompile Include="Memory.cpp" />
     <ClCompile Include="System.cpp" />
     <ClCompile Include="SystemInfo.cpp" />
+    <ClCompile Include="TextCheckDirector.cpp" />
+    <ClCompile Include="TextPrinterDevice.cpp" />
     <ClCompile Include="TimeManager.cpp" />
     <ClCompile Include="Unit.cpp" />
     <ClCompile Include="UserInputController.cpp" />
@@ -269,6 +285,7 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Utility.cpp" />
     <ClCompile Include="WhatboxGraphic.cpp" />
+    <ClCompile Include="WhatboxObjectViewer.cpp" />
     <ClCompile Include="WhatboxSystemInfo.cpp" />
     <ClCompile Include="WhatboxUserInputController.cpp" />
   </ItemGroup>
@@ -363,12 +380,16 @@
     <ClInclude Include="cInterpolar.h" />
     <ClInclude Include="CommandFunction.h" />
     <ClInclude Include="CommandOperator.h" />
+    <ClInclude Include="ComPort.h" />
+    <ClInclude Include="Device.h" />
+    <ClInclude Include="Director.h" />
     <ClInclude Include="Energy.h" />
     <ClInclude Include="Graphic.h" />
     <ClInclude Include="Linker.h" />
     <ClInclude Include="LinkHelper.h" />
     <ClInclude Include="Object.h" />
     <ClInclude Include="Memory.h" />
+    <ClInclude Include="ObjectViewer.h" />
     <ClInclude Include="System.h" />
     <ClInclude Include="cParticle.h" />
     <ClInclude Include="cParticleWorld.h" />
@@ -459,12 +480,15 @@
     <ClInclude Include="SknMeshListName.h" />
     <ClInclude Include="SndListName.h" />
     <ClInclude Include="SystemInfo.h" />
+    <ClInclude Include="TextCheckDirector.h" />
+    <ClInclude Include="TextPrinterDevice.h" />
     <ClInclude Include="TimeManager.h" />
     <ClInclude Include="Unit.h" />
     <ClInclude Include="UserInputController.h" />
     <ClInclude Include="Util.h" />
     <ClInclude Include="Utility.h" />
     <ClInclude Include="WhatboxGraphic.h" />
+    <ClInclude Include="WhatboxObjectViewer.h" />
     <ClInclude Include="WhatboxSystemInfo.h" />
     <ClInclude Include="WhatboxUserInputController.h" />
   </ItemGroup>
@@ -478,6 +502,7 @@
     <Image Include="MainIcon.ico" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="BiogramWorld.inl" />
     <None Include="Utility.inl" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

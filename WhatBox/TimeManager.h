@@ -38,11 +38,24 @@ protected:
 	float m_pitchF;
 
 
+protected:
+	double m_elapsedTime;
+
+
+public:
+	int update();
+
+
 public:
 	void setPitch(double pitch);
 	void setPitch(float pitchF);
 
 	double getPitch() const;
 	float getPitchF() const;
+
+
+public:
+	double getElapsedTime() const;
+	void resetElapsedTime();
 };
 

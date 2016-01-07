@@ -91,6 +91,7 @@ public:
 	std::vector<std::shared_ptr<Linker>> getOutParamLinkerList() const;
 
 	std::shared_ptr<Unit> getRelativeFlowUnit(int relativeIndex) const;
+	std::shared_ptr<Unit> getSharedPtrOfThis() const;
 
 
 public:

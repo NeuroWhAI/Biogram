@@ -184,23 +184,22 @@ std::vector<std::shared_ptr<Linker>> Unit::getOutParamLinkerList() const
 
 std::shared_ptr<Unit> Unit::getRelativeFlowUnit(int relativeIndex) const
 {
-	std::shared_ptr<Unit> pNext = nullptr;
+	const Unit* pNext = nullptr;
 
 
 	if (relativeIndex < 0)
 	{
 		if (m_pInFlowLinker)
 		{
-			pNext = m_pInFlowLinker->getInUnit();
+			pNext = m_pInFlowLinker->getInUnit().get();
 
-			relativeIndex = -relativeIndex;
-
-			for (int i = 1; i < relativeIndex && pNext; ++i)
+			for (int i = -1; i > relativeIndex && pNext != nullptr;
+			--i)
 			{
-				auto pInLinker = pNext->getInLinker();
+				const auto pInLinker = pNext->getInLinker().get();
 
-				if (pInLinker)
-					pNext = pInLinker->getInUnit();
+				if (pInLinker != nullptr)
+					pNext = pInLinker->getInUnit().get();
 				else
 				{
 					pNext = nullptr;
@@ -213,14 +212,15 @@ std::shared_ptr<Unit> Unit::getRelativeFlowUnit(int relativeIndex) const
 	{
 		if (m_pOutFlowLinker)
 		{
-			pNext = m_pOutFlowLinker->getOutUnit();
+			pNext = m_pOutFlowLinker->getOutUnit().get();
 
-			for (int i = 1; i < relativeIndex && pNext; ++i)
+			for (int i = 1; i < relativeIndex && pNext != nullptr;
+			++i)
 			{
-				auto pOutLinker = pNext->getOutLinker();
+				const auto pOutLinker = pNext->getOutLinker().get();
 
-				if (pOutLinker)
-					pNext = pOutLinker->getOutUnit();
+				if (pOutLinker != nullptr)
+					pNext = pOutLinker->getOutUnit().get();
 				else
 				{
 					pNext = nullptr;
@@ -232,22 +232,39 @@ std::shared_ptr<Unit> Unit::getRelativeFlowUnit(int relativeIndex) const
 	else
 	{
 		// 스마트포인터를 반환하기 위해서 다른 곳에서 찾아봄
-		if (m_pInFlowLinker && m_pInFlowLinker->getOutUnit())
-			return m_pInFlowLinker->getOutUnit();
-		else if (m_pOutFlowLinker && m_pOutFlowLinker->getInUnit())
-			return m_pOutFlowLinker->getInUnit();
-		else
+		return getSharedPtrOfThis();
+	}
+
+
+	if (pNext != nullptr)
+		return pNext->getSharedPtrOfThis();
+	return nullptr;
+}
+
+
+std::shared_ptr<Unit> Unit::getSharedPtrOfThis() const
+{
+	if (m_pInFlowLinker && m_pInFlowLinker->getOutUnit())
+		return m_pInFlowLinker->getOutUnit();
+	else if (m_pOutFlowLinker && m_pOutFlowLinker->getInUnit())
+		return m_pOutFlowLinker->getInUnit();
+	else
+	{
+		for (const auto& pLinker : m_pParamLinkers)
 		{
-			for (const auto& pLinker : m_pParamLinkers)
-			{
-				if (pLinker && pLinker->getOutUnit())
-					return pLinker->getOutUnit();
-			}
+			if (pLinker && pLinker->getOutUnit())
+				return pLinker->getOutUnit();
+		}
+
+		for (const auto& pLinker : m_pOutParamLinkers)
+		{
+			if (pLinker && pLinker->getInUnit())
+				return pLinker->getInUnit();
 		}
 	}
 
 
-	return pNext;
+	return nullptr;
 }
 
 //###############################################################

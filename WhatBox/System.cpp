@@ -9,6 +9,9 @@
 // Graphic
 #include "WhatboxGraphic.h"
 
+// ObjectViewer
+#include "WhatboxObjectViewer.h"
+
 
 
 
@@ -54,6 +57,7 @@ System::System()
 	: m_pSystemInfo(std::make_shared<WhatboxSystemInfo>())
 	, m_pUserInputController(std::make_shared<WhatboxUserInputController>())
 	, m_pGraphic(std::make_shared<WhatboxGraphic>())
+	, m_pObjectViewer(std::make_shared<WhatboxObjectViewer>())
 {
 
 }
@@ -94,5 +98,11 @@ UserInputController& System::getUserInputController()
 Graphic& System::getGraphic()
 {
 	return *m_pGraphic;
+}
+
+
+ObjectViewer& System::getObjectViewer()
+{
+	return *m_pObjectViewer;
 }
 

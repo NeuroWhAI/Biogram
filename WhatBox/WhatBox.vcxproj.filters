@@ -550,9 +550,6 @@
     <Filter Include="Biogram\Model\Biogram\BiogramWorld">
       <UniqueIdentifier>{703c9dba-6733-4496-90ed-2b815f4261e0}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Biogram\Model\Biogram\BiogramLab">
-      <UniqueIdentifier>{f8acea6c-bd37-46db-b82d-f8a719aafec5}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Biogram\Model\Biogram\BiogramDNA">
       <UniqueIdentifier>{9724e157-6b37-4e40-80d0-d41dd7cb5a82}</UniqueIdentifier>
     </Filter>
@@ -561,6 +558,42 @@
     </Filter>
     <Filter Include="Biogram\Model\Biogram\Memory">
       <UniqueIdentifier>{54ca90e7-d670-428c-849c-729ef1e466ed}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Biogram\Model\Biogram\ComPort">
+      <UniqueIdentifier>{a756b2a3-43ba-417b-8ef4-19faddb1c1b9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Biogram\Model\Biogram\Device">
+      <UniqueIdentifier>{22e6eb4e-156f-4312-b08c-16634de888d6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Biogram\Model\Biogram\Device\Device">
+      <UniqueIdentifier>{2e31ebad-eb23-4c21-9a82-4e1930fe557e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Biogram\Model\Biogram\Device\TextPrinterDevice">
+      <UniqueIdentifier>{862a9951-5435-4664-967a-f60fa09781bd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Biogram\View\ObjectViewer">
+      <UniqueIdentifier>{ee6e07f9-f0fd-4825-a7c8-f57f34248b19}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Biogram\View\ObjectViewer\ObjectViewer">
+      <UniqueIdentifier>{f10769f6-285c-46d0-b43c-1f2fc10f6e12}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Biogram\View\ObjectViewer\WhatboxObjectViewer">
+      <UniqueIdentifier>{489f597c-4cc3-41c9-b2f3-479124422e77}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Biogram\Model\Biogram\BiogramCage\BiogramLab">
+      <UniqueIdentifier>{f8acea6c-bd37-46db-b82d-f8a719aafec5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Biogram\Model\Biogram\BiogramCage\BiogramCage">
+      <UniqueIdentifier>{20b3d307-d696-4d81-af7e-d0b2b195f4e7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Biogram\Model\Biogram\Director">
+      <UniqueIdentifier>{eb495910-7a7b-4af7-a66f-9b938bee0ef2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Biogram\Model\Biogram\Director\Director">
+      <UniqueIdentifier>{230c382b-a696-4159-810e-4ae3509f18ac}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Biogram\Model\Biogram\Director\TextCheckDirector">
+      <UniqueIdentifier>{006d6ac6-6565-479e-b456-97777b819a40}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -1087,10 +1120,7 @@
       <Filter>Biogram\Model\Biogram\BiogramWorld</Filter>
     </ClCompile>
     <ClCompile Include="BiogramLab.cpp">
-      <Filter>Biogram\Model\Biogram\BiogramLab</Filter>
-    </ClCompile>
-    <ClCompile Include="BiogramCage.cpp">
-      <Filter>Biogram\Model\Biogram\BiogramCage</Filter>
+      <Filter>Biogram\Model\Biogram\BiogramCage\BiogramLab</Filter>
     </ClCompile>
     <ClCompile Include="BiogramDNA.cpp">
       <Filter>Biogram\Model\Biogram\BiogramDNA</Filter>
@@ -1100,6 +1130,30 @@
     </ClCompile>
     <ClCompile Include="Memory.cpp">
       <Filter>Biogram\Model\Biogram\Memory</Filter>
+    </ClCompile>
+    <ClCompile Include="ComPort.cpp">
+      <Filter>Biogram\Model\Biogram\ComPort</Filter>
+    </ClCompile>
+    <ClCompile Include="Device.cpp">
+      <Filter>Biogram\Model\Biogram\Device\Device</Filter>
+    </ClCompile>
+    <ClCompile Include="TextPrinterDevice.cpp">
+      <Filter>Biogram\Model\Biogram\Device\TextPrinterDevice</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjectViewer.cpp">
+      <Filter>Biogram\View\ObjectViewer\ObjectViewer</Filter>
+    </ClCompile>
+    <ClCompile Include="WhatboxObjectViewer.cpp">
+      <Filter>Biogram\View\ObjectViewer\WhatboxObjectViewer</Filter>
+    </ClCompile>
+    <ClCompile Include="BiogramCage.cpp">
+      <Filter>Biogram\Model\Biogram\BiogramCage\BiogramCage</Filter>
+    </ClCompile>
+    <ClCompile Include="Director.cpp">
+      <Filter>Biogram\Model\Biogram\Director\Director</Filter>
+    </ClCompile>
+    <ClCompile Include="TextCheckDirector.cpp">
+      <Filter>Biogram\Model\Biogram\Director\TextCheckDirector</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -1671,10 +1725,7 @@
       <Filter>Biogram\Model\Biogram\BiogramWorld</Filter>
     </ClInclude>
     <ClInclude Include="BiogramLab.h">
-      <Filter>Biogram\Model\Biogram\BiogramLab</Filter>
-    </ClInclude>
-    <ClInclude Include="BiogramCage.h">
-      <Filter>Biogram\Model\Biogram\BiogramCage</Filter>
+      <Filter>Biogram\Model\Biogram\BiogramCage\BiogramLab</Filter>
     </ClInclude>
     <ClInclude Include="BiogramDNA.h">
       <Filter>Biogram\Model\Biogram\BiogramDNA</Filter>
@@ -1684,6 +1735,30 @@
     </ClInclude>
     <ClInclude Include="Memory.h">
       <Filter>Biogram\Model\Biogram\Memory</Filter>
+    </ClInclude>
+    <ClInclude Include="ComPort.h">
+      <Filter>Biogram\Model\Biogram\ComPort</Filter>
+    </ClInclude>
+    <ClInclude Include="Device.h">
+      <Filter>Biogram\Model\Biogram\Device\Device</Filter>
+    </ClInclude>
+    <ClInclude Include="TextPrinterDevice.h">
+      <Filter>Biogram\Model\Biogram\Device\TextPrinterDevice</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjectViewer.h">
+      <Filter>Biogram\View\ObjectViewer\ObjectViewer</Filter>
+    </ClInclude>
+    <ClInclude Include="WhatboxObjectViewer.h">
+      <Filter>Biogram\View\ObjectViewer\WhatboxObjectViewer</Filter>
+    </ClInclude>
+    <ClInclude Include="BiogramCage.h">
+      <Filter>Biogram\Model\Biogram\BiogramCage\BiogramCage</Filter>
+    </ClInclude>
+    <ClInclude Include="Director.h">
+      <Filter>Biogram\Model\Biogram\Director\Director</Filter>
+    </ClInclude>
+    <ClInclude Include="TextCheckDirector.h">
+      <Filter>Biogram\Model\Biogram\Director\TextCheckDirector</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -1704,6 +1779,9 @@
   <ItemGroup>
     <None Include="Utility.inl">
       <Filter>Biogram\Model\Utility</Filter>
+    </None>
+    <None Include="BiogramWorld.inl">
+      <Filter>Biogram\Model\Biogram\BiogramWorld</Filter>
     </None>
   </ItemGroup>
 </Project>

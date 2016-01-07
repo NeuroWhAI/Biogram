@@ -2,9 +2,6 @@
 
 #include "Graphic.h"
 
-#include <vector>
-#include <string>
-
 
 
 
@@ -38,10 +35,6 @@ public:
 	virtual ~WhatboxGraphic();
 
 
-protected:
-	std::vector<std::wstring> m_cmdNameList;
-
-
 public:
 	virtual int drawLineBegin(float width) const override;
 	virtual int drawLine(float x1, float y1, float x2, float y2,
@@ -58,11 +51,5 @@ public:
 		int r, int g, int b, int a = 255) const override;
 	virtual int drawText(std::wstring text, Utility::PointF location, bool isCenter,
 		Utility::Color color) const override;
-
-
-public:
-	virtual int drawBiogramWorld(const BiogramWorld& world) const override;
-	virtual int drawBiogramCage(const BiogramCage& cage) const override;
-	virtual int drawUnitDetail(const Unit& unit) const override;
 };
 

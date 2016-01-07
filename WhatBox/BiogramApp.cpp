@@ -6,6 +6,9 @@
 
 #include "BiogramWorld.h"
 
+#include "TextPrinterDevice.h"
+#include "TextCheckDirector.h"
+
 
 
 
@@ -48,7 +51,13 @@ BiogramApp::~BiogramApp()
 
 int BiogramApp::init()
 {
-	
+	m_pBiogramWorld->initWorld(32, 5000.0);
+
+	TextPrinterDevice printer;
+	m_pBiogramWorld->initDeviceForeachCage(printer);
+
+	TextCheckDirector checker(L"Hello!");
+	m_pBiogramWorld->initDirector(checker);
 
 
 	return 0;
@@ -78,7 +87,7 @@ int BiogramApp::update()
 
 int BiogramApp::render()
 {
-	System::getInstance().getGraphic().
+	System::getInstance().getObjectViewer().
 		drawBiogramWorld(*m_pBiogramWorld);
 
 
@@ -93,7 +102,7 @@ int BiogramApp::render()
 	oss << 1.0 / m_elapsedTime.count() << "fps";
 
 	System::getInstance().getGraphic().
-		drawText(oss.str(), Utility::Point(winSize.width / 2, 8),
+		drawText(oss.str(), Utility::Point(winSize.width / 2 - 200, 8),
 			true, Utility::Color::BLACK);
 
 

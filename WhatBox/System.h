@@ -5,6 +5,7 @@
 #include "SystemInfo.h"
 #include "UserInputController.h"
 #include "Graphic.h"
+#include "ObjectViewer.h"
 
 
 
@@ -53,6 +54,7 @@ protected:
 	std::shared_ptr<SystemInfo> m_pSystemInfo;
 	std::shared_ptr<UserInputController> m_pUserInputController;
 	std::shared_ptr<Graphic> m_pGraphic;
+	std::shared_ptr<ObjectViewer> m_pObjectViewer;
 
 
 public:
@@ -63,5 +65,6 @@ public:
 	SystemInfo& getSystemInfo();
 	UserInputController& getUserInputController();
 	Graphic& getGraphic();
+	ObjectViewer& getObjectViewer();
 };
 

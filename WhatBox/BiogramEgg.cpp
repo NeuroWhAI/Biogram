@@ -100,47 +100,43 @@ int BiogramEgg::buildBiogram(std::vector<UnitPtr>* pUnitOut,
 	int sequence = 0;
 	// * DNA에서 읽을 비트의 수를 나타냄
 	size_t bufferSize = 16;
-	// * DNA에서 읽은 비트데이터를 가지고 있음
-	std::vector<bool> partialData;
-	size_t readCount = 0;
+	// * DNA에서 읽을 위치를 나타냄
+	auto currentPos = data.cbegin();
+	// * DNA 길이
+	const size_t dnaLength = data.size();
 	// * DNA 길이의 반
-	const size_t halfSize = data.size() / 2;
+	const size_t halfSize = dnaLength / 2;
 
-	for (const auto& bit : data)
+	for (size_t d = 0; d < dnaLength; d += bufferSize)
 	{
-		// 한 비트를 읽음
-		partialData.emplace_back(bit);
+		currentPos = data.cbegin() + d;
+
+		// 읽어야 할 만큼 남은 길이가 충분하지 않으면 종료
+		if (d + bufferSize > dnaLength) break;
 
 		// 만약 DNA의 반을 읽었으면 Param연결 단계(-1)로 설정
 		// 이때부터 readCount는 증가하지 않는다.
-		if (readCount < halfSize)
-			++readCount;
-		else if(sequence == 0)
+		if(d >= halfSize
+			&&
+			sequence == 0)
 		{
-			m_pUnitOnProcess = pUnitOut->at(0);
+			m_pUnitOnProcess = (*pUnitOut)[0];
 
 			sequence = -1;
 		}
 		
-		// 읽어야할 만큼 DNA을 읽었으면
-		if (partialData.size() >= bufferSize)
-		{
-			// 데이터를 처리하고
-			// 다음 단계에서 필요한 데이터 비트 수를 받는다.
-			bufferSize = proceedData(sequence,
-				partialData,
-				pUnitOut,
-				pFlowLinkerOut,
-				pParamLinkerOut,
-				pCmdOperator);
-			
-			// 데이터 초기화
-			partialData.clear();
+		// 데이터를 처리하고
+		// 다음 단계에서 필요한 데이터 비트 수를 받는다.
+		bufferSize = proceedData(sequence,
+			currentPos, bufferSize,
+			pUnitOut,
+			pFlowLinkerOut,
+			pParamLinkerOut,
+			pCmdOperator);
 
-			// 만약 다음 단계에서 필요한 데이터 비트 수가 없다면
-			// DNA 해석작업을 종료한다.
-			if (bufferSize <= 0) break;
-		}
+		// 만약 다음 단계에서 필요한 데이터 비트 수가 없다면
+		// DNA 해석작업을 종료한다.
+		if (bufferSize <= 0) break;
 	}
 
 
@@ -154,12 +150,17 @@ int BiogramEgg::buildBiogram(std::vector<UnitPtr>* pUnitOut,
 //###############################################################
 
 size_t BiogramEgg::proceedData(int& sequence,
-	const std::vector<bool>& data,
+	std::vector<bool>::const_iterator begin,
+	size_t bufferSize,
 	std::vector<UnitPtr>* pUnitOut,
 	std::vector<LinkerPtr>* pFlowLinkerOut,
 	std::vector<LinkerPtr>* pParamLinkerOut,
 	CmdOperatorPtr pCmdOperator)
 {
+	int dataInt = toInt(begin, bufferSize);
+	int dataBitTotal = bitTotal(begin, bufferSize);
+
+
 	switch (sequence)
 	{
 	case -2: {
@@ -173,7 +174,7 @@ size_t BiogramEgg::proceedData(int& sequence,
 		{
 			// data는 16비트일 것이므로 최대값은 32767라는 것을
 			// 이용해서 최대값의 반을 넘는 수는 음수로 만든다.
-			int relativeIndex = toInt(data);
+			int relativeIndex = dataInt;
 			if (relativeIndex > 32767 / 2)
 			{
 				relativeIndex -= 32767 / 2;
@@ -216,7 +217,7 @@ size_t BiogramEgg::proceedData(int& sequence,
 
 	case -1: {
 		// 다음단계(-2)에서 쓸 값을 받는다.
-		m_dataFromPast = bitTotal(data) % 4;
+		m_dataFromPast = dataBitTotal % 4;
 
 		sequence = -2;
 	} return 16;
@@ -228,7 +229,7 @@ size_t BiogramEgg::proceedData(int& sequence,
 		*/
 
 		// 새로 만들 Unit의 좌표는 선택된 Unit의 좌표에대해 상대적이다.
-		float angle = static_cast<float>(toInt(data));
+		float angle = static_cast<float>(dataInt);
 		float length = angle / 32767.0f * 16.0f;
 		Utility::PointF pos(cosf(angle) * length, sinf(angle) * length);
 		if (m_pUnitOnProcess)
@@ -264,7 +265,7 @@ size_t BiogramEgg::proceedData(int& sequence,
 
 		if (m_pUnitOnProcess)
 		{
-			int cmdNum = toInt(data) % pCmdOperator->getCmdFunctionCount();
+			int cmdNum = dataInt % pCmdOperator->getCmdFunctionCount();
 			m_pUnitOnProcess->setCmdNumber(cmdNum);
 		}
 
@@ -281,7 +282,7 @@ size_t BiogramEgg::proceedData(int& sequence,
 		{
 			// 얻은 값을 바로 쓰는게 아니라
 			// 최대값의 반을 기준으로 음수나 양수로 변환한다.
-			int memory = toInt(data);
+			int memory = dataInt;
 			if (memory > 32767 / 2)
 			{
 				memory -= 32767 / 2;
@@ -301,7 +302,7 @@ size_t BiogramEgg::proceedData(int& sequence,
 		* Param 연결 단계(4)로 갈지 처음 단계(0)로 갈지 선택한다.
 		*/
 
-		m_dataFromPast = bitTotal(data);
+		m_dataFromPast = dataBitTotal;
 		if (m_dataFromPast < 4)
 		{
 			sequence = 4;
@@ -323,7 +324,7 @@ size_t BiogramEgg::proceedData(int& sequence,
 		if (m_pUnitOnProcess)
 		{
 			// 새 Unit의 위치를 계산한다.
-			float angle = static_cast<float>(toInt(data));
+			float angle = static_cast<float>(dataInt);
 			float length = angle / 32767.0f * 8.0f;
 			Utility::PointF pos(cosf(angle) * length, sinf(angle) * length);
 			pos += m_pUnitOnProcess->getLocation();
@@ -363,16 +364,16 @@ size_t BiogramEgg::proceedData(int& sequence,
 }
 
 
-int BiogramEgg::toInt(const std::vector<bool>& data)
+int BiogramEgg::toInt(std::vector<bool>::const_iterator begin,
+	size_t size)
 {
 	int result = 0;
 
-	int count = 0;
-	for (const auto& bit : data)
+	for (size_t i = 0; i < size; ++i)
 	{
-		result |= ((bit ? 1 : 0) << count);
+		result |= ((*begin ? 1 : 0) << i);
 
-		++count;
+		++begin;
 	}
 
 
@@ -380,14 +381,17 @@ int BiogramEgg::toInt(const std::vector<bool>& data)
 }
 
 
-int BiogramEgg::bitTotal(const std::vector<bool>& data)
+int BiogramEgg::bitTotal(std::vector<bool>::const_iterator begin,
+	size_t size)
 {
 	int result = 0;
 
-	for (const auto& bit : data)
+	for (size_t i = 0; i < size; ++i)
 	{
-		if (bit)
+		if (*begin)
 			++result;
+
+		++begin;
 	}
 
 
