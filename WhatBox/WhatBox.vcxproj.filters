@@ -595,6 +595,9 @@
     <Filter Include="Biogram\Model\Biogram\Director\TextCheckDirector">
       <UniqueIdentifier>{006d6ac6-6565-479e-b456-97777b819a40}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Biogram\Model\Biogram\ObjectPool">
+      <UniqueIdentifier>{46865df5-f920-470e-9ecd-b2d3bf1095ec}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -1154,6 +1157,9 @@
     </ClCompile>
     <ClCompile Include="TextCheckDirector.cpp">
       <Filter>Biogram\Model\Biogram\Director\TextCheckDirector</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjectPool.cpp">
+      <Filter>Biogram\Model\Biogram\ObjectPool</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -1760,6 +1766,9 @@
     <ClInclude Include="TextCheckDirector.h">
       <Filter>Biogram\Model\Biogram\Director\TextCheckDirector</Filter>
     </ClInclude>
+    <ClInclude Include="ObjectPool.h">
+      <Filter>Biogram\Model\Biogram\ObjectPool</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt">
@@ -1782,6 +1791,9 @@
     </None>
     <None Include="BiogramWorld.inl">
       <Filter>Biogram\Model\Biogram\BiogramWorld</Filter>
+    </None>
+    <None Include="ObjectPool.inl">
+      <Filter>Biogram\Model\Biogram\ObjectPool</Filter>
     </None>
   </ItemGroup>
 </Project>

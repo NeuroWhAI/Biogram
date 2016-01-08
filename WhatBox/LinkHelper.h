@@ -4,6 +4,8 @@
 
 class Unit;
 class Linker;
+template <typename T>
+class ObjectPool;
 
 
 
@@ -59,7 +61,8 @@ public: // 실행흐름 연결
 	// * @Return: 연결을 위해 새로 생성한 Linker. 연결실패시 nullptr.
 	static LinkerPtr ConnectFlow(
 		UnitPtr pInUnit,
-		UnitPtr pOutUnit);
+		UnitPtr pOutUnit,
+		ObjectPool<Linker>* pool = nullptr);
 
 
 	// * pInLinker X-Flow-X> pOutUnit
@@ -98,7 +101,8 @@ public: // 인자전달 연결
 	// * @Return: 연결을 위해 새로 생성한 Linker. 연결실패시 nullptr
 	static LinkerPtr ConnectParam(
 		UnitPtr pInUnit,
-		UnitPtr pOutUnit, int paramIndex);
+		UnitPtr pOutUnit, int paramIndex,
+		ObjectPool<Linker>* pool = nullptr);
 
 
 	// * pInUnit X-Param-X> pOutLinker

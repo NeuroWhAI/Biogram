@@ -10,6 +10,7 @@
 #include "Memory.h"
 #include "ComPort.h"
 #include "BiogramDNA.h"
+#include "ObjectPool.h"
 
 #include "BiogramEgg.h"
 
@@ -40,7 +41,10 @@
 
 
 BiogramCage::BiogramCage()
-	: m_elapsedTime(0.0)
+	: m_pUnitPool(std::make_shared<ObjectPool<Unit>>())
+	, m_pLinkerPool(std::make_shared<ObjectPool<Linker>>())
+	
+	, m_elapsedTime(0.0)
 
 	, m_DNA(nullptr)
 	, m_geneScore(0.0)
@@ -149,7 +153,9 @@ int BiogramCage::buildBiogramWithoutClear(const BiogramDNA& dna)
 	std::vector<std::shared_ptr<Linker>> pFlowLinkerList;
 	std::vector<std::shared_ptr<Linker>> pParamLinkerList;
 
-	bioMaker.buildBiogram(&pUnitList,
+	bioMaker.buildBiogram(*m_pUnitPool,
+		*m_pLinkerPool,
+		&pUnitList,
 		&pFlowLinkerList, &pParamLinkerList,
 		m_pCmdOperator);
 
@@ -187,6 +193,23 @@ int BiogramCage::clearWithoutComPort()
 
 	m_pCmdOperator->clear();
 
+
+	// 객체를 재활용하기 위해 초기화 후 Pool로 회수
+	for (auto& linker : m_pFlowLinkerList)
+	{
+		linker->clear();
+		m_pLinkerPool->releaseObject(linker);
+	}
+	for (auto& linker : m_pParamLinkerList)
+	{
+		linker->clear();
+		m_pLinkerPool->releaseObject(linker);
+	}
+	for (auto& unit : m_pUnitList)
+	{
+		unit->clear();
+		m_pUnitPool->releaseObject(unit);
+	}
 
 	m_pFlowLinkerList.clear();
 	m_pParamLinkerList.clear();
@@ -251,7 +274,7 @@ bool BiogramCage::removeUnit(std::shared_ptr<Unit> pUnit)
 	auto outParamLinkerList = pUnit->getOutParamLinkerList();
 	for (auto& linker : outParamLinkerList)
 	{
-		LinkHelper::DisconnectParam(pUnit, linker);
+		LinkHelper::DisconnectParam(pUnit, linker.lock());
 	}
 
 

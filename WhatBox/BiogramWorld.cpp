@@ -52,6 +52,7 @@ BiogramWorld::BiogramWorld()
 	, m_maxTimePerGeneration(5000.0)
 	, m_generationNumber(0)
 
+	, m_focusedCageNum(0)
 	, m_pSharedMemory(std::make_shared<Memory>())
 {
 	
@@ -130,8 +131,13 @@ int BiogramWorld::initDirector(const T_DIRECTOR& originalDirector);
 
 int BiogramWorld::update()
 {
-	// 1배속 초과에서는 전체 단위작업을 그만큼 반복하도록 함.
+	// 사용자 입력 처리
+	updateTimeControl();
 
+	updateCageFocus();
+
+
+	// 1배속 초과에서는 전체 단위작업을 그만큼 반복하도록 함.
 
 	// * 실제 시간속도
 	const double timeSpeed = m_pTimeManager->getPitch();
@@ -139,7 +145,6 @@ int BiogramWorld::update()
 	// 1배속을 초과하면 단위시간(1)로 바꿔서 단위작업을 하도록 함.
 	if (timeSpeed > 1.0)
 		m_pTimeManager->setPitch(1.0);
-
 
 	// 배속만큼 반복
 	for (double timeGage = 0.0; timeGage < timeSpeed;
@@ -162,7 +167,6 @@ int BiogramWorld::update()
 		// 다음 세대로 갈 준비가 되었으면 건너감
 		checkReadyForNext();
 	}
-
 
 	// 원래 배속으로 복구
 	m_pTimeManager->setPitch(timeSpeed);
@@ -224,8 +228,13 @@ int BiogramWorld::stepToNextGeneration()
 	{
 		auto dna = m_pCageList[i]->getDNA();
 
-		if(dna)
-			nextGeneList.emplace_back(*dna);
+		if (dna)
+		{
+			BiogramDNA newDNA(*dna);
+			newDNA.mutate(static_cast<unsigned>(std::time(nullptr)),
+				0.1 / parentCount * i);
+			nextGeneList.emplace_back(newDNA);
+		}
 		else
 		{
 			BiogramDNA randomDNA(static_cast<unsigned long>(std::time(nullptr)));
@@ -258,9 +267,11 @@ int BiogramWorld::stepToNextGeneration()
 				newDNA.combine(*parent1);
 			}
 
+
 			// 돌연변이
 			newDNA.mutate(static_cast<unsigned>(std::time(nullptr)),
-				1.0);
+				2.0);
+
 
 			nextGeneList.emplace_back(newDNA);
 		}
@@ -299,7 +310,31 @@ int BiogramWorld::stepToNextGeneration()
 
 //###############################################################
 
-int BiogramWorld::updateTimeSpeed()
+int BiogramWorld::updateCageFocus()
+{
+	if (System::getInstance().getUserInputController().
+		onKeyDown(0xBC/*<*/))
+	{
+		if (m_focusedCageNum <= 0)
+			m_focusedCageNum = m_pCageList.size() - 1;
+		else
+			--m_focusedCageNum;
+	}
+	else if (System::getInstance().getUserInputController().
+		onKeyDown(0xBE/*>*/))
+	{
+		if (m_focusedCageNum < m_pCageList.size() - 1)
+			++m_focusedCageNum;
+		else
+			m_focusedCageNum = 0;
+	}
+
+
+	return 0;
+}
+
+
+int BiogramWorld::updateTimeControl()
 {
 	if (System::getInstance().getUserInputController().
 		onKeyDown(0xdb/*[*/))
@@ -313,6 +348,12 @@ int BiogramWorld::updateTimeSpeed()
 	}
 
 
+	return 0;
+}
+
+
+int BiogramWorld::updateTimeSpeed()
+{
 	// 총 경과시간 누적
 	m_pTimeManager->update();
 
@@ -379,11 +420,11 @@ int BiogramWorld::evaluateCage()
 			// 아니면 다른 연결이 가까운 만큼 점수를 줌
 			if (bExist)
 			{
-				score += 11.0;
+				score += 2.0;
 			}
 			else
 			{
-				score += 10.0 / static_cast<double>(offset);
+				score += 1.0 / static_cast<double>(offset);
 			}
 		}
 
@@ -452,6 +493,12 @@ double BiogramWorld::getTimeSpeed() const
 double BiogramWorld::getElapsedTime() const
 {
 	return m_pTimeManager->getElapsedTime();
+}
+
+
+size_t BiogramWorld::getFocusedCageNumber() const
+{
+	return m_focusedCageNum;
 }
 
 

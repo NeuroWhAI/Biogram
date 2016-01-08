@@ -4,6 +4,7 @@
 #include "Linker.h"
 #include "LinkHelper.h"
 #include "CommandOperator.h"
+#include "ObjectPool.h"
 
 using UnitPtr = BiogramEgg::UnitPtr;
 using LinkerPtr = BiogramEgg::LinkerPtr;
@@ -71,13 +72,15 @@ int BiogramEgg::setDNA(const BiogramDNA& dna)
 }
 
 
-int BiogramEgg::buildBiogram(std::vector<UnitPtr>* pUnitOut,
+int BiogramEgg::buildBiogram(ObjectPool<Unit>& unitPool,
+	ObjectPool<Linker>& linkerPool,
+	std::vector<UnitPtr>* pUnitOut,
 	std::vector<LinkerPtr>* pFlowLinkerOut,
 	std::vector<LinkerPtr>* pParamLinkerOut,
 	CmdOperatorPtr pCmdOperator)
 {
 	// 처음은 None Unit을 두고 시작
-	m_pUnitOnProcess = std::make_shared<Unit>();
+	m_pUnitOnProcess = unitPool.acquireObject();
 	m_pUnitOnProcess->setLocation(0.0f, 0.0f);
 	m_pUnitOnProcess->setCmdNumber(0);
 	// Unit 목록에 등록
@@ -87,7 +90,7 @@ int BiogramEgg::buildBiogram(std::vector<UnitPtr>* pUnitOut,
 	pCmdOperator->addUnit(m_pUnitOnProcess);
 
 	// 첫번째 Unit을 입력으로하는 Flow Linker 생성후 연결
-	m_pLinkerOnProcess = std::make_shared<Linker>();
+	m_pLinkerOnProcess = linkerPool.acquireObject();
 	LinkHelper::ConnectFlow(m_pUnitOnProcess, m_pLinkerOnProcess);
 	// Flow Linker 목록에 등록
 	pFlowLinkerOut->emplace_back(m_pLinkerOnProcess);
@@ -129,6 +132,8 @@ int BiogramEgg::buildBiogram(std::vector<UnitPtr>* pUnitOut,
 		// 다음 단계에서 필요한 데이터 비트 수를 받는다.
 		bufferSize = proceedData(sequence,
 			currentPos, bufferSize,
+			unitPool,
+			linkerPool,
 			pUnitOut,
 			pFlowLinkerOut,
 			pParamLinkerOut,
@@ -152,6 +157,8 @@ int BiogramEgg::buildBiogram(std::vector<UnitPtr>* pUnitOut,
 size_t BiogramEgg::proceedData(int& sequence,
 	std::vector<bool>::const_iterator begin,
 	size_t bufferSize,
+	ObjectPool<Unit>& unitPool,
+	ObjectPool<Linker>& linkerPool,
 	std::vector<UnitPtr>* pUnitOut,
 	std::vector<LinkerPtr>* pFlowLinkerOut,
 	std::vector<LinkerPtr>* pParamLinkerOut,
@@ -188,7 +195,8 @@ size_t BiogramEgg::proceedData(int& sequence,
 				// Param Linker 생성 및 연결
 				auto paramLinker = LinkHelper::ConnectParam(relativeUnit,
 					m_pUnitOnProcess,
-					m_dataFromPast % m_pUnitOnProcess->getParamCount());
+					m_dataFromPast % m_pUnitOnProcess->getParamCount(),
+					&linkerPool);
 
 				// Param Linker 목록에 추가
 				pParamLinkerOut->emplace_back(paramLinker);
@@ -236,14 +244,14 @@ size_t BiogramEgg::proceedData(int& sequence,
 			pos += m_pUnitOnProcess->getLocation();
 
 		// 새 Unit 생성 후 위치 설정
-		auto unit = std::make_shared<Unit>();
+		auto unit = unitPool.acquireObject();
 		unit->setLocation(pos);
 
 		if (m_pLinkerOnProcess)
 			LinkHelper::ConnectFlow(m_pLinkerOnProcess, unit);
 
 		// 다음을 위한 새 Flow Linker를 생성후 연결해둠
-		m_pLinkerOnProcess = std::make_shared<Linker>();
+		m_pLinkerOnProcess = linkerPool.acquireObject();
 		LinkHelper::ConnectFlow(unit, m_pLinkerOnProcess);
 		// Flow Linker 목록에 추가
 		pFlowLinkerOut->emplace_back(m_pLinkerOnProcess);
@@ -330,7 +338,7 @@ size_t BiogramEgg::proceedData(int& sequence,
 			pos += m_pUnitOnProcess->getLocation();
 
 			// 새 Unit을 생성하고 설정한다.
-			auto unit = std::make_shared<Unit>();
+			auto unit = unitPool.acquireObject();
 			unit->setLocation(pos);
 			unit->setCmdNumber(0);
 			unit->setMemory(static_cast<double>(angle / 32767.0f) * 64.0);
@@ -340,7 +348,8 @@ size_t BiogramEgg::proceedData(int& sequence,
 			// 새 Param Linker를 생성하고 연결한다.
 			auto paramLinker = LinkHelper::ConnectParam(unit,
 				m_pUnitOnProcess,
-				m_dataFromPast % m_pUnitOnProcess->getParamCount());
+				m_dataFromPast % m_pUnitOnProcess->getParamCount(),
+				&linkerPool);
 			// Param Linker 목록에 추가
 			pParamLinkerOut->emplace_back(paramLinker);
 			

@@ -67,7 +67,7 @@ int WhatboxObjectViewer::drawBiogramWorld(const BiogramWorld& world) const
 	oss << L"G: " << world.getGenerationNumber() << std::endl;
 
 
-	// 각 Cage 그리기
+	// 선택된 Cage와 그 Cage에 연결된 Device 그리기
 	double totalScore = 0.0;
 	const auto& cageList = world.getCageList();
 	for (auto& cage : cageList)
@@ -76,19 +76,26 @@ int WhatboxObjectViewer::drawBiogramWorld(const BiogramWorld& world) const
 	}
 	oss << L"Cage Count: " << cageList.size() << std::endl;
 	oss << L"Total Score: " << totalScore << std::endl;
-	if (cageList.size() > 0)
-		drawBiogramCage(*cageList[0]);
 
+	size_t cageNum = world.getFocusedCageNumber();
+	oss << L"Current Cage: " << cageNum + 1 << std::endl;
 
-	// Device 그리기
 	const auto& deviceList = world.getDeviceList();
-	/*for (auto& device : deviceList)
+
+	if (cageNum < cageList.size())
 	{
-		device->render();
-	}*/
+		// Cage 그리기
+		drawBiogramCage(*cageList[cageNum]);
+
+
+		// Device 그리기
+		for (auto& device : deviceList)
+		{
+			if (device->getConnectedCage() == cageList[cageNum])
+				device->render();
+		}
+	}
 	oss << L"Device Count: " << deviceList.size() << std::endl;
-	if (deviceList.size() > 0)
-		deviceList[0]->render();
 
 
 	// 시간속도 및 경과시간 표시

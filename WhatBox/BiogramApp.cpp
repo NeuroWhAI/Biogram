@@ -51,7 +51,7 @@ BiogramApp::~BiogramApp()
 
 int BiogramApp::init()
 {
-	m_pBiogramWorld->initWorld(32, 5000.0);
+	m_pBiogramWorld->initWorld(32, 10000.0);
 
 	TextPrinterDevice printer;
 	m_pBiogramWorld->initDeviceForeachCage(printer);

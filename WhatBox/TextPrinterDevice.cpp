@@ -33,7 +33,7 @@
 TextPrinterDevice::TextPrinterDevice()
 	: Device({
 		{0, 100},
-		{1, 101} })
+		{1, 200} })
 {
 
 }

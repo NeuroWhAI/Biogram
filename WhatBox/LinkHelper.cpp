@@ -2,6 +2,7 @@
 
 #include "Unit.h"
 #include "Linker.h"
+#include "ObjectPool.h"
 
 using UnitPtr = LinkHelper::UnitPtr;
 using LinkerPtr = LinkHelper::LinkerPtr;
@@ -58,9 +59,18 @@ bool LinkHelper::ConnectFlow(
 
 LinkerPtr LinkHelper::ConnectFlow(
 	UnitPtr pInUnit,
-	UnitPtr pOutUnit)
+	UnitPtr pOutUnit,
+	ObjectPool<Linker>* pool)
 {
-	auto pNewLinker = std::make_shared<Linker>(pInUnit, pOutUnit);
+	LinkerPtr pNewLinker;
+	if (pool == nullptr)
+		pNewLinker = std::make_shared<Linker>(pInUnit, pOutUnit);
+	else
+	{
+		pNewLinker = pool->acquireObject();
+		pNewLinker->setInUnit(pInUnit);
+		pNewLinker->setOutUnit(pOutUnit);
+	}
 
 	pInUnit->setOutLinker(pNewLinker);
 	pOutUnit->setInLinker(pNewLinker);
@@ -163,9 +173,18 @@ bool LinkHelper::ConnectParam(
 
 LinkerPtr LinkHelper::ConnectParam(
 	UnitPtr pInUnit,
-	UnitPtr pOutUnit, int paramIndex)
+	UnitPtr pOutUnit, int paramIndex,
+	ObjectPool<Linker>* pool)
 {
-	auto pNewLinker = std::make_shared<Linker>(pInUnit, pOutUnit);
+	LinkerPtr pNewLinker;
+	if (pool == nullptr)
+		pNewLinker = std::make_shared<Linker>(pInUnit, pOutUnit);
+	else
+	{
+		pNewLinker = pool->acquireObject();
+		pNewLinker->setInUnit(pInUnit);
+		pNewLinker->setOutUnit(pOutUnit);
+	}
 
 	pInUnit->addOutParamLinker(pNewLinker);
 	pOutUnit->setParamLinker(pNewLinker, paramIndex);

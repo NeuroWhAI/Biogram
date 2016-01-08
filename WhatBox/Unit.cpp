@@ -32,15 +32,8 @@ Unit::Unit()
 	: m_cmdNumber(0)
 	, m_memory(0.0)
 
-	, m_pInFlowLinker(nullptr)
-	, m_pOutFlowLinker(nullptr)
-
 	, m_timeGage(0.0)
 {
-	for (auto& paramLinker : m_pParamLinkers)
-		paramLinker = nullptr;
-
-
 	m_mass = 1.0 + m_cmdNumber;
 
 	updateRadius();
@@ -54,19 +47,25 @@ Unit::~Unit()
 
 //###############################################################
 
-void Unit::updateRadius()
+int Unit::clear()
 {
-	m_radius = 0.0625f * m_cmdNumber + 4.0f;
+	m_pInFlowLinker.reset();
+	m_pOutFlowLinker.reset();
+
+	for (auto& linker : m_pParamLinkers)
+		linker.reset();
+
+	m_pOutParamLinkers.clear();
+
+
+	return 0;
 }
 
 //###############################################################
 
-int Unit::update(double timePitch)
+void Unit::updateRadius()
 {
-	
-
-
-	return 0;
+	m_radius = 0.0625f * m_cmdNumber + 4.0f;
 }
 
 //###############################################################
@@ -127,13 +126,13 @@ int Unit::setOutLinker(std::shared_ptr<Linker> pOutLinker)
 
 std::shared_ptr<Linker> Unit::getInLinker() const
 {
-	return m_pInFlowLinker;
+	return m_pInFlowLinker.lock();
 }
 
 
 std::shared_ptr<Linker> Unit::getOutLinker() const
 {
-	return m_pOutFlowLinker;
+	return m_pOutFlowLinker.lock();
 }
 
 //---------------------------------------------------------------
@@ -155,7 +154,7 @@ int Unit::setParamLinker(std::shared_ptr<Linker> pParamLinker, int index)
 
 std::shared_ptr<Linker> Unit::getParamLinker(int index) const
 {
-	return m_pParamLinkers[index];
+	return m_pParamLinkers[index].lock();
 }
 
 //---------------------------------------------------------------
@@ -171,11 +170,26 @@ bool Unit::addOutParamLinker(std::shared_ptr<Linker> pOutParamLinker)
 
 bool Unit::removeOutParamLinker(std::shared_ptr<Linker> pOutParamLinker)
 {
-	return Utility::removeFrom(&m_pOutParamLinkers, pOutParamLinker);
+	size_t count = 0;
+	for (auto& linkerPtr : m_pOutParamLinkers)
+	{
+		if (linkerPtr.lock() == pOutParamLinker)
+		{
+			m_pOutParamLinkers.erase(m_pOutParamLinkers.begin() + count);
+			
+			
+			return true;
+		}
+
+		++count;
+	}
+
+
+	return false;
 }
 
 
-std::vector<std::shared_ptr<Linker>> Unit::getOutParamLinkerList() const
+const std::vector<std::weak_ptr<Linker>>& Unit::getOutParamLinkerList() const
 {
 	return m_pOutParamLinkers;
 }
@@ -189,9 +203,9 @@ std::shared_ptr<Unit> Unit::getRelativeFlowUnit(int relativeIndex) const
 
 	if (relativeIndex < 0)
 	{
-		if (m_pInFlowLinker)
+		if (!m_pInFlowLinker.expired())
 		{
-			pNext = m_pInFlowLinker->getInUnit().get();
+			pNext = m_pInFlowLinker.lock()->getInUnit().get();
 
 			for (int i = -1; i > relativeIndex && pNext != nullptr;
 			--i)
@@ -210,9 +224,9 @@ std::shared_ptr<Unit> Unit::getRelativeFlowUnit(int relativeIndex) const
 	}
 	else if (relativeIndex > 0)
 	{
-		if (m_pOutFlowLinker)
+		if (!m_pOutFlowLinker.expired())
 		{
-			pNext = m_pOutFlowLinker->getOutUnit().get();
+			pNext = m_pOutFlowLinker.lock()->getOutUnit().get();
 
 			for (int i = 1; i < relativeIndex && pNext != nullptr;
 			++i)
@@ -244,22 +258,22 @@ std::shared_ptr<Unit> Unit::getRelativeFlowUnit(int relativeIndex) const
 
 std::shared_ptr<Unit> Unit::getSharedPtrOfThis() const
 {
-	if (m_pInFlowLinker && m_pInFlowLinker->getOutUnit())
-		return m_pInFlowLinker->getOutUnit();
-	else if (m_pOutFlowLinker && m_pOutFlowLinker->getInUnit())
-		return m_pOutFlowLinker->getInUnit();
+	if (!m_pInFlowLinker.expired() && m_pInFlowLinker.lock()->getOutUnit())
+		return m_pInFlowLinker.lock()->getOutUnit();
+	else if (!m_pOutFlowLinker.expired() && m_pOutFlowLinker.lock()->getInUnit())
+		return m_pOutFlowLinker.lock()->getInUnit();
 	else
 	{
 		for (const auto& pLinker : m_pParamLinkers)
 		{
-			if (pLinker && pLinker->getOutUnit())
-				return pLinker->getOutUnit();
+			if (!pLinker.expired() && pLinker.lock()->getOutUnit())
+				return pLinker.lock()->getOutUnit();
 		}
 
 		for (const auto& pLinker : m_pOutParamLinkers)
 		{
-			if (pLinker && pLinker->getInUnit())
-				return pLinker->getInUnit();
+			if (!pLinker.expired() && pLinker.lock()->getInUnit())
+				return pLinker.lock()->getInUnit();
 		}
 	}
 

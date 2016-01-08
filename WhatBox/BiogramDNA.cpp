@@ -156,7 +156,8 @@ int BiogramDNA::combine(const BiogramDNA& other)
 	// гуд║╠Б
 	size_t thisCount = m_data.size();
 	size_t otherCount = other.m_data.size();
-	std::uniform_int_distribution<> rangeDist(0, m_data.size() / 8);
+	std::uniform_int_distribution<> rangeDist(0,
+		((thisCount < otherCount) ? thisCount : otherCount) / 8);
 
 	for (size_t i = rangeDist(engine);
 	i < thisCount && i < otherCount;

@@ -57,6 +57,7 @@ protected:
 
 
 protected:
+	size_t m_focusedCageNum;
 	std::vector<BiogramCagePtr> m_pCageList;
 	MemoryPtr m_pSharedMemory;
 
@@ -86,6 +87,8 @@ protected:
 
 
 protected:
+	int updateCageFocus();
+	int updateTimeControl();
 	int updateTimeSpeed();
 	int updateCage();
 	int updateDevice();
@@ -102,6 +105,7 @@ public:
 	size_t getGenerationNumber() const;
 	double getTimeSpeed() const;
 	double getElapsedTime() const;
+	size_t getFocusedCageNumber() const;
 	const std::vector<BiogramCagePtr>& getCageList() const;
 	MemoryPtr getSharedMemory() const;
 	const std::vector<DevicePtr>& getDeviceList() const;

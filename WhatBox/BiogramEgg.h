@@ -8,6 +8,8 @@
 class Unit;
 class Linker;
 class CommandOperator;
+template <typename T>
+class ObjectPool;
 
 
 
@@ -61,7 +63,9 @@ protected:
 
 public:
 	int setDNA(const BiogramDNA& dna);
-	int buildBiogram(std::vector<UnitPtr>* pUnitOut,
+	int buildBiogram(ObjectPool<Unit>& unitPool,
+		ObjectPool<Linker>& linkerPool,
+		std::vector<UnitPtr>* pUnitOut,
 		std::vector<LinkerPtr>* pFlowLinkerOut,
 		std::vector<LinkerPtr>* pParamLinkerOut,
 		CmdOperatorPtr pCmdOperator);
@@ -71,6 +75,8 @@ protected:
 	size_t proceedData(int& sequence,
 		std::vector<bool>::const_iterator begin,
 		size_t bufferSize,
+		ObjectPool<Unit>& unitPool,
+		ObjectPool<Linker>& linkerPool,
 		std::vector<UnitPtr>* pUnitOut,
 		std::vector<LinkerPtr>* pFlowLinkerOut,
 		std::vector<LinkerPtr>* pParamLinkerOut,

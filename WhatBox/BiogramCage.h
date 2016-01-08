@@ -10,6 +10,8 @@ class CommandOperator;
 class Memory;
 class ComPort;
 class BiogramDNA;
+template <typename T>
+class ObjectPool;
 
 
 
@@ -49,6 +51,11 @@ class BiogramCage
 public:
 	BiogramCage();
 	virtual ~BiogramCage();
+
+
+protected:
+	std::shared_ptr<ObjectPool<Unit>> m_pUnitPool;
+	std::shared_ptr<ObjectPool<Linker>> m_pLinkerPool;
 
 
 protected:
