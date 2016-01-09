@@ -49,12 +49,14 @@ Unit::~Unit()
 
 int Unit::clear()
 {
-	m_pInFlowLinker.reset();
-	m_pOutFlowLinker.reset();
+	m_pInFlowLinker = nullptr;
+	m_pOutFlowLinker = nullptr;
 
 	for (auto& linker : m_pParamLinkers)
-		linker.reset();
+		linker = nullptr;
 
+	for (auto& linker : m_pOutParamLinkers)
+		linker = nullptr;
 	m_pOutParamLinkers.clear();
 
 
@@ -126,13 +128,13 @@ int Unit::setOutLinker(std::shared_ptr<Linker> pOutLinker)
 
 std::shared_ptr<Linker> Unit::getInLinker() const
 {
-	return m_pInFlowLinker.lock();
+	return m_pInFlowLinker;
 }
 
 
 std::shared_ptr<Linker> Unit::getOutLinker() const
 {
-	return m_pOutFlowLinker.lock();
+	return m_pOutFlowLinker;
 }
 
 //---------------------------------------------------------------
@@ -154,7 +156,7 @@ int Unit::setParamLinker(std::shared_ptr<Linker> pParamLinker, int index)
 
 std::shared_ptr<Linker> Unit::getParamLinker(int index) const
 {
-	return m_pParamLinkers[index].lock();
+	return m_pParamLinkers[index];
 }
 
 //---------------------------------------------------------------
@@ -173,7 +175,7 @@ bool Unit::removeOutParamLinker(std::shared_ptr<Linker> pOutParamLinker)
 	size_t count = 0;
 	for (auto& linkerPtr : m_pOutParamLinkers)
 	{
-		if (linkerPtr.lock() == pOutParamLinker)
+		if (linkerPtr == pOutParamLinker)
 		{
 			m_pOutParamLinkers.erase(m_pOutParamLinkers.begin() + count);
 			
@@ -189,7 +191,7 @@ bool Unit::removeOutParamLinker(std::shared_ptr<Linker> pOutParamLinker)
 }
 
 
-const std::vector<std::weak_ptr<Linker>>& Unit::getOutParamLinkerList() const
+const std::vector<std::shared_ptr<Linker>>& Unit::getOutParamLinkerList() const
 {
 	return m_pOutParamLinkers;
 }
@@ -203,9 +205,9 @@ std::shared_ptr<Unit> Unit::getRelativeFlowUnit(int relativeIndex) const
 
 	if (relativeIndex < 0)
 	{
-		if (!m_pInFlowLinker.expired())
+		if (m_pInFlowLinker)
 		{
-			pNext = m_pInFlowLinker.lock()->getInUnit().get();
+			pNext = m_pInFlowLinker->getInUnit().get();
 
 			for (int i = -1; i > relativeIndex && pNext != nullptr;
 			--i)
@@ -224,9 +226,9 @@ std::shared_ptr<Unit> Unit::getRelativeFlowUnit(int relativeIndex) const
 	}
 	else if (relativeIndex > 0)
 	{
-		if (!m_pOutFlowLinker.expired())
+		if (m_pOutFlowLinker)
 		{
-			pNext = m_pOutFlowLinker.lock()->getOutUnit().get();
+			pNext = m_pOutFlowLinker->getOutUnit().get();
 
 			for (int i = 1; i < relativeIndex && pNext != nullptr;
 			++i)
@@ -258,22 +260,22 @@ std::shared_ptr<Unit> Unit::getRelativeFlowUnit(int relativeIndex) const
 
 std::shared_ptr<Unit> Unit::getSharedPtrOfThis() const
 {
-	if (!m_pInFlowLinker.expired() && m_pInFlowLinker.lock()->getOutUnit())
-		return m_pInFlowLinker.lock()->getOutUnit();
-	else if (!m_pOutFlowLinker.expired() && m_pOutFlowLinker.lock()->getInUnit())
-		return m_pOutFlowLinker.lock()->getInUnit();
+	if (m_pInFlowLinker && m_pInFlowLinker->getOutUnit())
+		return m_pInFlowLinker->getOutUnit();
+	else if (m_pOutFlowLinker && m_pOutFlowLinker->getInUnit())
+		return m_pOutFlowLinker->getInUnit();
 	else
 	{
 		for (const auto& pLinker : m_pParamLinkers)
 		{
-			if (!pLinker.expired() && pLinker.lock()->getOutUnit())
-				return pLinker.lock()->getOutUnit();
+			if (pLinker && pLinker->getOutUnit())
+				return pLinker->getOutUnit();
 		}
 
 		for (const auto& pLinker : m_pOutParamLinkers)
 		{
-			if (!pLinker.expired() && pLinker.lock()->getInUnit())
-				return pLinker.lock()->getInUnit();
+			if (pLinker && pLinker->getInUnit())
+				return pLinker->getInUnit();
 		}
 	}
 

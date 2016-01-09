@@ -1,6 +1,8 @@
 #pragma once
 
 #include <vector>
+#include <ostream>
+#include <istream>
 
 
 
@@ -42,6 +44,8 @@ protected:
 
 
 public:
+	int saveTo(std::ostream& osr) const;
+	int loadFrom(std::istream& isr);
 	const std::vector<bool>& getData() const;
 
 

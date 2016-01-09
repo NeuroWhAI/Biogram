@@ -40,7 +40,7 @@ BiogramDNA::BiogramDNA(unsigned long seed)
 	// ·£´ý DNA »ý¼º
 	std::mt19937 engine(seed);
 	std::uniform_int_distribution<int> bitDist(0, 1);
-	std::uniform_int_distribution<int> sizeDist(1, 50000);
+	std::uniform_int_distribution<int> sizeDist(1, 100000);
 
 	int size = sizeDist(engine);
 
@@ -65,11 +65,52 @@ BiogramDNA::~BiogramDNA()
 
 //###############################################################
 
+int BiogramDNA::saveTo(std::ostream& osr) const
+{
+	if (osr.good())
+	{
+		osr << m_data.size() << std::endl;
+		for (const auto& bit : m_data)
+		{
+			osr << (bit ? '1' : '0');
+		}
+		osr << std::endl;
+	}
+
+
+	return 0;
+}
+
+
+int BiogramDNA::loadFrom(std::istream& isr)
+{
+	if (isr.good())
+	{
+		size_t size = 0;
+		isr >> size;
+
+		for (size_t i = 0; i < size; ++i)
+		{
+			char bit = 0;
+
+			do
+			{
+				isr.get(bit);
+			} while (bit == '\n');
+
+			m_data.emplace_back((bit != '0') ? true : false);
+		}
+	}
+
+
+	return 0;
+}
+
+
 const std::vector<bool>& BiogramDNA::getData() const
 {
 	return m_data;
 }
-
 
 //###############################################################
 

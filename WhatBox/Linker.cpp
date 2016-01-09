@@ -51,8 +51,8 @@ Linker::~Linker()
 
 int Linker::clear()
 {
-	m_pInUnit.reset();
-	m_pOutUnit.reset();
+	m_pInUnit = nullptr;
+	m_pOutUnit = nullptr;
 
 
 	return 0;
@@ -80,12 +80,12 @@ int Linker::setOutUnit(std::shared_ptr<Unit> pOutUnit)
 
 std::shared_ptr<Unit> Linker::getInUnit() const
 {
-	return m_pInUnit.lock();
+	return m_pInUnit;
 }
 
 
 std::shared_ptr<Unit> Linker::getOutUnit() const
 {
-	return m_pOutUnit.lock();
+	return m_pOutUnit;
 }
 

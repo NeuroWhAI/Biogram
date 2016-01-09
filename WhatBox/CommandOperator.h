@@ -45,9 +45,7 @@ public:
 
 
 protected:
-	std::unordered_set<std::shared_ptr<Unit>> m_pCurrentUnitList;
-	std::unordered_set<std::shared_ptr<Unit>> m_pRemovalUnitList;
-	std::unordered_set<std::shared_ptr<Unit>> m_pNextUnitList;
+	std::shared_ptr<Unit> m_pCurrentUnit;
 
 
 protected:

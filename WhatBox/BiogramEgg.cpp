@@ -118,7 +118,6 @@ int BiogramEgg::buildBiogram(ObjectPool<Unit>& unitPool,
 		if (d + bufferSize > dnaLength) break;
 
 		// 만약 DNA의 반을 읽었으면 Param연결 단계(-1)로 설정
-		// 이때부터 readCount는 증가하지 않는다.
 		if(d >= halfSize
 			&&
 			sequence == 0)
@@ -164,8 +163,9 @@ size_t BiogramEgg::proceedData(int& sequence,
 	std::vector<LinkerPtr>* pParamLinkerOut,
 	CmdOperatorPtr pCmdOperator)
 {
-	int dataInt = toInt(begin, bufferSize);
-	int dataBitTotal = bitTotal(begin, bufferSize);
+	const int dataInt = toInt(begin, bufferSize);
+	const int dataBitTotal = bitTotal(begin, bufferSize);
+	const int dataPartialInt = toPartialInt(begin, bufferSize);
 
 
 	switch (sequence)
@@ -188,35 +188,41 @@ size_t BiogramEgg::proceedData(int& sequence,
 				relativeIndex *= -1;
 			}
 
-			// 입력으로 할 Unit을 찾고 연결한다.
-			auto relativeUnit = m_pUnitOnProcess->getRelativeFlowUnit(relativeIndex);
-			if (relativeUnit)
+			// 접근하려는 상대좌표가 유효한 것 같으면
+			if (static_cast<size_t>(std::abs(relativeIndex)) < pUnitOut->size())
 			{
-				// Param Linker 생성 및 연결
-				auto paramLinker = LinkHelper::ConnectParam(relativeUnit,
-					m_pUnitOnProcess,
-					m_dataFromPast % m_pUnitOnProcess->getParamCount(),
-					&linkerPool);
-
-				// Param Linker 목록에 추가
-				pParamLinkerOut->emplace_back(paramLinker);
-
-
-				// 현재 선택된 Unit에 대해 Param 연결을 더 할지 여부를
-				// 이전 단계(-1)에서 받은 값으로부터 결정한다.
-				if (m_dataFromPast < 2)
+				// 입력으로 할 Unit을 찾고 연결한다.
+				auto relativeUnit = m_pUnitOnProcess->getRelativeFlowUnit(relativeIndex);
+				if (relativeUnit)
 				{
-					// 다음 Unit을 선택해 Param 연결작업을 하도록 한다.
-					m_pUnitOnProcess = m_pUnitOnProcess->getRelativeFlowUnit(1);
+					// Param Linker 생성 및 연결
+					auto paramLinker = LinkHelper::ConnectParam(relativeUnit,
+						m_pUnitOnProcess,
+						m_dataFromPast % m_pUnitOnProcess->getParamCount(),
+						&linkerPool);
 
-					sequence = -1;
-				}
-				else
-				{
-					// 현재 Unit에대해 한번 더 Param 연결을 시도한다.
-					m_dataFromPast = 3 - m_dataFromPast;
+					// Param Linker 목록에 추가
+					pParamLinkerOut->emplace_back(paramLinker);
 
-					sequence = -2;
+
+					// 현재 선택된 Unit에 대해 Param 연결을 더 할지 여부를
+					// 이전 단계(-1)에서 받은 값으로부터 결정한다.
+					if (m_dataFromPast < 2)
+					{
+						// 다음 Unit을 선택해 Param 연결작업을 하도록 한다.
+						auto nextLinker = m_pUnitOnProcess->getOutLinker();
+						if (nextLinker)
+							m_pUnitOnProcess = nextLinker->getOutUnit();
+
+						sequence = -1;
+					}
+					else
+					{
+						// 현재 Unit에대해 한번 더 Param 연결을 시도한다.
+						m_dataFromPast = 3 - m_dataFromPast;
+
+						sequence = -2;
+					}
 				}
 			}
 		}
@@ -263,7 +269,7 @@ size_t BiogramEgg::proceedData(int& sequence,
 		pUnitOut->emplace_back(unit);
 
 		sequence = 1;
-	} return 16;
+	} return 64;
 
 	case 1: {
 		/*
@@ -273,12 +279,12 @@ size_t BiogramEgg::proceedData(int& sequence,
 
 		if (m_pUnitOnProcess)
 		{
-			int cmdNum = dataInt % pCmdOperator->getCmdFunctionCount();
+			int cmdNum = dataPartialInt % pCmdOperator->getCmdFunctionCount();
 			m_pUnitOnProcess->setCmdNumber(cmdNum);
 		}
 
 		sequence = 2;
-	} return 16;
+	} return 64;
 
 	case 2: {
 		/*
@@ -290,10 +296,10 @@ size_t BiogramEgg::proceedData(int& sequence,
 		{
 			// 얻은 값을 바로 쓰는게 아니라
 			// 최대값의 반을 기준으로 음수나 양수로 변환한다.
-			int memory = dataInt;
-			if (memory > 32767 / 2)
+			int memory = dataPartialInt;
+			if (memory > 2040 / 2)
 			{
-				memory -= 32767 / 2;
+				memory -= 2040 / 2;
 				memory *= -1;
 			}
 
@@ -314,6 +320,9 @@ size_t BiogramEgg::proceedData(int& sequence,
 		if (m_dataFromPast < 4)
 		{
 			sequence = 4;
+
+
+			return 64;
 		}
 		else
 		{
@@ -332,8 +341,8 @@ size_t BiogramEgg::proceedData(int& sequence,
 		if (m_pUnitOnProcess)
 		{
 			// 새 Unit의 위치를 계산한다.
-			float angle = static_cast<float>(dataInt);
-			float length = angle / 32767.0f * 8.0f;
+			float angle = static_cast<float>(dataPartialInt);
+			float length = angle / 2040.0f * 8.0f;
 			Utility::PointF pos(cosf(angle) * length, sinf(angle) * length);
 			pos += m_pUnitOnProcess->getLocation();
 
@@ -341,7 +350,14 @@ size_t BiogramEgg::proceedData(int& sequence,
 			auto unit = unitPool.acquireObject();
 			unit->setLocation(pos);
 			unit->setCmdNumber(0);
-			unit->setMemory(static_cast<double>(angle / 32767.0f) * 64.0);
+			// 메모리 초깃값 설정
+			double memory = dataPartialInt;
+			if (memory > 2040 / 2)
+			{
+				memory -= 2040 / 2;
+				memory *= -1;
+			}
+			unit->setMemory(memory);
 			// Unit 목록에 추가
 			pUnitOut->emplace_back(unit);
 
@@ -363,6 +379,9 @@ size_t BiogramEgg::proceedData(int& sequence,
 				m_dataFromPast = 3 - m_dataFromPast;
 
 				sequence = 4;
+
+
+				return 64;
 			}
 		}
 	} return 16;
@@ -376,6 +395,10 @@ size_t BiogramEgg::proceedData(int& sequence,
 int BiogramEgg::toInt(std::vector<bool>::const_iterator begin,
 	size_t size)
 {
+	if (size > sizeof(int) * 8)
+		size = sizeof(int) * 8;
+
+
 	int result = 0;
 
 	for (size_t i = 0; i < size; ++i)
@@ -399,6 +422,23 @@ int BiogramEgg::bitTotal(std::vector<bool>::const_iterator begin,
 	{
 		if (*begin)
 			++result;
+
+		++begin;
+	}
+
+
+	return result;
+}
+
+
+int BiogramEgg::toPartialInt(std::vector<bool>::const_iterator begin,
+	size_t size)
+{
+	int result = 0;
+
+	for (size_t i = 0; i < size; ++i)
+	{
+		result += ((*begin ? 1 : 0) << (i % 8));
 
 		++begin;
 	}

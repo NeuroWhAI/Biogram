@@ -47,11 +47,11 @@ protected:
 
 protected:
 	// * 실행흐름 연결
-	std::weak_ptr<Linker> m_pInFlowLinker, m_pOutFlowLinker;
+	std::shared_ptr<Linker> m_pInFlowLinker, m_pOutFlowLinker;
 
 	// * 인자 연결
-	std::array<std::weak_ptr<Linker>, 2> m_pParamLinkers;
-	std::vector<std::weak_ptr<Linker>> m_pOutParamLinkers;
+	std::array<std::shared_ptr<Linker>, 2> m_pParamLinkers;
+	std::vector<std::shared_ptr<Linker>> m_pOutParamLinkers;
 
 	
 protected:
@@ -88,7 +88,7 @@ public:
 
 	bool addOutParamLinker(std::shared_ptr<Linker> pOutParamLinker);
 	bool removeOutParamLinker(std::shared_ptr<Linker> pOutParamLinker);
-	const std::vector<std::weak_ptr<Linker>>& getOutParamLinkerList() const;
+	const std::vector<std::shared_ptr<Linker>>& getOutParamLinkerList() const;
 
 	std::shared_ptr<Unit> getRelativeFlowUnit(int relativeIndex) const;
 	std::shared_ptr<Unit> getSharedPtrOfThis() const;

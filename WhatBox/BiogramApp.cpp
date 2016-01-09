@@ -51,12 +51,15 @@ BiogramApp::~BiogramApp()
 
 int BiogramApp::init()
 {
-	m_pBiogramWorld->initWorld(32, 10000.0);
+	if (!m_pBiogramWorld->initWorld(L"./Sample/World/auto-saved.biow"))
+	{
+		m_pBiogramWorld->initWorld(32, 10000.0);
+	}
 
 	TextPrinterDevice printer;
 	m_pBiogramWorld->initDeviceForeachCage(printer);
 
-	TextCheckDirector checker(L"Hello!");
+	TextCheckDirector checker(L"Hi!");
 	m_pBiogramWorld->initDirector(checker);
 
 
@@ -66,7 +69,7 @@ int BiogramApp::init()
 
 int BiogramApp::release()
 {
-
+	m_pBiogramWorld->saveWorld(L"./Sample/World/auto-saved.biow");
 
 
 	return 0;

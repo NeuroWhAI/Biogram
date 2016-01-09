@@ -2,6 +2,8 @@
 
 #include <memory>
 #include <vector>
+#include <ostream>
+#include <istream>
 
 class TimeManager;
 class BiogramCage;
@@ -68,8 +70,15 @@ protected:
 
 
 public:
+	bool saveTo(std::ostream& osr) const;
+	bool loadFrom(std::istream& isr);
+
+
+public:
 	int clear();
 	int clearForNextGeneration();
+	bool initWorld(const std::wstring& fileName);
+	bool saveWorld(const std::wstring& fileName);
 	int initWorld(size_t cageCount, double maxTimePerGeneration);
 	template <typename T_DEVICE>
 	int initDeviceForeachCage(const T_DEVICE& originalDevice);

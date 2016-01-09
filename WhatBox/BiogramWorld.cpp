@@ -4,6 +4,7 @@
 #include <ctime>
 #include <list>
 #include <random>
+#include <fstream>
 
 #include "System.h"
 
@@ -61,7 +62,71 @@ BiogramWorld::BiogramWorld()
 
 BiogramWorld::~BiogramWorld()
 {
+	this->clear();
+}
 
+//###############################################################
+
+bool BiogramWorld::saveTo(std::ostream& osr) const
+{
+	using std::endl;
+
+	/*
+	* 현재 세대를 다시 만들 수 있는 정도의 정보만 저장한다.
+	* 즉, 시간과 메모리 상태 같은건 저장하지 않는다.
+	*/
+
+	if (osr.good())
+	{
+		osr << m_maxTimePerGeneration << endl;
+		osr << m_generationNumber << endl;
+
+
+		osr << m_pCageList.size() << endl;
+		for (auto& cage : m_pCageList)
+		{
+			auto dna = cage->getDNA();
+			dna->saveTo(osr);
+		}
+
+
+		return true;
+	}
+
+
+	return false;
+}
+
+
+bool BiogramWorld::loadFrom(std::istream& isr)
+{
+	if (isr.good())
+	{
+		isr >> m_maxTimePerGeneration;
+		isr >> m_generationNumber;
+
+
+		size_t size = 0;
+		isr >> size;
+
+
+		for (size_t i = 0; i < size; ++i)
+		{
+			auto cage = std::make_shared<BiogramCage>();
+
+			BiogramDNA dna;
+			dna.loadFrom(isr);
+			cage->buildBiogram(dna);
+
+			this->addCage(cage);
+		}
+
+
+		return true;
+	}
+
+
+	return false;
 }
 
 //###############################################################
@@ -102,6 +167,46 @@ int BiogramWorld::clearForNextGeneration()
 }
 
 
+bool BiogramWorld::initWorld(const std::wstring& fileName)
+{
+	std::ifstream fr(fileName);
+
+	if (fr.is_open())
+	{
+		bool bResult = this->loadFrom(fr);
+
+
+		fr.close();
+
+
+		return bResult;
+	}
+
+
+	return false;
+}
+
+
+bool BiogramWorld::saveWorld(const std::wstring& fileName)
+{
+	std::ofstream fw(fileName);
+
+	if (fw.is_open())
+	{
+		bool bResult = this->saveTo(fw);
+
+
+		fw.close();
+
+
+		return bResult;
+	}
+
+
+	return false;
+}
+
+
 int BiogramWorld::initWorld(size_t cageCount, double maxTimePerGeneration)
 {
 	this->clear();
@@ -115,7 +220,7 @@ int BiogramWorld::initWorld(size_t cageCount, double maxTimePerGeneration)
 	{
 		auto cage = std::make_shared<BiogramCage>();
 
-		BiogramDNA randomDNA(static_cast<unsigned long>(std::time(nullptr)));
+		BiogramDNA randomDNA(static_cast<unsigned long>(std::time(nullptr) + rand()));
 		cage->buildBiogram(randomDNA);
 
 		this->addCage(cage);
@@ -211,7 +316,7 @@ int BiogramWorld::stepToNextGeneration()
 
 
 	// 부모 선택
-	std::mt19937 randEngine(static_cast<unsigned>(std::time(nullptr)));
+	std::mt19937 randEngine(static_cast<unsigned>(std::time(nullptr) + rand()));
 	std::normal_distribution<> selectionDist(0,
 		((cageCount < 4) ? 1 : cageCount / 4));
 
@@ -241,13 +346,13 @@ int BiogramWorld::stepToNextGeneration()
 		if (dna)
 		{
 			BiogramDNA newDNA(*dna);
-			newDNA.mutate(static_cast<unsigned>(std::time(nullptr)),
+			newDNA.mutate(static_cast<unsigned>(std::time(nullptr) + rand()),
 				0.1 / parentCount * i);
 			nextGeneList.emplace_back(newDNA);
 		}
 		else
 		{
-			BiogramDNA randomDNA(static_cast<unsigned long>(std::time(nullptr)));
+			BiogramDNA randomDNA(static_cast<unsigned long>(std::time(nullptr) + rand()));
 			nextGeneList.emplace_back(randomDNA);
 		}
 	}

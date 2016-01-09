@@ -39,7 +39,7 @@ public:
 
 
 protected:
-	std::weak_ptr<Unit> m_pInUnit, m_pOutUnit;
+	std::shared_ptr<Unit> m_pInUnit, m_pOutUnit;
 
 
 public:

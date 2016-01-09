@@ -59,7 +59,7 @@ BiogramCage::BiogramCage()
 
 BiogramCage::~BiogramCage()
 {
-
+	this->clear();
 }
 
 //###############################################################
@@ -274,7 +274,7 @@ bool BiogramCage::removeUnit(std::shared_ptr<Unit> pUnit)
 	auto outParamLinkerList = pUnit->getOutParamLinkerList();
 	for (auto& linker : outParamLinkerList)
 	{
-		LinkHelper::DisconnectParam(pUnit, linker.lock());
+		LinkHelper::DisconnectParam(pUnit, linker);
 	}
 
 

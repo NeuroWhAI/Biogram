@@ -93,5 +93,11 @@ protected:
 	*/
 	int bitTotal(std::vector<bool>::const_iterator begin,
 		size_t size);
+	/*
+	* 부분적으로 이진수 형식으로 계산한다음 합산한다.
+	* @Return: 변환된 정수 값
+	*/
+	int toPartialInt(std::vector<bool>::const_iterator begin,
+		size_t size);
 };
 
