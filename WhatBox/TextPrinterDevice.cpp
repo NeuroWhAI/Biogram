@@ -46,6 +46,16 @@ TextPrinterDevice::~TextPrinterDevice()
 
 //#################################################################
 
+int TextPrinterDevice::readyForNextG()
+{
+	m_text.clear();
+	m_textCompleted.clear();
+
+
+	return 0;
+}
+
+
 int TextPrinterDevice::update(double timeSpeed)
 {
 	if (std::abs(readCom(0)) > std::numeric_limits<double>::epsilon())

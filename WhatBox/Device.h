@@ -51,6 +51,7 @@ private:
 
 
 public:
+	virtual int readyForNextG();
 	virtual int update(double timeSpeed);
 	virtual int render();
 

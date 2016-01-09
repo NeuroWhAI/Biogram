@@ -46,6 +46,15 @@ Device::~Device()
 
 //#################################################################
 
+int Device::readyForNextG()
+{
+
+
+
+	return 0;
+}
+
+
 int Device::update(double timeSpeed)
 {
 

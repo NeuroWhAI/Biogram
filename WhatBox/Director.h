@@ -36,6 +36,7 @@ public:
 
 
 public:
+	virtual int readyForNextG();
 	virtual double evaluate(const TextPrinterDevice& device);
 };
 

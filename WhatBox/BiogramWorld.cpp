@@ -83,6 +83,16 @@ int BiogramWorld::clear()
 
 int BiogramWorld::clearForNextGeneration()
 {
+	for (auto& device : m_deviceList)
+	{
+		device->readyForNextG();
+	}
+
+	for (auto& director : m_directorList)
+	{
+		director->readyForNextG();
+	}
+
 	m_pTimeManager->resetElapsedTime();
 
 	m_pSharedMemory->clear();

@@ -42,6 +42,7 @@ protected:
 
 
 public:
-	double evaluate(const TextPrinterDevice& device) override;
+	virtual int readyForNextG() override;
+	virtual double evaluate(const TextPrinterDevice& device) override;
 };
 

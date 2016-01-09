@@ -42,6 +42,15 @@ TextCheckDirector::~TextCheckDirector()
 
 //#################################################################
 
+int TextCheckDirector::readyForNextG()
+{
+
+
+
+	return 0;
+}
+
+
 double TextCheckDirector::evaluate(const TextPrinterDevice& device)
 {
 	std::wstring text = device.getText();

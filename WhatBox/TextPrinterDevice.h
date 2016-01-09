@@ -43,6 +43,7 @@ protected:
 
 
 public:
+	virtual int readyForNextG() override;
 	virtual int update(double timeSpeed) override;
 	virtual int render() override;
 
