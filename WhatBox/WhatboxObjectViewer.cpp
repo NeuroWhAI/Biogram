@@ -207,7 +207,7 @@ int WhatboxObjectViewer::drawBiogramCage(const BiogramCage& cage) const
 		auto location = pUnit->getLocation();
 		float scale = pUnit->getRadius() / 16.0f;
 
-		int color = (pUnit->getTimeGage() > 0.0) ? 255 : 128;
+		int color = (pUnit->getTimeGage() > 0.0) ? 255 : 64;
 		cCore::Sprite.SetColor(
 			D3DCOLOR_ARGB(color, 255, 255, 255));
 		cCore::Sprite.DrawTextureCenter(cCore::Resource.m_pTxList[TxList_Biogram]->GetTexture(0),

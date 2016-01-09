@@ -102,7 +102,7 @@ int BiogramEgg::buildBiogram(ObjectPool<Unit>& unitPool,
 	// * 값을 처리하는 단계를 나타냄
 	int sequence = 0;
 	// * DNA에서 읽을 비트의 수를 나타냄
-	size_t bufferSize = 16;
+	size_t bufferSize = 64;
 	// * DNA에서 읽을 위치를 나타냄
 	auto currentPos = data.cbegin();
 	// * DNA 길이
@@ -238,13 +238,14 @@ size_t BiogramEgg::proceedData(int& sequence,
 
 	case 0: {
 		/*
-		* 새로운 Unit을 생성하고 이 Unit에게 선택되어있는 Unit을
+		* 새로운 Unit을 생성하고 명령어 번호를 설정한다음
+		* 이 Unit에게 선택되어있는 Unit을
 		* 입력으로하여 Flow Linker를 연결한다.
 		*/
 
 		// 새로 만들 Unit의 좌표는 선택된 Unit의 좌표에대해 상대적이다.
-		float angle = static_cast<float>(dataInt);
-		float length = angle / 32767.0f * 16.0f;
+		float angle = static_cast<float>(dataPartialInt);
+		float length = angle / 2040.0f * 32.0f + 8.0f;
 		Utility::PointF pos(cosf(angle) * length, sinf(angle) * length);
 		if (m_pUnitOnProcess)
 			pos += m_pUnitOnProcess->getLocation();
@@ -252,6 +253,10 @@ size_t BiogramEgg::proceedData(int& sequence,
 		// 새 Unit 생성 후 위치 설정
 		auto unit = unitPool.acquireObject();
 		unit->setLocation(pos);
+		
+		// 명령어 설정
+		int cmdNum = dataPartialInt % pCmdOperator->getCmdFunctionCount();
+		m_pUnitOnProcess->setCmdNumber(cmdNum);
 
 		if (m_pLinkerOnProcess)
 			LinkHelper::ConnectFlow(m_pLinkerOnProcess, unit);
@@ -267,21 +272,6 @@ size_t BiogramEgg::proceedData(int& sequence,
 
 		// Unit 목록에 추가
 		pUnitOut->emplace_back(unit);
-
-		sequence = 1;
-	} return 64;
-
-	case 1: {
-		/*
-		* 선택된 Unit이 있다면 DNA로부터 얻은 값을
-		* 해당 Unit의 명령어 번호로 설정한다.
-		*/
-
-		if (m_pUnitOnProcess)
-		{
-			int cmdNum = dataPartialInt % pCmdOperator->getCmdFunctionCount();
-			m_pUnitOnProcess->setCmdNumber(cmdNum);
-		}
 
 		sequence = 2;
 	} return 64;
@@ -329,8 +319,11 @@ size_t BiogramEgg::proceedData(int& sequence,
 			m_dataFromPast = 0;
 
 			sequence = 0;
+
+
+			return 64;
 		}
-	} return 16;
+	} return 0;
 
 	case 4: {
 		/*
@@ -342,7 +335,7 @@ size_t BiogramEgg::proceedData(int& sequence,
 		{
 			// 새 Unit의 위치를 계산한다.
 			float angle = static_cast<float>(dataPartialInt);
-			float length = angle / 2040.0f * 8.0f;
+			float length = angle / 2040.0f * 8.0f + 4.0f;
 			Utility::PointF pos(cosf(angle) * length, sinf(angle) * length);
 			pos += m_pUnitOnProcess->getLocation();
 
@@ -373,7 +366,12 @@ size_t BiogramEgg::proceedData(int& sequence,
 			// 현재 Unit에 대해 Param 연결을 한번 더 할지
 			// 처음 단계(0)로 돌아갈지 결정한다.
 			if (m_dataFromPast < 2)
+			{
 				sequence = 0;
+
+
+				return 64;
+			}
 			else
 			{
 				m_dataFromPast = 3 - m_dataFromPast;
@@ -384,7 +382,7 @@ size_t BiogramEgg::proceedData(int& sequence,
 				return 64;
 			}
 		}
-	} return 16;
+	} return 0;
 	}
 
 
