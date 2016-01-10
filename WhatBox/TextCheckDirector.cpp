@@ -53,7 +53,7 @@ int TextCheckDirector::readyForNextG()
 
 double TextCheckDirector::evaluate(const TextPrinterDevice& device)
 {
-	std::wstring text = device.getText();
+	const std::wstring& text = device.getText();
 
 
 	double score = 0.0;

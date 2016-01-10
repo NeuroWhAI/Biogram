@@ -45,7 +45,7 @@ double Memory::read(int address)
 
 	if (it == m_memory.end())
 		return 0.0;
-	return m_memory[address];
+	return it->second;
 }
 
 

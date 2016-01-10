@@ -52,6 +52,7 @@ BiogramWorld::BiogramWorld()
 	: m_pTimeManager(std::make_shared<TimeManager>())
 	, m_maxTimePerGeneration(5000.0)
 	, m_generationNumber(0)
+	, m_mutationRate(0.1)
 
 	, m_focusedCageNum(0)
 	, m_pSharedMemory(std::make_shared<Memory>())
@@ -80,6 +81,7 @@ bool BiogramWorld::saveTo(std::ostream& osr) const
 	{
 		osr << m_maxTimePerGeneration << endl;
 		osr << m_generationNumber << endl;
+		osr << m_mutationRate << endl;
 
 
 		osr << m_pCageList.size() << endl;
@@ -104,6 +106,7 @@ bool BiogramWorld::loadFrom(std::istream& isr)
 	{
 		isr >> m_maxTimePerGeneration;
 		isr >> m_generationNumber;
+		isr >> m_mutationRate;
 
 
 		size_t size = 0;
@@ -207,12 +210,15 @@ bool BiogramWorld::saveWorld(const std::wstring& fileName)
 }
 
 
-int BiogramWorld::initWorld(size_t cageCount, double maxTimePerGeneration)
+int BiogramWorld::initWorld(size_t cageCount,
+	double maxTimePerGeneration,
+	double mutationRate)
 {
 	this->clear();
 
 
 	m_maxTimePerGeneration = maxTimePerGeneration;
+	m_mutationRate = mutationRate;
 
 
 	// 랜덤한 DNA로 Cage 생성
@@ -294,7 +300,25 @@ int BiogramWorld::update()
 
 bool BiogramWorld::isReadyForNextGeneration()
 {
-	return (m_pTimeManager->getElapsedTime() >= m_maxTimePerGeneration);
+	// 할당한 시간이 경과하면 무조건 종료
+	if (m_pTimeManager->getElapsedTime() >= m_maxTimePerGeneration)
+		return true;
+
+
+	// 모든 Cage가 활동을 멈추면 종료
+	bool isEnd = true;
+
+	for (auto& cage : m_pCageList)
+	{
+		if (cage->isEnd() == false)
+		{
+			isEnd = false;
+			break;
+		}
+	}
+
+
+	return isEnd;
 }
 
 
@@ -347,7 +371,7 @@ int BiogramWorld::stepToNextGeneration()
 		{
 			BiogramDNA newDNA(*dna);
 			newDNA.mutate(static_cast<unsigned>(std::time(nullptr) + rand()),
-				0.1 / parentCount * i);
+				m_mutationRate / parentCount * i);
 			nextGeneList.emplace_back(newDNA);
 		}
 		else
@@ -385,7 +409,7 @@ int BiogramWorld::stepToNextGeneration()
 
 			// 돌연변이
 			newDNA.mutate(static_cast<unsigned>(std::time(nullptr)),
-				2.0);
+				m_mutationRate);
 
 
 			nextGeneList.emplace_back(newDNA);
@@ -596,6 +620,12 @@ int BiogramWorld::addDevice(DevicePtr pDevice)
 size_t BiogramWorld::getGenerationNumber() const
 {
 	return m_generationNumber;
+}
+
+
+double BiogramWorld::getMutationRate() const
+{
+	return m_mutationRate;
 }
 
 

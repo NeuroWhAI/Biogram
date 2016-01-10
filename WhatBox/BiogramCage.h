@@ -64,7 +64,7 @@ protected:
 
 protected:
 	std::shared_ptr<BiogramDNA> m_DNA;
-	double m_geneScore;
+	double m_geneScore, m_prevGeneScore;
 
 
 protected:
@@ -83,6 +83,11 @@ protected:
 public:
 	int setSharedMemory(std::shared_ptr<Memory> sharedMemory);
 	virtual int update(double timeSpeed);
+	/*
+	* 명령어 진행이 종료되었고 적합도의 변화가 없는가?
+	* @Return: 종료 여부
+	*/
+	bool isEnd() const;
 
 
 protected:

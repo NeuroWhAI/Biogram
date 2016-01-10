@@ -37,6 +37,7 @@
 
 BiogramApp::BiogramApp()
 	: m_pBiogramWorld(std::make_shared<BiogramWorld>())
+	, m_geneNum(0)
 {
 
 }
@@ -53,8 +54,10 @@ int BiogramApp::init()
 {
 	if (!m_pBiogramWorld->initWorld(L"./Sample/World/auto-saved.biow"))
 	{
-		m_pBiogramWorld->initWorld(32, 10000.0);
+		m_pBiogramWorld->initWorld(64, 10000.0, 0.01);
 	}
+
+	m_geneNum = m_pBiogramWorld->getGenerationNumber();
 
 	TextPrinterDevice printer;
 	m_pBiogramWorld->initDeviceForeachCage(printer);
@@ -82,6 +85,15 @@ int BiogramApp::update()
 
 
 	m_pBiogramWorld->update();
+
+	if (m_geneNum != m_pBiogramWorld->getGenerationNumber()
+		&&
+		m_pBiogramWorld->getGenerationNumber() % 100 == 0)
+	{
+		m_pBiogramWorld->saveWorld(L"./Sample/World/auto-saved.biow");
+
+		m_geneNum = m_pBiogramWorld->getGenerationNumber();
+	}
 
 
 	return 0;

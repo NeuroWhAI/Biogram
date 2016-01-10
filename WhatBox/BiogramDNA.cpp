@@ -116,10 +116,10 @@ const std::vector<bool>& BiogramDNA::getData() const
 
 int BiogramDNA::mutate(unsigned long seed, double rate)
 {
-	int rateNum = static_cast<int>(rate * 100000.0) + 1;
+	int rateNum = static_cast<int>(rate * 1000000.0) + 1;
 
 	std::mt19937 engine(seed);
-	std::uniform_int_distribution<int> rateDist(1, 10000000);
+	std::uniform_int_distribution<int> rateDist(1, 100000000);
 
 
 	for (auto& bit : m_data)

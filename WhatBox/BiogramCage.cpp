@@ -48,6 +48,7 @@ BiogramCage::BiogramCage()
 
 	, m_DNA(nullptr)
 	, m_geneScore(0.0)
+	, m_prevGeneScore(0.0)
 	
 	, m_cageMemory(std::make_shared<Memory>())
 
@@ -90,6 +91,14 @@ int BiogramCage::update(double timeSpeed)
 	return 0;
 }
 
+
+bool BiogramCage::isEnd() const
+{
+	return (m_pCmdOperator->getCurrentUnitCount() < 1
+		&&
+		std::abs(m_prevGeneScore - m_geneScore) < std::numeric_limits<double>::epsilon());
+}
+
 //###############################################################
 
 int BiogramCage::updateCommand(double timeSpeed)
@@ -105,6 +114,8 @@ int BiogramCage::updateCommand(double timeSpeed)
 
 int BiogramCage::updateScore(double timeSpeed)
 {
+	m_prevGeneScore = m_geneScore;
+
 	m_geneScore -= m_geneScore / 32 * timeSpeed;
 
 

@@ -65,6 +65,11 @@ int WhatboxObjectViewer::drawBiogramWorld(const BiogramWorld& world) const
 
 	// 세대 번호 표시
 	oss << L"G: " << world.getGenerationNumber() << std::endl;
+	
+
+	// 돌연변이율 표시
+	oss << L"Mutation Rate:" << std::endl;
+	oss << L" " << world.getMutationRate() << std::endl;
 
 
 	// 선택된 Cage와 그 Cage에 연결된 Device 그리기
@@ -113,13 +118,14 @@ int WhatboxObjectViewer::drawBiogramWorld(const BiogramWorld& world) const
 	size_t nlCount = memory.size() / 64;
 	for (const auto& cell : memory)
 	{
-		oss << L" (" << cell.first << L": " << cell.second << L")";
+		oss << L" (" << cell.first << L": " << cell.second << L")" << std::endl;
 
 		++count;
-		if (count > nlCount)
+		if (count > 32)
 		{
-			oss << std::endl;
 			count = 0;
+			oss << L"..." << std::endl;
+			break;
 		}
 	}
 
@@ -136,6 +142,7 @@ int WhatboxObjectViewer::drawBiogramCage(const BiogramCage& cage) const
 	auto& graphic = System::getInstance().getGraphic();
 	D3DXVECTOR2 camPos = *cCore::Camera2D.Pos();
 	std::wostringstream oss;
+	//std::wostringstream oss2;
 
 
 	// 경과시간 표시
@@ -154,9 +161,18 @@ int WhatboxObjectViewer::drawBiogramCage(const BiogramCage& cage) const
 	auto cageMem = cage.getCageMemory();
 	auto memory = cageMem->getMemory();
 
+	size_t count = 0;
 	for (const auto& cell : memory)
 	{
 		oss << L" (" << cell.first << L": " << cell.second << L")" << std::endl;
+	
+		++count;
+		if (count > 32)
+		{
+			count = 0;
+			oss << L"..." << std::endl;
+			break;
+		}
 	}
 
 
@@ -201,6 +217,8 @@ int WhatboxObjectViewer::drawBiogramCage(const BiogramCage& cage) const
 	// 유닛 그리기
 	cCore::Sprite.BeginDraw();
 
+	//oss2 << L"Command Flow:" << std::endl;
+
 	const auto& pUnitList = cage.getUnitList();
 	for (auto& pUnit : pUnitList)
 	{
@@ -213,6 +231,15 @@ int WhatboxObjectViewer::drawBiogramCage(const BiogramCage& cage) const
 		cCore::Sprite.DrawTextureCenter(cCore::Resource.m_pTxList[TxList_Biogram]->GetTexture(0),
 			D3DXVECTOR2(location.x, location.y), 0.0f,
 			D3DXVECTOR2(scale, scale));
+
+		/*if (pUnit->getInLinker() || pUnit->getOutLinker())
+		{
+			int cmdNumber = pUnit->getCmdNumber();
+			if (static_cast<size_t>(cmdNumber) < m_cmdNameList.size())
+				oss2 << L" " << m_cmdNameList[cmdNumber] << std::endl;
+			else
+				oss2 << L" Cmd_????" << std::endl;
+		}*/
 	}
 
 	cCore::Sprite.EndDraw();
@@ -258,6 +285,9 @@ int WhatboxObjectViewer::drawBiogramCage(const BiogramCage& cage) const
 	// 텍스트 정보 표시
 	graphic.drawText(oss.str(),
 		Utility::PointF(-200.0f, 8.0f), false, Utility::Color::BLACK);
+
+	//graphic.drawText(oss2.str(),
+	//	Utility::PointF(-500.0f, 8.0f), false, Utility::Color::BLACK);
 
 
 	return 0;

@@ -153,7 +153,7 @@ void CommandOperator::removeUnit(std::shared_ptr<Unit> pUnit)
 
 size_t CommandOperator::getCurrentUnitCount() const
 {
-	return 1;
+	return ((m_pCurrentUnit) ? 1 : 0);
 }
 
 

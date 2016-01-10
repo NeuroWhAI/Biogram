@@ -45,6 +45,7 @@ protected:
 
 protected:
 	std::shared_ptr<BiogramWorld> m_pBiogramWorld;
+	size_t m_geneNum;
 
 
 public:

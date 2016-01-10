@@ -59,6 +59,7 @@ protected:
 	UnitPtr m_pUnitOnProcess;
 	LinkerPtr m_pLinkerOnProcess;
 	int m_dataFromPast;
+	float m_prevAngle;
 
 
 public:

@@ -10,6 +10,8 @@ using UnitPtr = BiogramEgg::UnitPtr;
 using LinkerPtr = BiogramEgg::LinkerPtr;
 using CmdOperatorPtr = BiogramEgg::CmdOperatorPtr;
 
+#define TO_RADIAN(x) ((x) * 0.01745329251f)
+
 
 
 
@@ -40,6 +42,7 @@ BiogramEgg::BiogramEgg()
 	: m_pUnitOnProcess(nullptr)
 	, m_pLinkerOnProcess(nullptr)
 	, m_dataFromPast(0)
+	, m_prevAngle(0.0f)
 {
 
 }
@@ -51,6 +54,7 @@ BiogramEgg::BiogramEgg(const BiogramDNA& dna)
 	, m_pUnitOnProcess(nullptr)
 	, m_pLinkerOnProcess(nullptr)
 	, m_dataFromPast(0)
+	, m_prevAngle(0.0f)
 {
 
 }
@@ -245,8 +249,13 @@ size_t BiogramEgg::proceedData(int& sequence,
 
 		// 새로 만들 Unit의 좌표는 선택된 Unit의 좌표에대해 상대적이다.
 		float angle = static_cast<float>(dataPartialInt);
-		float length = angle / 2040.0f * 32.0f + 8.0f;
-		Utility::PointF pos(cosf(angle) * length, sinf(angle) * length);
+		m_prevAngle += TO_RADIAN(dataPartialInt % 360);
+
+		float length = angle / 2040.0f * 16.0f + 4.0f;
+
+		Utility::PointF pos(cosf(m_prevAngle) * length,
+			sinf(m_prevAngle) * length);
+
 		if (m_pUnitOnProcess)
 			pos += m_pUnitOnProcess->getLocation();
 

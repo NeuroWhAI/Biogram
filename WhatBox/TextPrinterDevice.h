@@ -39,7 +39,6 @@ public:
 
 protected:
 	std::wstring m_text;
-	std::wstring m_textCompleted;
 
 
 public:
@@ -53,6 +52,6 @@ public:
 
 
 public:
-	std::wstring getText() const;
+	const std::wstring& getText() const;
 };
 

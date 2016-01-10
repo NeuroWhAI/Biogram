@@ -33,9 +33,9 @@
 TextPrinterDevice::TextPrinterDevice()
 	: Device({
 		{0, 100},
-		{1, 101},
-		{2, 102},
-		{3, 103} })
+		{1, 200},
+		{2, 300},
+		{3, 400} })
 {
 
 }
@@ -51,7 +51,6 @@ TextPrinterDevice::~TextPrinterDevice()
 int TextPrinterDevice::readyForNextG()
 {
 	m_text.clear();
-	m_textCompleted.clear();
 
 
 	return 0;
@@ -62,27 +61,22 @@ int TextPrinterDevice::update(double timeSpeed)
 {
 	if (std::abs(readCom(0)) > std::numeric_limits<double>::epsilon())
 	{
+		m_text.clear();
+
+
 		for (int port = 1; port <= 3; ++port)
 		{
 			double readVal = std::abs(readCom(port));
 			if (readVal > 65535) readVal = 65535;
 			wchar_t ch = static_cast<wchar_t>(readVal);
 
-			if (ch == L'\0' || ch == L'\n' || ch == L'\r')
+			if (ch != L'\0' && ch != L'\n' && ch != L'\r')
 			{
-				m_textCompleted = m_text;
-				m_text.clear();
+				m_text.push_back(ch);
 			}
 			else
 			{
-				m_text.push_back(ch);
-
-				// 문장이 너무 길면 강제로 완료시킴
-				if (m_text.length() >= 64)
-				{
-					m_textCompleted = m_text;
-					m_text.clear();
-				}
+				m_text.push_back(L' ');
 			}
 		}
 	}
@@ -110,8 +104,8 @@ double TextPrinterDevice::evaluate(std::shared_ptr<Director> pDirector)
 
 //#################################################################
 
-std::wstring TextPrinterDevice::getText() const
+const std::wstring& TextPrinterDevice::getText() const
 {
-	return m_textCompleted;
+	return m_text;
 }
 
