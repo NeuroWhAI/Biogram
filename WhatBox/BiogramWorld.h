@@ -108,6 +108,10 @@ protected:
 	int checkReadyForNext();
 
 
+protected:
+	void increaseGenerationNumber();
+
+
 public:
 	int addCage(BiogramCagePtr pCage);
 	int addDevice(DevicePtr pDevice);

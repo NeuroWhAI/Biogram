@@ -3,6 +3,7 @@
 #include <vector>
 #include <ostream>
 #include <istream>
+#include <random>
 
 
 
@@ -33,13 +34,13 @@
 class BiogramDNA
 {
 public:
-	BiogramDNA();
-	explicit BiogramDNA(unsigned long seed);
+	explicit BiogramDNA(bool bFillRandomly = false);
 	explicit BiogramDNA(const std::vector<bool> bitData);
 	virtual ~BiogramDNA();
 
 
 protected:
+	static std::mt19937 s_randEngine;
 	std::vector<bool> m_data;
 
 
@@ -50,7 +51,7 @@ public:
 
 
 public:
-	int mutate(unsigned long seed, double rate);
+	int mutate(double rate);
 	int combine(const BiogramDNA& other);
 };
 

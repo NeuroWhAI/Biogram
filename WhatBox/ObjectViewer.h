@@ -7,6 +7,7 @@ class BiogramCage;
 class Unit;
 
 class TextPrinterDevice;
+class VoidGameDevice;
 
 
 
@@ -49,5 +50,6 @@ public:
 
 public: // 각종 Device 그리기
 	virtual int draw(const TextPrinterDevice& device) const = 0;
+	virtual int draw(const VoidGameDevice& device) const = 0;
 };
 

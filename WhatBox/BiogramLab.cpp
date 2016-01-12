@@ -42,7 +42,7 @@ BiogramLab::BiogramLab()
 	, m_bLoop(false)
 {
 	// TODO: юс╫ц
-	buildBiogram(BiogramDNA(static_cast<unsigned long>(std::time(nullptr))));
+	buildBiogram(BiogramDNA(true));
 }
 
 
@@ -99,7 +99,7 @@ int BiogramLab::update(double timeSpeed)
 
 	if (inputMgr.onKeyDown(0x0D/*Enter*/))
 	{
-		buildBiogram(BiogramDNA(static_cast<unsigned long>(std::time(nullptr))));
+		buildBiogram(BiogramDNA(true));
 	}
 
 	if (inputMgr.onKeyDown(0x2E/*Delete*/))
@@ -114,8 +114,7 @@ int BiogramLab::update(double timeSpeed)
 		if (inputMgr.onKeyPress(0x10/*Shift*/))
 			rate = 1.0;
 
-		m_currentDNA.mutate(static_cast<unsigned long>(std::time(nullptr)),
-			rate);
+		m_currentDNA.mutate(rate);
 
 		buildBiogram(m_currentDNA);
 	}

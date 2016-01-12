@@ -1,6 +1,7 @@
 #pragma once
 
 class TextPrinterDevice;
+class VoidGameDevice;
 
 
 
@@ -36,7 +37,8 @@ public:
 
 
 public:
-	virtual int readyForNextG();
+	virtual int init();
 	virtual double evaluate(const TextPrinterDevice& device);
+	virtual double evaluate(const VoidGameDevice& device);
 };
 

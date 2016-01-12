@@ -3,6 +3,7 @@
 
 #include "Unit.h"
 #include "Linker.h"
+#include "Memory.h"
 
 #include <numeric>
 
@@ -493,6 +494,40 @@ CMD_FUNC_DECL(Cmd_JumpToIfEqual)
 }
 
 
+CMD_FUNC_DECL(Cmd_AssignSharedMem)
+{
+	/*
+	* [*, *]
+	* here의 값에 해당하는 주소의 공유메모리를 할당한다.
+	*/
+
+
+	return Cmd_AssignSharedMemFrom(pNextUnit, here, here, nullptr);
+}
+
+
+CMD_FUNC_DECL(Cmd_AssignSharedMemFrom)
+{
+	/*
+	* [1, *]
+	* 1의 값에 해당하는 주소의 공유메모리를 할당한다.
+	*/
+
+
+	if (param1)
+	{
+		m_pSharedMemory->assignAddress(
+			static_cast<int>(param1->getMemory()));
+
+
+		return 0.0;
+	}
+
+
+	return -0.1;
+}
+
+
 CMD_FUNC_DECL(Cmd_ReadSharedMem)
 {
 	/*
@@ -555,6 +590,40 @@ CMD_FUNC_DECL(Cmd_WriteSharedMemFrom)
 	{
 		writeSharedMem(static_cast<int>(param1->getMemory()),
 			param2->getMemory());
+
+
+		return 0.0;
+	}
+
+
+	return -0.1;
+}
+
+
+CMD_FUNC_DECL(Cmd_AssignCageMem)
+{
+	/*
+	* [*, *]
+	* here의 값에 해당하는 주소의 Cage 메모리를 할당한다.
+	*/
+
+
+	return Cmd_AssignCageMemFrom(pNextUnit, here, here, nullptr);
+}
+
+
+CMD_FUNC_DECL(Cmd_AssignCageMemFrom)
+{
+	/*
+	* [1, *]
+	* 1의 값에 해당하는 주소의 Cage 메모리를 할당한다.
+	*/
+
+
+	if (param1)
+	{
+		m_pCageMemory->assignAddress(
+			static_cast<int>(param1->getMemory()));
 
 
 		return 0.0;

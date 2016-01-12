@@ -1,8 +1,8 @@
 #include "BiogramDNA.h"
 
-#include <random>
 #include <ctime>
 
+#include "System.h"
 
 
 
@@ -29,24 +29,24 @@
 
 
 
-BiogramDNA::BiogramDNA()
+std::mt19937 BiogramDNA::s_randEngine(static_cast<unsigned>(time(nullptr)));
+
+//###############################################################
+
+BiogramDNA::BiogramDNA(bool bFillRandomly)
 {
-
-}
-
-
-BiogramDNA::BiogramDNA(unsigned long seed)
-{
-	// 랜덤 DNA 생성
-	std::mt19937 engine(seed);
-	std::uniform_int_distribution<int> bitDist(0, 1);
-	std::uniform_int_distribution<int> sizeDist(1, 100000);
-
-	int size = sizeDist(engine);
-
-	for (int i = 0; i < size; ++i)
+	if (bFillRandomly)
 	{
-		m_data.emplace_back(bitDist(engine) != 0);
+		// 랜덤 DNA 생성
+		std::uniform_int_distribution<int> bitDist(0, 1);
+		std::uniform_int_distribution<int> sizeDist(1, 100000);
+
+		int size = sizeDist(s_randEngine);
+
+		for (int i = 0; i < size; ++i)
+		{
+			m_data.emplace_back(bitDist(s_randEngine) != 0);
+		}
 	}
 }
 
@@ -114,49 +114,91 @@ const std::vector<bool>& BiogramDNA::getData() const
 
 //###############################################################
 
-int BiogramDNA::mutate(unsigned long seed, double rate)
+int BiogramDNA::mutate(double rate)
 {
 	int rateNum = static_cast<int>(rate * 1000000.0) + 1;
 
-	std::mt19937 engine(seed);
-	std::uniform_int_distribution<int> rateDist(1, 100000000);
+	std::uniform_int_distribution<> rateDist(1, 100000000);
 
 
+	// 단순 비트 반전 작업
 	for (auto& bit : m_data)
 	{
-		if (rateDist(engine) < rateNum)
-		{
+		if (rateDist(s_randEngine) < rateNum)
 			bit = !bit;
-		}
 	}
 
 
-	if (rateDist(engine) < rateNum)
+	// 유전자 길이가 변하는 돌연변이
+	if (rateDist(s_randEngine) < rateNum)
 	{
-		std::uniform_int_distribution<int> sizeDist(1, m_data.size() / 4);
+		std::normal_distribution<> sizeDist(64, m_data.size() / 256);
+		std::uniform_int_distribution<> bitDist(0, 1);
 
-		int deltaSize = sizeDist(engine);
-		if (sizeDist(engine) % 2 != 0)
+		int deltaSize = std::abs(static_cast<int>(sizeDist(s_randEngine)));
+		if (static_cast<size_t>(deltaSize) > m_data.size() / 4)
+			deltaSize = m_data.size() / 4;
+		if (bitDist(s_randEngine) != 0)
 			deltaSize *= -1;
 
 		if (deltaSize < 0)
 		{
-			std::uniform_int_distribution<int> rangeDist(0, m_data.size() + deltaSize);
+			// 유전자 결실 작업
+
+			std::uniform_int_distribution<> posDist(0, m_data.size() + deltaSize);
 		
-			int sliceBeginIndex = rangeDist(engine);
+			int sliceBeginIndex = posDist(s_randEngine);
 
 			m_data.erase(m_data.begin() + sliceBeginIndex,
 				m_data.begin() + (sliceBeginIndex - deltaSize));
+
+
+			LOG("Slice DNA from ",
+				sliceBeginIndex, " by ",
+				-deltaSize);
 		}
 		else
 		{
-			std::uniform_int_distribution<int> bitDist(0, 1);
+			// 유전자 중복 작업
 
-			for (int d = 0; d < deltaSize; ++d)
-			{
-				m_data.emplace_back(bitDist(engine) != 0);
-			}
+			std::uniform_int_distribution<> posDist(0, m_data.size() - deltaSize);
+
+			int duplicationIndex = posDist(s_randEngine);
+
+			m_data.insert(m_data.begin() + (duplicationIndex + deltaSize),
+				m_data.begin() + duplicationIndex,
+				m_data.begin() + (duplicationIndex + deltaSize));
+
+
+			LOG("Duplicate DNA from ",
+				duplicationIndex, " by ",
+				deltaSize);
 		}
+	}
+
+
+	// 유전자 역위 작업
+	if (rateDist(s_randEngine) < rateNum)
+	{
+		std::normal_distribution<> rangeDist(16, m_data.size() / 256);
+
+		int reverseRange = std::abs(static_cast<int>(rangeDist(s_randEngine)));
+		if (static_cast<size_t>(reverseRange) >= m_data.size() / 4)
+			reverseRange = static_cast<int>(m_data.size() / 4);
+		
+
+		std::uniform_int_distribution<> posDist(0, m_data.size() - reverseRange);
+
+		size_t beginIndex = static_cast<size_t>(posDist(s_randEngine));
+
+		
+		std::reverse(m_data.begin() + beginIndex,
+			m_data.begin() + (beginIndex + reverseRange));
+
+
+		LOG("Reverse DNA from ",
+			beginIndex, " by ",
+			reverseRange);
 	}
 
 
@@ -173,12 +215,11 @@ int BiogramDNA::combine(const BiogramDNA& other)
 	}
 
 
-	std::mt19937 engine(static_cast<unsigned>(std::time(nullptr)));
 	std::uniform_int_distribution<> boolDist(0, 1);
 
 
 	// 길이 변환
-	if (boolDist(engine) != 0)
+	if (boolDist(s_randEngine) != 0)
 	{
 		if (other.m_data.size() > m_data.size())
 		{
@@ -200,11 +241,11 @@ int BiogramDNA::combine(const BiogramDNA& other)
 	std::uniform_int_distribution<> rangeDist(0,
 		((thisCount < otherCount) ? thisCount : otherCount) / 8);
 
-	for (size_t i = rangeDist(engine);
+	for (size_t i = rangeDist(s_randEngine);
 	i < thisCount && i < otherCount;
-	i += rangeDist(engine))
+	i += rangeDist(s_randEngine))
 	{
-		size_t end = i + rangeDist(engine);
+		size_t end = i + rangeDist(s_randEngine);
 
 		// 범위 초과 방지
 		if (end > thisCount || end > otherCount)

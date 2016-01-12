@@ -266,6 +266,7 @@
     <ClCompile Include="LcXSkin\LcXSkinSrc.cpp" />
     <ClCompile Include="Linker.cpp" />
     <ClCompile Include="LinkHelper.cpp" />
+    <ClCompile Include="Logger.cpp" />
     <ClCompile Include="NetMsgUtil.cpp" />
     <ClCompile Include="Object.cpp" />
     <ClCompile Include="ObjectPool.cpp" />
@@ -285,7 +286,10 @@
     <ClCompile Include="Util.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Utility.cpp" />
+    <ClCompile Include="VoidDirector.cpp" />
+    <ClCompile Include="VoidGameDevice.cpp" />
     <ClCompile Include="WhatboxGraphic.cpp" />
+    <ClCompile Include="WhatboxLogger.cpp" />
     <ClCompile Include="WhatboxObjectViewer.cpp" />
     <ClCompile Include="WhatboxSystemInfo.cpp" />
     <ClCompile Include="WhatboxUserInputController.cpp" />
@@ -388,6 +392,7 @@
     <ClInclude Include="Graphic.h" />
     <ClInclude Include="Linker.h" />
     <ClInclude Include="LinkHelper.h" />
+    <ClInclude Include="Logger.h" />
     <ClInclude Include="Object.h" />
     <ClInclude Include="Memory.h" />
     <ClInclude Include="ObjectPool.h" />
@@ -489,7 +494,10 @@
     <ClInclude Include="UserInputController.h" />
     <ClInclude Include="Util.h" />
     <ClInclude Include="Utility.h" />
+    <ClInclude Include="VoidDirector.h" />
+    <ClInclude Include="VoidGameDevice.h" />
     <ClInclude Include="WhatboxGraphic.h" />
+    <ClInclude Include="WhatboxLogger.h" />
     <ClInclude Include="WhatboxObjectViewer.h" />
     <ClInclude Include="WhatboxSystemInfo.h" />
     <ClInclude Include="WhatboxUserInputController.h" />
@@ -505,6 +513,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="BiogramWorld.inl" />
+    <None Include="Logger.inl" />
     <None Include="ObjectPool.inl" />
     <None Include="Utility.inl" />
   </ItemGroup>

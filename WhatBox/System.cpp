@@ -12,6 +12,9 @@
 // ObjectViewer
 #include "WhatboxObjectViewer.h"
 
+// Logger
+#include "WhatboxLogger.h"
+
 
 
 
@@ -54,10 +57,11 @@ System::CleanHelper::~CleanHelper()
 // 여기서 생성되는 객체를 수평적으로 달리함으로서
 // 다른 플랫폼에 대응할 수도 있게된다.
 System::System()
-	: m_pSystemInfo(std::make_shared<WhatboxSystemInfo>())
-	, m_pUserInputController(std::make_shared<WhatboxUserInputController>())
-	, m_pGraphic(std::make_shared<WhatboxGraphic>())
-	, m_pObjectViewer(std::make_shared<WhatboxObjectViewer>())
+	: m_pSystemInfo(std::make_unique<WhatboxSystemInfo>())
+	, m_pUserInputController(std::make_unique<WhatboxUserInputController>())
+	, m_pGraphic(std::make_unique<WhatboxGraphic>())
+	, m_pObjectViewer(std::make_unique<WhatboxObjectViewer>())
+	, m_pLogger(std::make_unique<WhatboxLogger>())
 {
 
 }
@@ -104,5 +108,11 @@ Graphic& System::getGraphic()
 ObjectViewer& System::getObjectViewer()
 {
 	return *m_pObjectViewer;
+}
+
+
+Logger& System::getLogger()
+{
+	return *m_pLogger;
 }
 

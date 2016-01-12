@@ -46,7 +46,7 @@ Device::~Device()
 
 //#################################################################
 
-int Device::readyForNextG()
+int Device::init()
 {
 
 

@@ -51,6 +51,7 @@ BiogramCage::BiogramCage()
 	, m_prevGeneScore(0.0)
 	
 	, m_cageMemory(std::make_shared<Memory>())
+	, m_assignedPortCount(0)
 
 	, m_pCmdOperator(std::make_shared<CommandOperator>())
 {
@@ -187,6 +188,7 @@ int BiogramCage::clear()
 	clearWithoutComPort();
 	
 	m_comPortList.clear();
+	m_assignedPortCount = 0;
 
 
 	return 0;
@@ -378,11 +380,21 @@ std::shared_ptr<ComPort> BiogramCage::assignComPort(
 	}
 
 
+	// 연결개수 갱신
+	m_assignedPortCount += portNum_address.size();
+
+
 	// 목록에 등록
 	m_comPortList.emplace_back(pNewCom);
 
 
 	return pNewCom;
+}
+
+
+size_t BiogramCage::getValidPortCount() const
+{
+	return m_assignedPortCount;
 }
 
 //###############################################################

@@ -50,5 +50,6 @@ public:
 
 public:
 	virtual int draw(const TextPrinterDevice& device) const override;
+	virtual int draw(const VoidGameDevice& device) const override;
 };
 

@@ -42,7 +42,7 @@ TextCheckDirector::~TextCheckDirector()
 
 //#################################################################
 
-int TextCheckDirector::readyForNextG()
+int TextCheckDirector::init()
 {
 
 
@@ -53,14 +53,14 @@ int TextCheckDirector::readyForNextG()
 
 double TextCheckDirector::evaluate(const TextPrinterDevice& device)
 {
-	const std::wstring& text = device.getText();
+	const std::vector<wchar_t>& text = device.getRealText();
 
 
 	double score = 0.0;
 
 
 	const size_t answerLength = m_answer.size();
-	const size_t textLength = text.length();
+	const size_t textLength = text.size();
 
 
 	if (answerLength > 0 && textLength > 0)

@@ -62,7 +62,7 @@ int BiogramApp::init()
 	TextPrinterDevice printer;
 	m_pBiogramWorld->initDeviceForeachCage(printer);
 
-	TextCheckDirector checker(L"Hi!");
+	TextCheckDirector checker(L"42!");
 	m_pBiogramWorld->initDirector(checker);
 
 

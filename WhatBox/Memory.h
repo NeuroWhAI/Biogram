@@ -37,9 +37,17 @@ public:
 
 protected:
 	std::unordered_map<int, double> m_memory;
+	std::vector<int> m_addressList;
 
 
 public:
+	/*
+	* 메모리에서 address에 해당하는 공간을 할당합니다.
+	* 해당 공간은 0으로 초기화 됩니다.
+	* @Return: 이미 할당되었으면 false
+	*/
+	bool assignAddress(int address);
+
 	/*
 	* 메모리의 address에 접근해 데이터를 읽어옵니다.
 	* 단, 해당 주소가 없다면 0.0을 반환합니다.
@@ -63,5 +71,6 @@ public:
 
 public:
 	const std::unordered_map<int, double>& getMemory() const;
+	size_t getAssignedCellCount() const;
 };
 

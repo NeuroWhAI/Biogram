@@ -39,6 +39,7 @@ int BiogramWorld::initDeviceForeachCage(const T_DEVICE& originalDevice)
 	{
 		auto newDevice = std::make_shared<T_DEVICE>(originalDevice);
 		newDevice->connectTo(cage);
+		newDevice->init();
 
 		this->addDevice(newDevice);
 	}
@@ -56,6 +57,8 @@ int BiogramWorld::initDirector(const T_DIRECTOR& originalDirector)
 
 
 	auto newDirector = std::make_shared<T_DIRECTOR>(originalDirector);
+	newDirector->init();
+	
 	m_directorList.emplace_back(newDirector);
 
 

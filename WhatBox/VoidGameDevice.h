@@ -1,8 +1,5 @@
 #pragma once
 
-#include <string>
-#include <vector>
-
 #include "Device.h"
 
 
@@ -31,16 +28,17 @@
 
 
 
-class TextPrinterDevice : public Device
+class VoidGameDevice : public Device
 {
 public:
-	TextPrinterDevice();
-	virtual ~TextPrinterDevice();
+	VoidGameDevice();
+	virtual ~VoidGameDevice();
 
 
 protected:
-	std::wstring m_text;
-	std::vector<wchar_t> m_realText;
+	bool m_bBombInLeft;
+
+	size_t m_failCount, m_successCount;
 
 
 public:
@@ -54,7 +52,8 @@ public:
 
 
 public:
-	const std::wstring& getText() const;
-	const std::vector<wchar_t>& getRealText() const;
+	size_t getFailCount() const;
+	size_t getSuccessCount() const;
 };
 
+#pragma once

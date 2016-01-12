@@ -598,6 +598,24 @@
     <Filter Include="Biogram\Model\Biogram\ObjectPool">
       <UniqueIdentifier>{46865df5-f920-470e-9ecd-b2d3bf1095ec}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Biogram\Model\Biogram\Device\VoidGameDevice">
+      <UniqueIdentifier>{36c17db7-86b5-458d-9b84-f8a486990290}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Biogram\Model\Biogram\Director\VoidDirector">
+      <UniqueIdentifier>{c87387a5-e7a0-487c-b165-cdb24a7c08b2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Biogram\Model\Utility\Utility">
+      <UniqueIdentifier>{e7135ff5-34eb-4533-a763-743968c22846}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Biogram\Model\Utility\Logger">
+      <UniqueIdentifier>{e5b2bca0-9cce-4ca9-9c5f-a90b14ee5ba3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Biogram\Model\Utility\Logger\Logger">
+      <UniqueIdentifier>{c34f0796-d2e5-4ea8-8c81-0ff1e4dfad89}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Biogram\Model\Utility\Logger\WhatboxLogger">
+      <UniqueIdentifier>{aa8c4707-9880-4134-b478-29d73067b549}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -1092,9 +1110,6 @@
     <ClCompile Include="WhatboxSystemInfo.cpp">
       <Filter>Biogram\Model\SystemInfo\WhatboxSystemInfo</Filter>
     </ClCompile>
-    <ClCompile Include="Utility.cpp">
-      <Filter>Biogram\Model\Utility</Filter>
-    </ClCompile>
     <ClCompile Include="Energy.cpp">
       <Filter>Biogram\Model\Biogram\Energy</Filter>
     </ClCompile>
@@ -1160,6 +1175,21 @@
     </ClCompile>
     <ClCompile Include="ObjectPool.cpp">
       <Filter>Biogram\Model\Biogram\ObjectPool</Filter>
+    </ClCompile>
+    <ClCompile Include="VoidGameDevice.cpp">
+      <Filter>Biogram\Model\Biogram\Device\VoidGameDevice</Filter>
+    </ClCompile>
+    <ClCompile Include="VoidDirector.cpp">
+      <Filter>Biogram\Model\Biogram\Director\VoidDirector</Filter>
+    </ClCompile>
+    <ClCompile Include="Utility.cpp">
+      <Filter>Biogram\Model\Utility\Utility</Filter>
+    </ClCompile>
+    <ClCompile Include="Logger.cpp">
+      <Filter>Biogram\Model\Utility\Logger\Logger</Filter>
+    </ClCompile>
+    <ClCompile Include="WhatboxLogger.cpp">
+      <Filter>Biogram\Model\Utility\Logger\WhatboxLogger</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -1700,9 +1730,6 @@
     <ClInclude Include="WhatboxSystemInfo.h">
       <Filter>Biogram\Model\SystemInfo\WhatboxSystemInfo</Filter>
     </ClInclude>
-    <ClInclude Include="Utility.h">
-      <Filter>Biogram\Model\Utility</Filter>
-    </ClInclude>
     <ClInclude Include="Energy.h">
       <Filter>Biogram\Model\Biogram\Energy</Filter>
     </ClInclude>
@@ -1769,6 +1796,21 @@
     <ClInclude Include="ObjectPool.h">
       <Filter>Biogram\Model\Biogram\ObjectPool</Filter>
     </ClInclude>
+    <ClInclude Include="VoidGameDevice.h">
+      <Filter>Biogram\Model\Biogram\Device\VoidGameDevice</Filter>
+    </ClInclude>
+    <ClInclude Include="VoidDirector.h">
+      <Filter>Biogram\Model\Biogram\Director\VoidDirector</Filter>
+    </ClInclude>
+    <ClInclude Include="Utility.h">
+      <Filter>Biogram\Model\Utility\Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="Logger.h">
+      <Filter>Biogram\Model\Utility\Logger\Logger</Filter>
+    </ClInclude>
+    <ClInclude Include="WhatboxLogger.h">
+      <Filter>Biogram\Model\Utility\Logger\WhatboxLogger</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt">
@@ -1786,14 +1828,17 @@
     </Image>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Utility.inl">
-      <Filter>Biogram\Model\Utility</Filter>
-    </None>
     <None Include="BiogramWorld.inl">
       <Filter>Biogram\Model\Biogram\BiogramWorld</Filter>
     </None>
     <None Include="ObjectPool.inl">
       <Filter>Biogram\Model\Biogram\ObjectPool</Filter>
+    </None>
+    <None Include="Utility.inl">
+      <Filter>Biogram\Model\Utility\Utility</Filter>
+    </None>
+    <None Include="Logger.inl">
+      <Filter>Biogram\Model\Utility\Logger\Logger</Filter>
     </None>
   </ItemGroup>
 </Project>

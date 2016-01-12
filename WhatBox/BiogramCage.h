@@ -74,6 +74,7 @@ protected:
 	
 	std::shared_ptr<Memory> m_cageMemory;
 	std::vector<std::shared_ptr<ComPort>> m_comPortList;
+	size_t m_assignedPortCount;
 
 
 protected:
@@ -122,6 +123,7 @@ public:
 public:
 	std::shared_ptr<ComPort> assignComPort(
 		std::vector<std::pair<int, int>> portNum_address);
+	size_t getValidPortCount() const;
 
 
 public:

@@ -104,6 +104,9 @@ bool BiogramWorld::loadFrom(std::istream& isr)
 {
 	if (isr.good())
 	{
+		this->clear();
+
+
 		isr >> m_maxTimePerGeneration;
 		isr >> m_generationNumber;
 		isr >> m_mutationRate;
@@ -153,12 +156,12 @@ int BiogramWorld::clearForNextGeneration()
 {
 	for (auto& device : m_deviceList)
 	{
-		device->readyForNextG();
+		device->init();
 	}
 
 	for (auto& director : m_directorList)
 	{
-		director->readyForNextG();
+		director->init();
 	}
 
 	m_pTimeManager->resetElapsedTime();
@@ -226,7 +229,7 @@ int BiogramWorld::initWorld(size_t cageCount,
 	{
 		auto cage = std::make_shared<BiogramCage>();
 
-		BiogramDNA randomDNA(static_cast<unsigned long>(std::time(nullptr) + rand()));
+		BiogramDNA randomDNA(true);
 		cage->buildBiogram(randomDNA);
 
 		this->addCage(cage);
@@ -370,13 +373,12 @@ int BiogramWorld::stepToNextGeneration()
 		if (dna)
 		{
 			BiogramDNA newDNA(*dna);
-			newDNA.mutate(static_cast<unsigned>(std::time(nullptr) + rand()),
-				m_mutationRate / parentCount * i);
+			newDNA.mutate(m_mutationRate / parentCount * i);
 			nextGeneList.emplace_back(newDNA);
 		}
 		else
 		{
-			BiogramDNA randomDNA(static_cast<unsigned long>(std::time(nullptr) + rand()));
+			BiogramDNA randomDNA(true);
 			nextGeneList.emplace_back(randomDNA);
 		}
 	}
@@ -408,18 +410,22 @@ int BiogramWorld::stepToNextGeneration()
 
 
 			// 돌연변이
-			newDNA.mutate(static_cast<unsigned>(std::time(nullptr)),
-				m_mutationRate);
+			newDNA.mutate(m_mutationRate);
 
 
 			nextGeneList.emplace_back(newDNA);
 		}
 		else
 		{
-			BiogramDNA randomDNA(static_cast<unsigned long>(std::time(nullptr)));
+			BiogramDNA randomDNA(true);
 			nextGeneList.emplace_back(randomDNA);
 		}
 	}
+
+
+	// Cage 초기화
+	for (auto& cage : m_pCageList)
+		cage->clearWithoutComPort();
 
 
 	// 초기화
@@ -430,7 +436,6 @@ int BiogramWorld::stepToNextGeneration()
 	auto nextGeneListItr = nextGeneList.begin();
 	for (auto& cage : m_pCageList)
 	{
-		cage->clearWithoutComPort();
 		cage->buildBiogramWithoutClear(*nextGeneListItr);
 
 
@@ -441,7 +446,7 @@ int BiogramWorld::stepToNextGeneration()
 
 
 	// 세대번호 증가
-	++m_generationNumber;
+	increaseGenerationNumber();
 
 
 	return 0;
@@ -559,13 +564,25 @@ int BiogramWorld::evaluateCage()
 			// 아니면 다른 연결이 가까운 만큼 점수를 줌
 			if (bExist)
 			{
-				score += 2.0;
+				score += 1.0;
 			}
 			else
 			{
-				score += 1.0 / static_cast<double>(offset);
+				score += 1.0 / static_cast<double>(offset + 1);
 			}
 		}
+
+
+		// 포트연결 수와 실제 할당된 Cage Mem의 수가 차이가 나는 만큼
+		// 낮은 점수를 줌
+		const double validPortCount = cage->getValidPortCount();
+		const double assignedCellCount = mem->getAssignedCellCount();
+		
+		double portOffset = std::abs(assignedCellCount - validPortCount);
+		if (portOffset < validPortCount*2.0)
+			score += validPortCount;
+		else
+			score += validPortCount / portOffset;
 
 
 		// 작동 평가
@@ -592,6 +609,22 @@ int BiogramWorld::checkReadyForNext()
 
 
 	return 0;
+}
+
+//###############################################################
+
+void BiogramWorld::increaseGenerationNumber()
+{
+	++m_generationNumber;
+
+	// 돌연변이율 변화
+	if (m_generationNumber % 100 == 0)
+	{
+		if (m_generationNumber / 100 % 2 == 0)
+			m_mutationRate /= 10.0;
+		else
+			m_mutationRate *= 10.0;
+	}
 }
 
 //###############################################################

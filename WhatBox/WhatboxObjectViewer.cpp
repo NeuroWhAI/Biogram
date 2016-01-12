@@ -13,6 +13,7 @@
 #include "Memory.h"
 
 #include "TextPrinterDevice.h"
+#include "VoidGameDevice.h"
 
 #define CMD_FUNC(name) m_cmdNameList.emplace_back(L#name);
 
@@ -332,6 +333,24 @@ int WhatboxObjectViewer::draw(const TextPrinterDevice& device) const
 
 	oss << L"TextPrinterDevice:" << std::endl;
 	oss << L" " << device.getText();
+
+
+	graphic.drawText(oss.str(),
+		Utility::PointF(400.0f, 8.0f), false, Utility::Color::BLACK);
+
+
+	return 0;
+}
+
+
+int WhatboxObjectViewer::draw(const VoidGameDevice& device) const
+{
+	auto& graphic = System::getInstance().getGraphic();
+	std::wostringstream oss;
+
+
+	oss << L"VoidGameDevice:" << std::endl;
+	oss << L" ";
 
 
 	graphic.drawText(oss.str(),
