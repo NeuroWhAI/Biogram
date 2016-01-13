@@ -78,10 +78,10 @@ int WhatboxObjectViewer::drawBiogramWorld(const BiogramWorld& world) const
 	const auto& cageList = world.getCageList();
 	for (auto& cage : cageList)
 	{
-		totalScore += cage->getGeneScore();
+		totalScore += cage->getOldGeneScore();
 	}
 	oss << L"Cage Count: " << cageList.size() << std::endl;
-	oss << L"Total Score: " << totalScore << std::endl;
+	oss << L"Previous Total Score: " << totalScore << std::endl;
 
 	size_t cageNum = world.getFocusedCageNumber();
 	oss << L"Current Cage: " << cageNum + 1 << std::endl;
@@ -113,21 +113,45 @@ int WhatboxObjectViewer::drawBiogramWorld(const BiogramWorld& world) const
 	oss << L"Shared Memory:" << std::endl;
 
 	auto sharedMem = world.getSharedMemory();
-	auto memory = sharedMem->getMemory();
 
 	size_t count = 0;
-	size_t nlCount = memory.size() / 64;
-	for (const auto& cell : memory)
+	size_t address = 0;
+	for (const auto& cell : sharedMem->getMemory())
 	{
-		oss << L" (" << cell.first << L": " << cell.second << L")" << std::endl;
-
-		++count;
-		if (count > 32)
+		if (cell.first)
 		{
-			count = 0;
-			oss << L"..." << std::endl;
-			break;
+			oss << L" (" << address << L": " << cell.second << L")" << std::endl;
+
+			++count;
+			if (count > 16)
+			{
+				count = 0;
+				oss << L"..." << std::endl;
+				break;
+			}
 		}
+
+		++address;
+	}
+
+	count = 0;
+	address = 0;
+	for (const auto& cell : sharedMem->getNegativeMemory())
+	{
+		if (cell.first)
+		{
+			oss << L" (-" << address << L": " << cell.second << L")" << std::endl;
+
+			++count;
+			if (count > 16)
+			{
+				count = 0;
+				oss << L"..." << std::endl;
+				break;
+			}
+		}
+
+		++address;
 	}
 
 	graphic.drawText(oss.str(),
@@ -152,28 +176,58 @@ int WhatboxObjectViewer::drawBiogramCage(const BiogramCage& cage) const
 
 
 	// 적합도 표시
-	oss << L"Gene Score:" << std::endl;
-	oss << L" " << cage.getGeneScore() << std::endl;
+	oss << L"Previous Gene Score:" << std::endl;
+	oss << L" " << cage.getOldGeneScore() << std::endl;
+
+
+	// 포트 연결 개수 표시
+	oss << L"PortCount:" << std::endl;
+	oss << L" " << cage.getValidPortCount() << std::endl;
 
 
 	// 메모리 표시
 	oss << L"Cage Memory:" << std::endl;
 
 	auto cageMem = cage.getCageMemory();
-	auto memory = cageMem->getMemory();
 
 	size_t count = 0;
-	for (const auto& cell : memory)
+	size_t address = 0;
+	for (const auto& cell : cageMem->getMemory())
 	{
-		oss << L" (" << cell.first << L": " << cell.second << L")" << std::endl;
-	
-		++count;
-		if (count > 32)
+		if (cell.first)
 		{
-			count = 0;
-			oss << L"..." << std::endl;
-			break;
+			oss << L" (" << address << L": " << cell.second << L")" << std::endl;
+
+			++count;
+			if (count > 32)
+			{
+				count = 0;
+				oss << L"..." << std::endl;
+				break;
+			}
 		}
+
+		++address;
+	}
+	
+	count = 0;
+	address = 0;
+	for (const auto& cell : cageMem->getNegativeMemory())
+	{
+		if (cell.first)
+		{
+			oss << L" (-" << address << L": " << cell.second << L")" << std::endl;
+
+			++count;
+			if (count > 32)
+			{
+				count = 0;
+				oss << L"..." << std::endl;
+				break;
+			}
+		}
+
+		++address;
 	}
 
 
@@ -350,7 +404,8 @@ int WhatboxObjectViewer::draw(const VoidGameDevice& device) const
 
 
 	oss << L"VoidGameDevice:" << std::endl;
-	oss << L" ";
+	oss << L" Success: " << device.getSuccessCount();
+	oss << L" Fail: " << device.getFailCount();
 
 
 	graphic.drawText(oss.str(),

@@ -2,6 +2,7 @@
 
 #include <memory>
 #include <unordered_map>
+#include <vector>
 
 class Memory;
 
@@ -40,7 +41,7 @@ public:
 
 protected:
 	std::shared_ptr<Memory> m_connectedMem;
-	std::unordered_map<int, int> m_assignedInfo;
+	std::unordered_map<int, std::vector<int>> m_assignedInfo;
 
 
 public:
@@ -54,12 +55,12 @@ public:
 
 
 public:
-	double readPort(int portNum);
+	double readPort(int portNum) const;
 	bool writePort(int portNum, double value);
 
 
 public:
 	std::shared_ptr<const Memory> getConnectedMemory() const;
-	const std::unordered_map<int, int>& getConnectionInfo() const;
+	const std::unordered_map<int, std::vector<int>>& getConnectionInfo() const;
 };
 

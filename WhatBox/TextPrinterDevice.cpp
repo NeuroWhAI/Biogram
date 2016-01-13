@@ -35,7 +35,7 @@ TextPrinterDevice::TextPrinterDevice()
 		{0, 100},
 		{1, 200},
 		{2, 300},
-		{3, 400} })
+		{3, 400} }, 16)
 {
 
 }

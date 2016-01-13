@@ -29,11 +29,12 @@
 
 
 
-Device::Device(const std::vector<std::pair<int, int>>& portNum_address)
+Device::Device(const std::vector<std::pair<int, int>>& portNum_address,
+	int thickness)
 	: m_pConnectedCage(nullptr)
 	
 	, m_pComPort(nullptr)
-	, m_connectionInfo(portNum_address)
+	, m_connectionInfo(createThickComPort(portNum_address, thickness))
 {
 
 }
@@ -86,7 +87,7 @@ int Device::connectTo(std::shared_ptr<BiogramCage> pCage)
 
 //#################################################################
 
-double Device::readCom(int portNum)
+double Device::readCom(int portNum) const
 {
 	if (m_pComPort)
 	{
@@ -127,5 +128,31 @@ std::shared_ptr<BiogramCage> Device::getConnectedCage()
 std::shared_ptr<const ComPort> Device::getComPort() const
 {
 	return m_pComPort;
+}
+
+//#################################################################
+
+std::vector<std::pair<int, int>> Device::createThickComPort(
+	const std::vector<std::pair<int, int>>& portNum_address,
+	int thickness)
+{
+	std::vector<std::pair<int, int>> portInfo;
+
+	if (thickness == 0)
+		return portInfo;
+
+	for (const auto& info : portNum_address)
+	{
+		int dir = ((thickness < 0) ? -1 : 1);
+		thickness = std::abs(thickness);
+		for (int i = 0; i < thickness; ++i)
+		{
+			portInfo.emplace_back(std::make_pair(
+				info.first, i * dir + info.second));
+		}
+	}
+
+
+	return portInfo;
 }
 

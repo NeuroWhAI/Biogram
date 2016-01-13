@@ -93,13 +93,13 @@ public:
 
 protected:
 	int updateCommand(double timeSpeed);
-	int updateScore(double timeSpeed);
 
 
 public:
 	std::shared_ptr<const BiogramDNA> getDNA() const;
 	void setGeneScore(double score);
 	double getGeneScore() const;
+	double getOldGeneScore() const;
 
 
 public:

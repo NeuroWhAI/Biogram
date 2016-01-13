@@ -33,8 +33,8 @@
 VoidGameDevice::VoidGameDevice()
 	: Device({
 		{ 0, 100 },
-		{ 1, 100 },
-		{ 2, 100 } })
+		{ 1, 200 },
+		{ 2, 300 } })
 
 	, m_bBombInLeft(false)
 	, m_failCount(0)

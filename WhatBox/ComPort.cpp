@@ -53,28 +53,35 @@ int ComPort::connectMemory(std::shared_ptr<Memory> pMem)
 
 bool ComPort::assignPort(int portNum, int address)
 {
-	if (m_assignedInfo.find(portNum) == m_assignedInfo.end())
+	for (auto& adr : m_assignedInfo[portNum])
 	{
-		m_assignedInfo.insert(std::make_pair(portNum, address));
-
-
-		return true;
+		if (adr == address)
+			return false;
 	}
 
+	m_assignedInfo[portNum].emplace_back(address);
 
-	return false;
+
+	return true;
 }
 
 //#################################################################
 
-double ComPort::readPort(int portNum)
+double ComPort::readPort(int portNum) const
 {
 	if (m_connectedMem)
 	{
 		auto pos = m_assignedInfo.find(portNum);
 		if (pos != m_assignedInfo.end())
 		{
-			return m_connectedMem->read(pos->second);
+			double result = 0.0;
+
+			for (auto& address : pos->second)
+			{
+				result += m_connectedMem->read(address);
+			}
+
+			return result;
 		}
 	}
 
@@ -90,7 +97,10 @@ bool ComPort::writePort(int portNum, double value)
 		auto pos = m_assignedInfo.find(portNum);
 		if (pos != m_assignedInfo.end())
 		{
-			m_connectedMem->write(pos->second, value);
+			for (auto& address : pos->second)
+			{
+				m_connectedMem->write(address, value);
+			}
 
 
 			return true;
@@ -109,7 +119,7 @@ std::shared_ptr<const Memory> ComPort::getConnectedMemory() const
 }
 
 
-const std::unordered_map<int, int>& ComPort::getConnectionInfo() const
+const std::unordered_map<int, std::vector<int>>& ComPort::getConnectionInfo() const
 {
 	return m_assignedInfo;
 }

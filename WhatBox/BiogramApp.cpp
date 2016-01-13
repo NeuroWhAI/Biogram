@@ -8,6 +8,8 @@
 
 #include "TextPrinterDevice.h"
 #include "TextCheckDirector.h"
+#include "VoidGameDevice.h"
+#include "VoidDirector.h"
 
 
 
@@ -38,6 +40,8 @@
 BiogramApp::BiogramApp()
 	: m_pBiogramWorld(std::make_shared<BiogramWorld>())
 	, m_geneNum(0)
+
+	, m_bDrawWorld(true)
 {
 
 }
@@ -64,6 +68,12 @@ int BiogramApp::init()
 
 	TextCheckDirector checker(L"42!");
 	m_pBiogramWorld->initDirector(checker);
+
+	/*VoidGameDevice game;
+	m_pBiogramWorld->initDeviceForeachCage(game);
+
+	VoidDirector director;
+	m_pBiogramWorld->initDirector(director);*/
 
 
 	return 0;
@@ -96,25 +106,42 @@ int BiogramApp::update()
 	}
 
 
+	if (System::getInstance().getUserInputController().
+		onKeyDown(0x20/*Space*/))
+	{
+		m_bDrawWorld = !m_bDrawWorld;
+	}
+
+
+	m_elapsedTime = std::chrono::system_clock::now() - m_beginTime;
+
+
 	return 0;
 }
 
 
 int BiogramApp::render()
 {
-	System::getInstance().getObjectViewer().
-		drawBiogramWorld(*m_pBiogramWorld);
+	std::chrono::system_clock::time_point beginRender =
+		std::chrono::system_clock::now();
 
+	if (m_bDrawWorld)
+	{
+		System::getInstance().getObjectViewer().
+			drawBiogramWorld(*m_pBiogramWorld);
+	}
 
-	m_elapsedTime = std::chrono::system_clock::now() - m_beginTime;
+	std::chrono::duration<double> renderTime =
+		std::chrono::system_clock::now() - beginRender;
+
 
 	auto winSize = System::getInstance().getSystemInfo().
 		getWinSize();
 	
 	std::wostringstream oss;
 	oss << std::fixed;
-	oss.precision(1);
-	oss << 1.0 / m_elapsedTime.count() << "fps";
+	oss << L"Update: " << m_elapsedTime.count() << L"s" << std::endl;
+	oss << L"Render: " << renderTime.count() << L"s";
 
 	System::getInstance().getGraphic().
 		drawText(oss.str(), Utility::Point(winSize.width / 2 - 200, 8),

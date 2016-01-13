@@ -39,8 +39,10 @@ public:
 
 
 protected:
-	std::chrono::time_point<std::chrono::system_clock> m_beginTime;
+	std::chrono::system_clock::time_point m_beginTime;
 	std::chrono::duration<double> m_elapsedTime;
+
+	bool m_bDrawWorld;
 
 
 protected:

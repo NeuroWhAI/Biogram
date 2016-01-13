@@ -121,14 +121,6 @@ int BiogramDNA::mutate(double rate)
 	std::uniform_int_distribution<> rateDist(1, 100000000);
 
 
-	// 단순 비트 반전 작업
-	for (auto& bit : m_data)
-	{
-		if (rateDist(s_randEngine) < rateNum)
-			bit = !bit;
-	}
-
-
 	// 유전자 길이가 변하는 돌연변이
 	if (rateDist(s_randEngine) < rateNum)
 	{
@@ -199,6 +191,14 @@ int BiogramDNA::mutate(double rate)
 		LOG("Reverse DNA from ",
 			beginIndex, " by ",
 			reverseRange);
+	}
+
+
+	// 단순 비트 반전 작업
+	for (auto& bit : m_data)
+	{
+		if (rateDist(s_randEngine) < rateNum)
+			bit = !bit;
 	}
 
 

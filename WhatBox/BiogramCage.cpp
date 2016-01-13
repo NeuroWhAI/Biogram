@@ -77,10 +77,6 @@ int BiogramCage::setSharedMemory(std::shared_ptr<Memory> sharedMemory)
 
 int BiogramCage::update(double timeSpeed)
 {
-	// 적합도 점수 감소
-	updateScore(timeSpeed);
-
-
 	// 명령어 실행 진행
 	updateCommand(timeSpeed);
 
@@ -95,9 +91,7 @@ int BiogramCage::update(double timeSpeed)
 
 bool BiogramCage::isEnd() const
 {
-	return (m_pCmdOperator->getCurrentUnitCount() < 1
-		&&
-		std::abs(m_prevGeneScore - m_geneScore) < std::numeric_limits<double>::epsilon());
+	return (m_pCmdOperator->getCurrentUnitCount() < 1);
 }
 
 //###############################################################
@@ -107,17 +101,6 @@ int BiogramCage::updateCommand(double timeSpeed)
 	m_pCmdOperator->setGeneScore(m_geneScore);
 
 	m_pCmdOperator->update(timeSpeed, m_elapsedTime);
-
-
-	return 0;
-}
-
-
-int BiogramCage::updateScore(double timeSpeed)
-{
-	m_prevGeneScore = m_geneScore;
-
-	m_geneScore -= m_geneScore / 32 * timeSpeed;
 
 
 	return 0;
@@ -134,12 +117,19 @@ std::shared_ptr<const BiogramDNA> BiogramCage::getDNA() const
 void BiogramCage::setGeneScore(double score)
 {
 	m_geneScore = score;
+	m_prevGeneScore = score;
 }
 
 
 double BiogramCage::getGeneScore() const
 {
 	return m_geneScore;
+}
+
+
+double BiogramCage::getOldGeneScore() const
+{
+	return m_prevGeneScore;
 }
 
 //###############################################################
@@ -186,6 +176,8 @@ int BiogramCage::buildBiogramWithoutClear(const BiogramDNA& dna)
 int BiogramCage::clear()
 {
 	clearWithoutComPort();
+
+	m_prevGeneScore = 0.0;
 	
 	m_comPortList.clear();
 	m_assignedPortCount = 0;

@@ -37,7 +37,8 @@ class Director;
 class Device
 {
 public:
-	explicit Device(const std::vector<std::pair<int, int>>& portNum_address);
+	Device(const std::vector<std::pair<int, int>>& portNum_address,
+		int thickness = 1);
 	virtual ~Device();
 
 
@@ -61,7 +62,7 @@ public:
 
 
 protected:
-	double readCom(int portNum);
+	double readCom(int portNum) const;
 	bool writeCom(int portNum, double value);
 
 
@@ -72,5 +73,11 @@ public:
 public:
 	std::shared_ptr<BiogramCage> getConnectedCage();
 	std::shared_ptr<const ComPort> getComPort() const;
+
+
+private:
+	std::vector<std::pair<int, int>> createThickComPort(
+		const std::vector<std::pair<int, int>>& portNum_address,
+		int thickness);
 };
 

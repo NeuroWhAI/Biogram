@@ -1,6 +1,7 @@
 #pragma once
 
 #include <unordered_map>
+#include <vector>
 
 
 
@@ -31,13 +32,19 @@
 class Memory
 {
 public:
+	static const int MAX_ADDRESS;
+
+
+public:
 	Memory();
 	virtual ~Memory();
 
 
 protected:
-	std::unordered_map<int, double> m_memory;
-	std::vector<int> m_addressList;
+	// * first: 할당여부
+	// * second: 메모리 값
+	std::vector<std::pair<bool, double>> m_memory, m_negativeMemory;
+	std::vector<int> m_addressList, m_negativeAddressList;
 
 
 public:
@@ -53,10 +60,10 @@ public:
 	* 단, 해당 주소가 없다면 0.0을 반환합니다.
 	* @Return: address에 해당하는 값
 	*/
-	double read(int address);
+	double read(int address) const;
 	/*
 	* 메모리의 address에 접근해 value를 덮어씁니다.
-	* 해당 주소가 없다면 만들고 씁니다.
+	* 해당 주소가 없다면 쓰지않습니다.
 	*/
 	void write(int address, double value);
 	void clear();
@@ -69,8 +76,21 @@ public:
 	bool findAddress(int address, int* pOffsetOut = nullptr) const;
 
 
+protected:
+	std::pair<bool, double>& findCell(int address);
+	const std::pair<bool, double>& findCell(int address) const;
+	bool assignAddressTo(
+		std::vector<std::pair<bool, double>>& memory,
+		size_t index,
+		std::vector<int>& addressList,
+		int address);
+
+
 public:
-	const std::unordered_map<int, double>& getMemory() const;
+	const std::vector<std::pair<bool, double>>&
+		getMemory() const;
+	const std::vector<std::pair<bool, double>>&
+		getNegativeMemory() const;
 	size_t getAssignedCellCount() const;
 };
 

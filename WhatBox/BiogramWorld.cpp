@@ -284,10 +284,6 @@ int BiogramWorld::update()
 		updateDevice();
 
 
-		// 각 Cage 평가
-		evaluateCage();
-
-
 		// 다음 세대로 갈 준비가 되었으면 건너감
 		checkReadyForNext();
 	}
@@ -332,6 +328,10 @@ int BiogramWorld::stepToNextGeneration()
 
 
 	std::vector<BiogramDNA> nextGeneList;
+
+
+	// 각 Cage 평가
+	evaluateCage();
 
 
 	// 적합도가 높은 순으로 정렬
@@ -463,6 +463,9 @@ int BiogramWorld::updateCageFocus()
 			m_focusedCageNum = m_pCageList.size() - 1;
 		else
 			--m_focusedCageNum;
+
+		
+		evaluateCage();
 	}
 	else if (System::getInstance().getUserInputController().
 		onKeyDown(0xBE/*>*/))
@@ -471,6 +474,9 @@ int BiogramWorld::updateCageFocus()
 			++m_focusedCageNum;
 		else
 			m_focusedCageNum = 0;
+
+
+		evaluateCage();
 	}
 
 
@@ -536,9 +542,6 @@ int BiogramWorld::updateDevice()
 
 int BiogramWorld::evaluateCage()
 {
-	const double timeSpeed = m_pTimeManager->getPitch();
-
-
 	// Device의 작동을 평가해서 연결된 Cage의 점수를 갱신
 	for (auto& device : m_deviceList)
 	{
@@ -557,18 +560,21 @@ int BiogramWorld::evaluateCage()
 
 		for (const auto& info : portInfo)
 		{
-			int offset = 0;
-			bool bExist = mem->findAddress(info.second, &offset);
+			for (auto& address : info.second)
+			{
+				int offset = 0;
+				bool bExist = mem->findAddress(address, &offset);
 
-			// 연결이 되어있으면 만점이고
-			// 아니면 다른 연결이 가까운 만큼 점수를 줌
-			if (bExist)
-			{
-				score += 1.0;
-			}
-			else
-			{
-				score += 1.0 / static_cast<double>(offset + 1);
+				// 연결이 되어있으면 만점이고
+				// 아니면 다른 연결이 가까운 만큼 점수를 줌
+				if (bExist)
+				{
+					score += 1.0;
+				}
+				else
+				{
+					score += 1.0 / static_cast<double>(offset + 1);
+				}
 			}
 		}
 
@@ -592,7 +598,7 @@ int BiogramWorld::evaluateCage()
 		}
 
 
-		cage->setGeneScore(score * timeSpeed + cage->getGeneScore());
+		cage->setGeneScore(score);
 	}
 
 
