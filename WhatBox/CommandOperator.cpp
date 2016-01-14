@@ -4,6 +4,8 @@
 #include "Linker.h"
 #include "Memory.h"
 
+#include "System.h"
+
 #define CMD_FUNC(name) m_cmdFuncList.emplace_back(&CommandOperator::name)
 
 

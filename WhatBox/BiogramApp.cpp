@@ -58,7 +58,7 @@ int BiogramApp::init()
 {
 	if (!m_pBiogramWorld->initWorld(L"./Sample/World/auto-saved.biow"))
 	{
-		m_pBiogramWorld->initWorld(64, 10000.0, 0.01);
+		m_pBiogramWorld->initWorld(64, 20000.0, 0.01);
 	}
 
 	m_geneNum = m_pBiogramWorld->getGenerationNumber();

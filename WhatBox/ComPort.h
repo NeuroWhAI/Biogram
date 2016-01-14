@@ -41,7 +41,7 @@ public:
 
 protected:
 	std::shared_ptr<Memory> m_connectedMem;
-	std::unordered_map<int, std::vector<int>> m_assignedInfo;
+	std::vector<std::vector<int>> m_assignedInfo;
 
 
 public:
@@ -61,6 +61,6 @@ public:
 
 public:
 	std::shared_ptr<const Memory> getConnectedMemory() const;
-	const std::unordered_map<int, std::vector<int>>& getConnectionInfo() const;
+	const std::vector<std::vector<int>>& getConnectionInfo() const;
 };
 

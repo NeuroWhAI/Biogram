@@ -53,6 +53,15 @@ int ComPort::connectMemory(std::shared_ptr<Memory> pMem)
 
 bool ComPort::assignPort(int portNum, int address)
 {
+	if (portNum < 0)
+		throw std::invalid_argument("portNum < 0");
+
+
+	size_t portCount = static_cast<size_t>(portNum);
+	while (portCount >= m_assignedInfo.size())
+		m_assignedInfo.emplace_back();
+
+
 	for (auto& adr : m_assignedInfo[portNum])
 	{
 		if (adr == address)
@@ -69,14 +78,17 @@ bool ComPort::assignPort(int portNum, int address)
 
 double ComPort::readPort(int portNum) const
 {
+	if (portNum < 0)
+		throw std::invalid_argument("portNum < 0");
+
+
 	if (m_connectedMem)
 	{
-		auto pos = m_assignedInfo.find(portNum);
-		if (pos != m_assignedInfo.end())
+		if (static_cast<size_t>(portNum) < m_assignedInfo.size())
 		{
 			double result = 0.0;
 
-			for (auto& address : pos->second)
+			for (auto& address : m_assignedInfo[portNum])
 			{
 				result += m_connectedMem->read(address);
 			}
@@ -92,12 +104,14 @@ double ComPort::readPort(int portNum) const
 
 bool ComPort::writePort(int portNum, double value)
 {
+	if (portNum < 0)
+		return 0.0;
+
 	if (m_connectedMem)
 	{
-		auto pos = m_assignedInfo.find(portNum);
-		if (pos != m_assignedInfo.end())
+		if (static_cast<size_t>(portNum) < m_assignedInfo.size())
 		{
-			for (auto& address : pos->second)
+			for (auto& address : m_assignedInfo[portNum])
 			{
 				m_connectedMem->write(address, value);
 			}
@@ -119,7 +133,7 @@ std::shared_ptr<const Memory> ComPort::getConnectedMemory() const
 }
 
 
-const std::unordered_map<int, std::vector<int>>& ComPort::getConnectionInfo() const
+const std::vector<std::vector<int>>& ComPort::getConnectionInfo() const
 {
 	return m_assignedInfo;
 }

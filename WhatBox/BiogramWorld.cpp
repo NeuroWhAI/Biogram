@@ -50,7 +50,7 @@ using DevicePtr = BiogramWorld::DevicePtr;
 
 BiogramWorld::BiogramWorld()
 	: m_pTimeManager(std::make_shared<TimeManager>())
-	, m_maxTimePerGeneration(5000.0)
+	, m_maxTimePerGeneration(10000.0)
 	, m_generationNumber(0)
 	, m_mutationRate(0.1)
 
@@ -560,7 +560,7 @@ int BiogramWorld::evaluateCage()
 
 		for (const auto& info : portInfo)
 		{
-			for (auto& address : info.second)
+			for (auto& address : info)
 			{
 				int offset = 0;
 				bool bExist = mem->findAddress(address, &offset);
