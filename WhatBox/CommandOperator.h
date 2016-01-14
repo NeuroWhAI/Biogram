@@ -63,6 +63,7 @@ protected:
 public:
 	int update(double timePitch, double totalTime);
 	int clear();
+	bool isEnd() const;
 
 
 public:

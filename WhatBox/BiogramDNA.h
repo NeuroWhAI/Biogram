@@ -48,6 +48,7 @@ public:
 	int saveTo(std::ostream& osr) const;
 	int loadFrom(std::istream& isr);
 	const std::vector<bool>& getData() const;
+	size_t getLength() const;
 
 
 public:

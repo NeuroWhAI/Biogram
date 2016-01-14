@@ -91,7 +91,7 @@ int BiogramCage::update(double timeSpeed)
 
 bool BiogramCage::isEnd() const
 {
-	return (m_pCmdOperator->getCurrentUnitCount() < 1);
+	return m_pCmdOperator->isEnd();
 }
 
 //###############################################################

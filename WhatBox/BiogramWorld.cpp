@@ -50,6 +50,7 @@ using DevicePtr = BiogramWorld::DevicePtr;
 
 BiogramWorld::BiogramWorld()
 	: m_pTimeManager(std::make_shared<TimeManager>())
+	, m_timeLimitScale(1.0)
 	, m_maxTimePerGeneration(10000.0)
 	, m_generationNumber(0)
 	, m_mutationRate(0.1)
@@ -79,7 +80,7 @@ bool BiogramWorld::saveTo(std::ostream& osr) const
 
 	if (osr.good())
 	{
-		osr << m_maxTimePerGeneration << endl;
+		osr << m_timeLimitScale << endl;
 		osr << m_generationNumber << endl;
 		osr << m_mutationRate << endl;
 
@@ -107,7 +108,7 @@ bool BiogramWorld::loadFrom(std::istream& isr)
 		this->clear();
 
 
-		isr >> m_maxTimePerGeneration;
+		isr >> m_timeLimitScale;
 		isr >> m_generationNumber;
 		isr >> m_mutationRate;
 
@@ -126,6 +127,10 @@ bool BiogramWorld::loadFrom(std::istream& isr)
 
 			this->addCage(cage);
 		}
+
+
+		// 세대당 시간제한 다시 계산
+		updateMaxTimeLimit();
 
 
 		return true;
@@ -214,13 +219,13 @@ bool BiogramWorld::saveWorld(const std::wstring& fileName)
 
 
 int BiogramWorld::initWorld(size_t cageCount,
-	double maxTimePerGeneration,
+	double timeLimitScale,
 	double mutationRate)
 {
 	this->clear();
 
 
-	m_maxTimePerGeneration = maxTimePerGeneration;
+	m_timeLimitScale = timeLimitScale;
 	m_mutationRate = mutationRate;
 
 
@@ -234,6 +239,10 @@ int BiogramWorld::initWorld(size_t cageCount,
 
 		this->addCage(cage);
 	}
+
+
+	// 세대당 시간제한 다시 계산
+	updateMaxTimeLimit();
 
 
 	return 0;
@@ -445,6 +454,10 @@ int BiogramWorld::stepToNextGeneration()
 	}
 
 
+	// 세대당 시간제한 다시 계산
+	updateMaxTimeLimit();
+
+
 	// 세대번호 증가
 	increaseGenerationNumber();
 
@@ -617,6 +630,31 @@ int BiogramWorld::checkReadyForNext()
 	return 0;
 }
 
+
+int BiogramWorld::updateMaxTimeLimit()
+{
+	if (m_pCageList.size() > 0
+		&&
+		m_deviceList.size() > 0)
+	{
+		auto cage = m_deviceList[0]->getConnectedCage();
+		auto dna = m_pCageList[0]->getDNA();
+
+		if (cage && dna)
+		{
+			double dnaLength = dna->getLength();
+			double portCount = cage->getValidPortCount();
+
+			m_maxTimePerGeneration = dnaLength / 2048.0 * portCount * m_timeLimitScale;
+			if (m_maxTimePerGeneration < 8000)
+				m_maxTimePerGeneration = 8000;
+		}
+	}
+
+
+	return 0;
+}
+
 //###############################################################
 
 void BiogramWorld::increaseGenerationNumber()
@@ -655,6 +693,12 @@ int BiogramWorld::addDevice(DevicePtr pDevice)
 }
 
 //###############################################################
+
+double BiogramWorld::getTimeLimit() const
+{
+	return m_maxTimePerGeneration;
+}
+
 
 size_t BiogramWorld::getGenerationNumber() const
 {

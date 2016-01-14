@@ -39,7 +39,7 @@ BiogramDNA::BiogramDNA(bool bFillRandomly)
 	{
 		// ·£´ý DNA »ý¼º
 		std::uniform_int_distribution<int> bitDist(0, 1);
-		std::uniform_int_distribution<int> sizeDist(1, 100000);
+		std::uniform_int_distribution<int> sizeDist(1, 200000);
 
 		int size = sizeDist(s_randEngine);
 
@@ -110,6 +110,12 @@ int BiogramDNA::loadFrom(std::istream& isr)
 const std::vector<bool>& BiogramDNA::getData() const
 {
 	return m_data;
+}
+
+
+size_t BiogramDNA::getLength() const
+{
+	return m_data.size();
 }
 
 //###############################################################

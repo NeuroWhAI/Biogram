@@ -54,6 +54,7 @@ public:
 
 protected:
 	TimeManagerPtr m_pTimeManager;
+	double m_timeLimitScale;
 	double m_maxTimePerGeneration;
 	size_t m_generationNumber;
 	double m_mutationRate;
@@ -81,7 +82,7 @@ public:
 	bool initWorld(const std::wstring& fileName);
 	bool saveWorld(const std::wstring& fileName);
 	int initWorld(size_t cageCount,
-		double maxTimePerGeneration,
+		double timeLimitScale,
 		double mutationRate);
 	template <typename T_DEVICE>
 	int initDeviceForeachCage(const T_DEVICE& originalDevice);
@@ -106,6 +107,7 @@ protected:
 	int updateDevice();
 	int evaluateCage();
 	int checkReadyForNext();
+	int updateMaxTimeLimit();
 
 
 protected:
@@ -118,6 +120,7 @@ public:
 
 
 public:
+	double getTimeLimit() const;
 	size_t getGenerationNumber() const;
 	double getMutationRate() const;
 	double getTimeSpeed() const;

@@ -35,7 +35,9 @@
 
 
 CommandOperator::CommandOperator()
-	: m_pSharedMemory(nullptr)
+	: m_pCurrentUnit(nullptr)
+	
+	, m_pSharedMemory(nullptr)
 	, m_pCageMemory(nullptr)
 	, m_elapsedTime(0.0)
 	, m_geneScore(0.0)
@@ -62,6 +64,7 @@ int CommandOperator::update(double timePitch, double totalTime)
 
 	if(m_pCurrentUnit)
 	{
+		// 시간 속도를 이용해 반복 횟수 계산
 		double leftTime = m_pCurrentUnit->getTimeGage() + timePitch;
 
 		while (leftTime >= timePerCmd)
@@ -94,7 +97,17 @@ int CommandOperator::update(double timePitch, double totalTime)
 			// Jump요청이 들어왔으면 하고 아니면 다음 유닛으로 이동
 			if (nextUnit)
 			{
-				m_pCurrentUnit = nextUnit;
+				// 현재위치로 Jump하면 그냥 종료시킴
+				if (m_pCurrentUnit == nextUnit)
+				{
+					m_pCurrentUnit = nullptr;
+					break;
+				}
+				else
+				{
+					// Jump
+					m_pCurrentUnit = nextUnit;
+				}
 			}
 			else
 			{
@@ -128,6 +141,12 @@ int CommandOperator::clear()
 
 
 	return 0;
+}
+
+
+bool CommandOperator::isEnd() const
+{
+	return (!m_pCurrentUnit);
 }
 
 //###############################################################

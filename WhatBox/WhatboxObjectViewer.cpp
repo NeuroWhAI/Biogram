@@ -106,7 +106,8 @@ int WhatboxObjectViewer::drawBiogramWorld(const BiogramWorld& world) const
 
 	// 시간속도 및 경과시간 표시
 	oss << L"Time Speed: " << world.getTimeSpeed() << std::endl;
-	oss << L"World Elapsed Time: " << world.getElapsedTime() << std::endl;
+	oss << L"World Elapsed Time:" << std::endl;
+	oss << L" " << world.getElapsedTime() << L"/" << world.getTimeLimit() << std::endl;
 
 
 	// 공유메모리 표시
