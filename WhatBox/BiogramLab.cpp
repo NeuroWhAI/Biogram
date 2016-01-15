@@ -60,11 +60,11 @@ int BiogramLab::update(double timeSpeed)
 
 	if (m_bLoop
 		&&
-		m_pCmdOperator->getCurrentUnitCount() <= 0
+		m_pCmdOperator->isEnd()
 		&&
 		m_pUnitList.size() > 0)
 	{
-		m_pCmdOperator->addUnit(m_pUnitList[0]);
+		m_pCmdOperator->restart();
 	}
 
 
@@ -91,10 +91,7 @@ int BiogramLab::update(double timeSpeed)
 
 	if (inputMgr.onKeyDown(0x20/*Space*/))
 	{
-		if (m_pUnitList.size() > 0)
-		{
-			m_pCmdOperator->addUnit(m_pUnitList[0]);
-		}
+		m_pCmdOperator->restart();
 	}
 
 	if (inputMgr.onKeyDown(0x0D/*Enter*/))

@@ -115,9 +115,7 @@ public:
 
 public:
 	bool addUnit(std::shared_ptr<Unit> pUnit);
-	bool removeUnit(std::shared_ptr<Unit> pUnit);
 	bool addLinker(std::shared_ptr<Linker> pLinker, LinkerTypes type);
-	bool removeLinker(std::shared_ptr<Linker> pLinker, LinkerTypes type);
 
 
 public:

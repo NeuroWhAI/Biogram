@@ -1,14 +1,13 @@
 #pragma once
 
 #include <memory>
-#include <unordered_set>
 #include <vector>
 
 class Unit;
 class Linker;
 class Memory;
 
-#define CMD_FUNC_PARAM (std::shared_ptr<Unit>* pNextUnit, std::shared_ptr<Unit> here, std::shared_ptr<Unit> param1, std::shared_ptr<Unit> param2)
+#define CMD_FUNC_PARAM (int* pNextRelativeNum, std::shared_ptr<Unit> here, std::shared_ptr<Unit> param1, std::shared_ptr<Unit> param2)
 #define CMD_FUNC(name) double name CMD_FUNC_PARAM
 
 
@@ -45,7 +44,9 @@ public:
 
 
 protected:
-	std::shared_ptr<Unit> m_pCurrentUnit;
+	size_t m_currentFlowIndex;
+	std::vector<std::shared_ptr<Unit>> m_pFlowUnitList;
+	bool m_bIsEnd;
 
 
 protected:
@@ -62,20 +63,17 @@ protected:
 
 public:
 	int update(double timePitch, double totalTime);
+	int restart();
 	int clear();
 	bool isEnd() const;
 
 
 public:
-	// * 명령어를 실행시킬 유닛 목록에 pUnit을 추가합니다.
-	// * @Return: 추가성공 여부
-	bool addUnit(std::shared_ptr<Unit> pUnit);
-
-	void removeUnit(std::shared_ptr<Unit> pUnit);
+	int addFlowUnit(std::shared_ptr<Unit> pUnit);
+	const std::vector<std::shared_ptr<Unit>>& getFlowUnitList() const;
 
 
 public:
-	size_t getCurrentUnitCount() const;
 	size_t getCmdFunctionCount() const;
 
 

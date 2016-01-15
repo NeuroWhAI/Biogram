@@ -35,7 +35,8 @@
 
 
 CommandOperator::CommandOperator()
-	: m_pCurrentUnit(nullptr)
+	: m_currentFlowIndex(0)
+	, m_bIsEnd(false)
 	
 	, m_pSharedMemory(nullptr)
 	, m_pCageMemory(nullptr)
@@ -62,14 +63,18 @@ int CommandOperator::update(double timePitch, double totalTime)
 	const double timePerCmd = 1.0; // 작을수록 명령어 실행속도가 빨라짐.
 	const int funcCount = static_cast<int>(m_cmdFuncList.size());
 
-	if(m_pCurrentUnit)
+	if(!m_bIsEnd
+		&&
+		m_currentFlowIndex < m_pFlowUnitList.size())
 	{
+		auto currentUnit = m_pFlowUnitList[m_currentFlowIndex];
+
 		// 시간 속도를 이용해 반복 횟수 계산
-		double leftTime = m_pCurrentUnit->getTimeGage() + timePitch;
+		double leftTime = currentUnit->getTimeGage() + timePitch;
 
 		while (leftTime >= timePerCmd)
 		{
-			std::shared_ptr<Unit> nextUnit(nullptr);
+			int jumpPosition = 1;
 
 
 			// 시간진행지수 누적
@@ -77,56 +82,59 @@ int CommandOperator::update(double timePitch, double totalTime)
 
 
 			// 명령어 실행
-			int cmdNum = m_pCurrentUnit->getCmdNumber();
+			int cmdNum = currentUnit->getCmdNumber();
 			if (cmdNum < funcCount)
 			{
-				auto linker1 = m_pCurrentUnit->getParamLinker(0);
-				auto linker2 = m_pCurrentUnit->getParamLinker(1);
+				auto linker1 = currentUnit->getParamLinker(0);
+				auto linker2 = currentUnit->getParamLinker(1);
 
-				(this->*m_cmdFuncList[cmdNum])(&nextUnit,
-					m_pCurrentUnit,
+				(this->*m_cmdFuncList[cmdNum])(&jumpPosition,
+					currentUnit,
 					(linker1 ? linker1->getInUnit() : nullptr),
 					(linker2 ? linker2->getInUnit() : nullptr));
 			}
 
 
 			// 작동했으므로 시간진행지수를 리셋
-			m_pCurrentUnit->setTimeGage(0.0);
+			currentUnit->setTimeGage(0.0);
 
 
-			// Jump요청이 들어왔으면 하고 아니면 다음 유닛으로 이동
-			if (nextUnit)
+			// Jump좌표가 유효하지 않으면 종료하고
+			// 유효하면 다음 유닛(명령어)으로 이동
+			if ((jumpPosition < 0
+				&&
+				static_cast<size_t>(-jumpPosition) > m_currentFlowIndex)
+				||
+				jumpPosition == 0)
 			{
-				// 현재위치로 Jump하면 그냥 종료시킴
-				if (m_pCurrentUnit == nextUnit)
-				{
-					m_pCurrentUnit = nullptr;
-					break;
-				}
-				else
-				{
-					// Jump
-					m_pCurrentUnit = nextUnit;
-				}
+				m_bIsEnd = true;
+				currentUnit = nullptr;
+
+				break;
 			}
 			else
 			{
-				// 다음 유닛(명령어)으로 이동
-				auto pOutLinker = m_pCurrentUnit->getOutLinker();
-				if (pOutLinker)
-					m_pCurrentUnit = pOutLinker->getOutUnit();
-				else
-					m_pCurrentUnit = nullptr;
+				// 좌표 이동
+				m_currentFlowIndex += jumpPosition;
 
-				// 다음 유닛이 없으면 진행종료
-				if(m_pCurrentUnit == nullptr) break;
+				// 다음 유닛을 선택하거나
+				// 범위를 벗어났다면 종료
+				if (m_currentFlowIndex < m_pFlowUnitList.size())
+					currentUnit = m_pFlowUnitList[m_currentFlowIndex];
+				else
+				{
+					m_bIsEnd = true;
+					currentUnit = nullptr;
+
+					break;
+				}
 			}
 		}
 
 		// 종료시점의 Head Unit의 시간진행 설정 및 목록에 등록
-		if (m_pCurrentUnit)
+		if (currentUnit)
 		{
-			m_pCurrentUnit->setTimeGage(leftTime);
+			currentUnit->setTimeGage(leftTime);
 		}
 	}
 
@@ -135,9 +143,21 @@ int CommandOperator::update(double timePitch, double totalTime)
 }
 
 
+int CommandOperator::restart()
+{
+	m_currentFlowIndex = 0;
+	m_bIsEnd = false;
+
+
+	return 0;
+}
+
+
 int CommandOperator::clear()
 {
-	m_pCurrentUnit = nullptr;
+	m_currentFlowIndex = 0;
+	m_pFlowUnitList.clear();
+	m_bIsEnd = false;
 
 
 	return 0;
@@ -146,37 +166,26 @@ int CommandOperator::clear()
 
 bool CommandOperator::isEnd() const
 {
-	return (!m_pCurrentUnit);
+	return m_bIsEnd;
 }
 
 //###############################################################
 
-bool CommandOperator::addUnit(std::shared_ptr<Unit> pUnit)
+int CommandOperator::addFlowUnit(std::shared_ptr<Unit> pUnit)
 {
-	if (m_pCurrentUnit)
-		return false;
+	m_pFlowUnitList.emplace_back(pUnit);
 
 
-	m_pCurrentUnit = pUnit;
-
-
-	return true;
+	return 0;
 }
 
 
-void CommandOperator::removeUnit(std::shared_ptr<Unit> pUnit)
+const std::vector<std::shared_ptr<Unit>>& CommandOperator::getFlowUnitList() const
 {
-	if (m_pCurrentUnit == pUnit)
-		m_pCurrentUnit = nullptr;
+	return m_pFlowUnitList;
 }
 
 //###############################################################
-
-size_t CommandOperator::getCurrentUnitCount() const
-{
-	return ((m_pCurrentUnit) ? 1 : 0);
-}
-
 
 size_t CommandOperator::getCmdFunctionCount() const
 {

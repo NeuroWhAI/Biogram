@@ -39,7 +39,7 @@ BiogramDNA::BiogramDNA(bool bFillRandomly)
 	{
 		// 랜덤 DNA 생성
 		std::uniform_int_distribution<int> bitDist(0, 1);
-		std::uniform_int_distribution<int> sizeDist(1, 200000);
+		std::uniform_int_distribution<int> sizeDist(256, 200000);
 
 		int size = sizeDist(s_randEngine);
 
@@ -201,11 +201,19 @@ int BiogramDNA::mutate(double rate)
 
 
 	// 단순 비트 반전 작업
-	for (auto& bit : m_data)
+	std::uniform_int_distribution<> rangeDist(1, m_data.size() / 256);
+
+	const size_t count = m_data.size();
+	for (size_t i = 0; i < count; i += rangeDist(s_randEngine))
+	{
+		if (rateDist(s_randEngine) < rateNum)
+			m_data[i] = !m_data[i];
+	}
+	/*for (auto& bit : m_data)
 	{
 		if (rateDist(s_randEngine) < rateNum)
 			bit = !bit;
-	}
+	}*/
 
 
 	return 0;

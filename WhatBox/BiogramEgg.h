@@ -60,6 +60,7 @@ protected:
 	LinkerPtr m_pLinkerOnProcess;
 	int m_dataFromPast;
 	float m_prevAngle;
+	size_t m_currentFlowIndex;
 
 
 public:

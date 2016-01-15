@@ -57,7 +57,7 @@ CMD_FUNC_DECL(Cmd_Jump)
 	*/
 
 
-	return Cmd_JumpTo(pNextUnit, here, here, nullptr);
+	return Cmd_JumpTo(pNextRelativeNum, here, here, nullptr);
 }
 
 
@@ -72,21 +72,13 @@ CMD_FUNC_DECL(Cmd_JumpTo)
 
 	if (param1)
 	{
-		auto targetUnit = here->getRelativeFlowUnit(
-			static_cast<int>(param1->getMemory()));
-
-		// Jump에 성공하면 문제가 없음을 0을 반환함으로서 알림
-		if (targetUnit)
-		{
-			*pNextUnit = targetUnit;
+		*pNextRelativeNum = static_cast<int>(param1->getMemory());
 
 
-			return 0.0;
-		}
+		return 0.0;
 	}
 
 
-	// Jump에 실패했으므로 문제가 되는 정도를 반환함으로서 알림
 	return -0.1;
 }
 
@@ -100,7 +92,7 @@ CMD_FUNC_DECL(Cmd_JumpIf)
 	*/
 
 
-	return Cmd_JumpToIf(pNextUnit, here, here, param1);
+	return Cmd_JumpToIf(pNextRelativeNum, here, here, param1);
 }
 
 
@@ -117,17 +109,10 @@ CMD_FUNC_DECL(Cmd_JumpToIf)
 		&&
 		static_cast<int>(param2->getMemory()) != 0)
 	{
-		auto targetUnit = here->getRelativeFlowUnit(
-			static_cast<int>(param1->getMemory()));
-
-		// Jump에 성공하면 문제가 없음을 0을 반환함으로서 알림
-		if (targetUnit)
-		{
-			*pNextUnit = targetUnit;
+		*pNextRelativeNum = static_cast<int>(param1->getMemory());
 
 
-			return 0.0;
-		}
+		return 0.0;
 	}
 
 
@@ -145,7 +130,7 @@ CMD_FUNC_DECL(Cmd_JumpIfNot)
 	*/
 
 
-	return Cmd_JumpToIfNot(pNextUnit, here, here, param1);
+	return Cmd_JumpToIfNot(pNextRelativeNum, here, here, param1);
 }
 
 
@@ -160,15 +145,9 @@ CMD_FUNC_DECL(Cmd_JumpToIfNot)
 
 	if (param1 && param2)
 	{
-		if (param2->getMemory() <= std::numeric_limits<double>::epsilon())
+		if (std::abs(param2->getMemory()) <= std::numeric_limits<double>::epsilon())
 		{
-			auto targetUnit = here->getRelativeFlowUnit(
-				static_cast<int>(param1->getMemory()));
-
-			if (targetUnit)
-			{
-				*pNextUnit = targetUnit;
-			}
+			*pNextRelativeNum = static_cast<int>(param1->getMemory());
 		}
 
 
@@ -193,16 +172,10 @@ CMD_FUNC_DECL(Cmd_JumpIfBig)
 	{
 		if (param1->getMemory() > param2->getMemory())
 		{
-			auto targetUnit = here->getRelativeFlowUnit(
-				static_cast<int>(here->getMemory()));
-
-			if (targetUnit)
-			{
-				*pNextUnit = targetUnit;
+			*pNextRelativeNum = static_cast<int>(here->getMemory());
 
 
-				return 0.0;
-			}
+			return 0.0;
 		}
 	}
 
@@ -224,16 +197,10 @@ CMD_FUNC_DECL(Cmd_JumpToIfBig)
 	{
 		if (param1->getMemory() > param2->getMemory())
 		{
-			auto targetUnit = here->getRelativeFlowUnit(
-				static_cast<int>(param1->getMemory()));
-
-			if (targetUnit)
-			{
-				*pNextUnit = targetUnit;
+			*pNextRelativeNum = static_cast<int>(param1->getMemory());
 
 
-				return 0.0;
-			}
+			return 0.0;
 		}
 	}
 
@@ -255,16 +222,10 @@ CMD_FUNC_DECL(Cmd_JumpIfSmall)
 	{
 		if (param1->getMemory() < param2->getMemory())
 		{
-			auto targetUnit = here->getRelativeFlowUnit(
-				static_cast<int>(here->getMemory()));
-
-			if (targetUnit)
-			{
-				*pNextUnit = targetUnit;
+			*pNextRelativeNum = static_cast<int>(here->getMemory());
 
 
-				return 0.0;
-			}
+			return 0.0;
 		}
 	}
 
@@ -286,16 +247,10 @@ CMD_FUNC_DECL(Cmd_JumpToIfSmall)
 	{
 		if (param1->getMemory() < param2->getMemory())
 		{
-			auto targetUnit = here->getRelativeFlowUnit(
-				static_cast<int>(param1->getMemory()));
-
-			if (targetUnit)
-			{
-				*pNextUnit = targetUnit;
+			*pNextRelativeNum = static_cast<int>(param1->getMemory());
 
 
-				return 0.0;
-			}
+			return 0.0;
 		}
 	}
 
@@ -317,16 +272,10 @@ CMD_FUNC_DECL(Cmd_JumpIfBigEqual)
 	{
 		if (param1->getMemory() >= param2->getMemory())
 		{
-			auto targetUnit = here->getRelativeFlowUnit(
-				static_cast<int>(here->getMemory()));
-
-			if (targetUnit)
-			{
-				*pNextUnit = targetUnit;
+			*pNextRelativeNum = static_cast<int>(here->getMemory());
 
 
-				return 0.0;
-			}
+			return 0.0;
 		}
 	}
 
@@ -348,16 +297,10 @@ CMD_FUNC_DECL(Cmd_JumpToIfBigEqual)
 	{
 		if (param1->getMemory() >= param2->getMemory())
 		{
-			auto targetUnit = here->getRelativeFlowUnit(
-				static_cast<int>(param1->getMemory()));
-
-			if (targetUnit)
-			{
-				*pNextUnit = targetUnit;
+			*pNextRelativeNum = static_cast<int>(param1->getMemory());
 
 
-				return 0.0;
-			}
+			return 0.0;
 		}
 	}
 
@@ -379,16 +322,10 @@ CMD_FUNC_DECL(Cmd_JumpIfSmallEqual)
 	{
 		if (param1->getMemory() <= param2->getMemory())
 		{
-			auto targetUnit = here->getRelativeFlowUnit(
-				static_cast<int>(here->getMemory()));
-
-			if (targetUnit)
-			{
-				*pNextUnit = targetUnit;
+			*pNextRelativeNum = static_cast<int>(here->getMemory());
 
 
-				return 0.0;
-			}
+			return 0.0;
 		}
 	}
 
@@ -410,16 +347,10 @@ CMD_FUNC_DECL(Cmd_JumpToIfSmallEqual)
 	{
 		if (param1->getMemory() <= param2->getMemory())
 		{
-			auto targetUnit = here->getRelativeFlowUnit(
-				static_cast<int>(param1->getMemory()));
-
-			if (targetUnit)
-			{
-				*pNextUnit = targetUnit;
+			*pNextRelativeNum = static_cast<int>(param1->getMemory());
 
 
-				return 0.0;
-			}
+			return 0.0;
 		}
 	}
 
@@ -443,13 +374,7 @@ CMD_FUNC_DECL(Cmd_JumpIfEqual)
 			<=
 			std::numeric_limits<double>::epsilon())
 		{
-			auto targetUnit = here->getRelativeFlowUnit(
-				static_cast<int>(param1->getMemory()));
-
-			if (targetUnit)
-			{
-				*pNextUnit = targetUnit;
-			}
+			*pNextRelativeNum = static_cast<int>(param1->getMemory());
 		}
 
 
@@ -476,13 +401,7 @@ CMD_FUNC_DECL(Cmd_JumpToIfEqual)
 			<=
 			std::numeric_limits<double>::epsilon())
 		{
-			auto targetUnit = here->getRelativeFlowUnit(
-				static_cast<int>(here->getMemory()));
-
-			if (targetUnit)
-			{
-				*pNextUnit = targetUnit;
-			}
+			*pNextRelativeNum = static_cast<int>(here->getMemory());
 		}
 
 
@@ -502,7 +421,7 @@ CMD_FUNC_DECL(Cmd_AssignSharedMem)
 	*/
 
 
-	return Cmd_AssignSharedMemFrom(pNextUnit, here, here, nullptr);
+	return Cmd_AssignSharedMemFrom(pNextRelativeNum, here, here, nullptr);
 }
 
 
@@ -537,7 +456,7 @@ CMD_FUNC_DECL(Cmd_ReadSharedMem)
 	*/
 
 
-	return Cmd_ReadSharedMemTo(pNextUnit, here, here, param1);
+	return Cmd_ReadSharedMemTo(pNextRelativeNum, here, here, param1);
 }
 
 
@@ -573,7 +492,7 @@ CMD_FUNC_DECL(Cmd_WriteSharedMem)
 	*/
 
 
-	return Cmd_WriteSharedMemFrom(pNextUnit, here, here, param1);
+	return Cmd_WriteSharedMemFrom(pNextRelativeNum, here, here, param1);
 }
 
 
@@ -608,7 +527,7 @@ CMD_FUNC_DECL(Cmd_AssignCageMem)
 	*/
 
 
-	return Cmd_AssignCageMemFrom(pNextUnit, here, here, nullptr);
+	return Cmd_AssignCageMemFrom(pNextRelativeNum, here, here, nullptr);
 }
 
 
@@ -643,7 +562,7 @@ CMD_FUNC_DECL(Cmd_ReadCageMem)
 	*/
 
 
-	return Cmd_ReadCageMemTo(pNextUnit, here, here, param1);
+	return Cmd_ReadCageMemTo(pNextRelativeNum, here, here, param1);
 }
 
 
@@ -679,7 +598,7 @@ CMD_FUNC_DECL(Cmd_WriteCageMem)
 	*/
 
 
-	return Cmd_WriteCageMemFrom(pNextUnit, here, here, param1);
+	return Cmd_WriteCageMemFrom(pNextRelativeNum, here, here, param1);
 }
 
 
@@ -714,7 +633,7 @@ CMD_FUNC_DECL(Cmd_Move)
 	*/
 
 
-	return Cmd_MoveTo(pNextUnit, here, here, param1);
+	return Cmd_MoveTo(pNextRelativeNum, here, here, param1);
 }
 
 
@@ -907,7 +826,7 @@ CMD_FUNC_DECL(Cmd_Swap)
 	*/
 
 
-	return Cmd_SwapBoth(pNextUnit, here, here, param1);
+	return Cmd_SwapBoth(pNextRelativeNum, here, here, param1);
 }
 
 
@@ -942,7 +861,7 @@ CMD_FUNC_DECL(Cmd_Negative)
 	*/
 
 
-	return Cmd_NegativeThis(pNextUnit, here, here, nullptr);
+	return Cmd_NegativeThis(pNextRelativeNum, here, here, nullptr);
 }
 
 
@@ -975,7 +894,7 @@ CMD_FUNC_DECL(Cmd_Multiply)
 	*/
 
 
-	return Cmd_MultiplyBoth(pNextUnit, here, here, param1);
+	return Cmd_MultiplyBoth(pNextRelativeNum, here, here, param1);
 }
 
 
@@ -1008,7 +927,7 @@ CMD_FUNC_DECL(Cmd_Divide)
 	*/
 
 
-	return Cmd_MultiplyBoth(pNextUnit, here, here, param1);
+	return Cmd_MultiplyBoth(pNextRelativeNum, here, here, param1);
 }
 
 
@@ -1045,7 +964,7 @@ CMD_FUNC_DECL(Cmd_Not)
 	*/
 
 
-	return Cmd_NotThis(pNextUnit, here, here, nullptr);
+	return Cmd_NotThis(pNextRelativeNum, here, here, nullptr);
 }
 
 
@@ -1080,7 +999,7 @@ CMD_FUNC_DECL(Cmd_Or)
 	*/
 
 
-	return Cmd_OrBoth(pNextUnit, here, here, param1);
+	return Cmd_OrBoth(pNextRelativeNum, here, here, param1);
 }
 
 
@@ -1122,7 +1041,7 @@ CMD_FUNC_DECL(Cmd_And)
 	*/
 
 
-	return Cmd_AndBoth(pNextUnit, here, here, param1);
+	return Cmd_AndBoth(pNextRelativeNum, here, here, param1);
 }
 
 
@@ -1164,7 +1083,7 @@ CMD_FUNC_DECL(Cmd_Xor)
 	*/
 
 
-	return Cmd_XorBoth(pNextUnit, here, here, param1);
+	return Cmd_XorBoth(pNextRelativeNum, here, here, param1);
 }
 
 
@@ -1206,7 +1125,7 @@ CMD_FUNC_DECL(Cmd_GetTemperature)
 	*/
 
 
-	return Cmd_GetTemperatureTo(pNextUnit, here, here, param1);
+	return Cmd_GetTemperatureTo(pNextRelativeNum, here, here, param1);
 }
 
 
@@ -1239,7 +1158,7 @@ CMD_FUNC_DECL(Cmd_GetMass)
 	*/
 
 
-	return Cmd_GetMassTo(pNextUnit, here, here, param1);
+	return Cmd_GetMassTo(pNextRelativeNum, here, here, param1);
 }
 
 
@@ -1272,7 +1191,7 @@ CMD_FUNC_DECL(Cmd_GetRadius)
 	*/
 
 
-	return Cmd_GetRadiusTo(pNextUnit, here, here, param1);
+	return Cmd_GetRadiusTo(pNextRelativeNum, here, here, param1);
 }
 
 
@@ -1361,7 +1280,7 @@ CMD_FUNC_DECL(Cmd_GetTime)
 	*/
 
 
-	return Cmd_GetTimeTo(pNextUnit, here, here, nullptr);
+	return Cmd_GetTimeTo(pNextRelativeNum, here, here, nullptr);
 }
 
 
@@ -1394,7 +1313,7 @@ CMD_FUNC_DECL(Cmd_GetScore)
 	*/
 
 
-	return Cmd_GetScoreTo(pNextUnit, here, here, nullptr);
+	return Cmd_GetScoreTo(pNextRelativeNum, here, here, nullptr);
 }
 
 
