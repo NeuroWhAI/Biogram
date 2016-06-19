@@ -1,5 +1,11 @@
-# Sample files
-*.biow
+# Other files
+*.mdj
+
+# Resource files
+*.ttf
+*.png
+*.jpg
+*.bmp
 
 # Compiled Object files
 *.slo
@@ -49,6 +55,7 @@
 [Rr]eleases/
 x64/
 x86/
+build/
 bld/
 [Bb]in/
 [Oo]bj/
@@ -109,6 +116,7 @@ ipch/
 *.ncb
 *.opensdf
 *.sdf
+*.db
 *.cachefile
 
 # Visual Studio profiler
